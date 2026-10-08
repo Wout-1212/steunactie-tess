@@ -1,19 +1,35 @@
 title: Update
 num: date
-fields:
-  date:
-    label: Datum
-    type: date
-    required: true
-    default: today
-    translate: false
-  cover:
-    label: Foto (optioneel)
-    type: files
-    multiple: false
-    uploads: image
-    translate: false
-  text:
-    label: Update
-    type: textarea
-    size: large
+create:
+  title:
+    label: Titel
+  slug: "{{ page.title }}"
+  fields:
+    - date
+  status: listed
+columns:
+  main:
+    width: 2/3
+    fields:
+      text:
+        label: Tekst
+        type: textarea
+        size: large
+      photos:
+        label: Foto's
+        type: files
+        uploads: image
+        layout: cards
+        size: small
+        help: De eerste foto wordt getoond op de kaart. Sleep om de volgorde te wijzigen.
+        translate: false
+  sidebar:
+    width: 1/3
+    fields:
+      date:
+        label: Geplaatst op
+        type: date
+        required: true
+        default: now
+        display: DD-MM-YYYY
+        translate: false

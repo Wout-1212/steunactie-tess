@@ -7,8 +7,16 @@ columns:
         type: pages
         headline: Updates
         template: update
+        status: all
         sortBy: date desc
+        layout: cards
+        size: small
+        empty: Nog geen updates. Klik op "Toevoegen" om de eerste te maken.
         info: "{{ page.date.toDate('d-m-Y') }}"
+        image:
+          query: page.photos.toFile
+          cover: true
+          ratio: 4/3
   sidebar:
     width: 1/3
     fields:

@@ -57,6 +57,4 @@
   .donation-bar::-webkit-progress-bar { @apply bg-transparent; }
   .donation-bar::-webkit-progress-value { @apply rounded-full bg-blush; }
   .donation-bar::-moz-progress-bar { @apply rounded-full bg-blush; }
-  .update-timeline article { @apply relative border-l-2 border-line pb-10 pl-[30px]; }
-  .update-timeline article::before { @apply absolute top-[6px] -left-[5px] size-2 rounded-full bg-pink; content: ''; }
 }

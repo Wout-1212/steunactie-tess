@@ -5,6 +5,25 @@ tabs:
     sections:
       pages:
         type: pages
+  updates:
+    label: Updates
+    icon: megaphone
+    sections:
+      updates:
+        type: pages
+        headline: Updates
+        parent: site.find("updates")
+        template: update
+        status: all
+        sortBy: date desc
+        layout: cards
+        size: small
+        empty: Nog geen updates. Klik op "Toevoegen" om de eerste te maken.
+        info: "{{ page.date.toDate('d-m-Y') }}"
+        image:
+          query: page.photos.toFile
+          cover: true
+          ratio: 4/3
   texts:
     label: Teksten
     fields:

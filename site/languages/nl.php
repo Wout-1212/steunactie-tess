@@ -68,7 +68,12 @@ return [
 
         'updates.read' => 'Lees update →',
         'updates.empty' => 'Binnenkort lees je hier de updates over Tess.',
-        'updates.image' => 'Foto bij update',
         'updates.back' => '← Alle updates',
+        'updates.photos' => "Foto's",
+
+        'lightbox.label' => 'Foto vergroot',
+        'lightbox.close' => 'Sluiten',
+        'lightbox.prev' => 'Vorige foto',
+        'lightbox.next' => 'Volgende foto',
     ],
 ];

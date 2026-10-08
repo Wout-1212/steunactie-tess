@@ -1,0 +1,13 @@
+Title: Welkom op de website
+
+----
+
+Date: 2026-10-08
+
+----
+
+Text: Dit is een voorbeeldupdate. Hier vertellen we binnenkort hoe het met Tess gaat en wat er met de steun gebeurt. Je kunt deze update aanpassen of verwijderen in het Panel.
+
+----
+
+Uuid: k3t9wq2vmx8bpl4d
