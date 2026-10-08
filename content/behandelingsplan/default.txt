@@ -1,0 +1,31 @@
+Title: Ziekte & behandeling
+
+----
+
+Uuid: yydtdmfxjktwjctn
+
+----
+
+Heading: Het behandelplan van Tess
+
+----
+
+Text: Hier komt het bevestigde behandelplan van Tess.
+
+----
+
+Sections: - heading: Waarom gespecialiseerde zorg nodig is
+  text: De toelichting op de behandeling volgt.
+- heading: Waarom deze kosten zo hoog zijn
+  text: De bevestigde informatie over de kosten volgt.
+
+----
+
+Steps: - heading: Diagnose & doorverwijzing
+  text: De toelichting volgt.
+- heading: Gespecialiseerde therapie
+  text: De toelichting volgt.
+- heading: Intensieve behandelfase
+  text: De toelichting volgt.
+- heading: Herstel & nazorg
+  text: De toelichting volgt.

@@ -1,0 +1,8 @@
+title: Afbeelding
+accept:
+  type: image
+fields:
+  alt:
+    label: Alternatieve tekst
+    type: text
+    help: Beschrijf kort wat op de afbeelding staat.

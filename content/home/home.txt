@@ -2,8 +2,23 @@ Title: Home
 
 ----
 
-Text: content van de pagina
+Uuid: rd6clbzyie47npja
 
 ----
 
-Uuid: rd6clbzyie47npja
+Herotitle: Help Tess richting herstel.
+
+----
+
+Herotext: Tess heeft gespecialiseerde behandeling nodig. Samen maken we het verschil.
+
+----
+
+Intro: Hier komt het verhaal van Tess: haar situatie, haar uitdagingen en waarom steun belangrijk is voor haar herstel. De definitieve tekst volgt.
+
+----
+
+Steps: - heading: Diagnose & doorverwijzing
+- heading: Gespecialiseerde therapie
+- heading: Intensieve behandelfase
+- heading: Herstel & nazorg

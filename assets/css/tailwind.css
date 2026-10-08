@@ -1,0 +1,63 @@
+@import "tailwindcss" source(none);
+@import "./fonts.css";
+
+/* Only scan application templates, not Kirby, vendor or content uploads. */
+@source "../../site/templates";
+@source "../../site/snippets";
+@source "../../site/plugins/tess-typography";
+@source "../js";
+
+@theme {
+  --color-pink: #DA5050;
+  --color-pink-dark: #a93636;
+  --color-blush: #FFD9DE;
+  --color-ink: #302a2d;
+  --color-muted: #70666b;
+  --color-line: #efc4c7;
+  --color-paper: #fffdfd;
+  --color-donation-ink: #251515;
+  --color-hero: #332b30;
+  --color-hero-placeholder: #493738;
+  --color-hero-copy: #ede3e3;
+  --color-progress-line: #f3ced2;
+  --font-sans: Montserrat, Arial, sans-serif;
+  --font-name: Caveat, cursive;
+  --breakpoint-xs: 22.5625rem;
+  --breakpoint-md: 42.5625rem;
+  --breakpoint-lg: 56.3125rem;
+}
+
+@layer base {
+  html { @apply scroll-smooth scroll-pt-[90px] motion-reduce:scroll-auto; }
+  h1, h2, h3 { @apply mb-4 font-bold leading-[1.2] tracking-[-.025em]; }
+  h1 { @apply text-[clamp(2.3rem,4.8vw,4rem)]; }
+  h2 { @apply text-[clamp(1.65rem,3vw,2.15rem)]; }
+  h3 { @apply text-[1.1rem]; }
+  p { @apply mb-4 last:mb-0; }
+  em { @apply not-italic; }
+  a, button, input, summary { @apply touch-manipulation; }
+  button, summary { @apply cursor-pointer; }
+  :focus-visible { @apply outline-3 outline-offset-4 outline-[#db9b20]; }
+  time { @apply mb-3 block text-xs text-pink-dark; }
+}
+
+/* Scoped styles for editable Kirby rich text and native pseudo-elements. */
+@layer components {
+  .prose { @apply max-w-[70ch]; }
+  .prose p { @apply mb-[1.2rem]; }
+  .prose a { @apply text-pink-dark underline; }
+  .steps { @apply list-none p-0; counter-reset: step; }
+  .steps li { @apply relative py-[10px] pl-11; counter-increment: step; }
+  .steps li::before { @apply absolute top-[9px] left-0 grid size-7 place-items-center rounded-full bg-blush text-[.8rem] text-pink-dark; content: counter(step); }
+  .steps li p { @apply mt-2 text-[.9rem] text-muted; }
+  summary { @apply relative list-none py-4 pr-12 pl-[18px] text-[.95rem] font-bold; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { @apply absolute right-[18px] text-pink-dark; content: '+'; }
+  details[open] summary::after { content: '−'; }
+  .donation-bar { @apply block h-4 w-full appearance-none overflow-hidden rounded-full border border-progress-line bg-white; }
+  .donation-bar::-webkit-progress-bar { @apply bg-white; }
+  .donation-bar::-webkit-progress-value { @apply rounded-full bg-blush; }
+  .donation-bar::-moz-progress-bar { @apply rounded-full bg-blush; }
+  .update-timeline article { @apply relative border-l-2 border-line pb-10 pl-[30px]; }
+  .update-timeline article::before { @apply absolute top-[6px] -left-[5px] size-2 rounded-full bg-pink; content: ''; }
+}

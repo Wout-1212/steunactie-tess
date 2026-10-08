@@ -1,0 +1,24 @@
+Title: Veelgestelde vragen
+
+----
+
+Uuid: 4uvpjwy80uyvb4ue
+
+----
+
+Text: Vind snel antwoord op de meest gestelde vragen. Klik op een vraag om het antwoord uit te klappen.
+
+----
+
+Accordiontitle: Vragen over steun aan Tess
+
+----
+
+Questions: - question: Hoe kan ik Tess helpen?
+  answer: Je kunt haar verhaal delen of contact opnemen om een actie te organiseren.
+- question: Kan ik al online doneren?
+  answer: Online betalen wordt later toegevoegd. Zodra een externe steunactie beschikbaar is, vind je de link bij Help Tess.
+- question: Waar vind ik nieuws over Tess?
+  answer: Nieuwe berichten verschijnen op de pagina Updates.
+- question: Hoe kan ik contact opnemen?
+  answer: De contactgegevens worden binnenkort toegevoegd op de homepage.

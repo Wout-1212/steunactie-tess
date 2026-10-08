@@ -1,0 +1,38 @@
+Title: Algemene voorwaarden
+
+----
+
+Uuid: fyrp8hot2tjbrxvd
+
+----
+
+Text: Deze voorwaarden zijn in voorbereiding. De opdrachtgever bevestigt de definitieve tekst.
+
+----
+
+Accordiontitle: Algemene voorwaarden
+
+----
+
+Questions: - question: Over Samen voor Tess
+  answer: De definitieve tekst wordt door de opdrachtgever aangeleverd.
+- question: Gebruik van de website
+  answer: De definitieve tekst wordt door de opdrachtgever aangeleverd.
+- question: Donaties
+  answer: De definitieve tekst wordt door de opdrachtgever aangeleverd.
+- question: Betalingen
+  answer: De definitieve tekst wordt door de opdrachtgever aangeleverd.
+- question: Informatie op de website
+  answer: De definitieve tekst wordt door de opdrachtgever aangeleverd.
+- question: Aansprakelijkheid
+  answer: De definitieve tekst wordt door de opdrachtgever aangeleverd.
+- question: Intellectueel eigendom
+  answer: De definitieve tekst wordt door de opdrachtgever aangeleverd.
+- question: Externe links
+  answer: De definitieve tekst wordt door de opdrachtgever aangeleverd.
+- question: Wijzigingen van de voorwaarden
+  answer: De definitieve tekst wordt door de opdrachtgever aangeleverd.
+- question: Toepasselijk recht
+  answer: De definitieve tekst wordt door de opdrachtgever aangeleverd.
+- question: Contact
+  answer: De definitieve tekst wordt door de opdrachtgever aangeleverd.

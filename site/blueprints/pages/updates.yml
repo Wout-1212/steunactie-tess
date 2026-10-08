@@ -1,0 +1,17 @@
+title: Updates
+columns:
+  main:
+    width: 2/3
+    sections:
+      updates:
+        type: pages
+        headline: Updates
+        template: update
+        sortBy: date desc
+        info: "{{ page.date.toDate('d-m-Y') }}"
+  sidebar:
+    width: 1/3
+    fields:
+      text:
+        label: Introductie
+        type: textarea

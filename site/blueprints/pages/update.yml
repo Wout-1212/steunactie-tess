@@ -1,0 +1,17 @@
+title: Update
+num: date
+fields:
+  date:
+    label: Datum
+    type: date
+    required: true
+    default: today
+  cover:
+    label: Foto (optioneel)
+    type: files
+    multiple: false
+    uploads: image
+  text:
+    label: Update
+    type: textarea
+    size: large

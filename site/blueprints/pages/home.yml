@@ -1,0 +1,40 @@
+title: Home
+options:
+  changeStatus: false
+  delete: false
+fields:
+  description:
+    label: Beschrijving voor zoekmachines
+    type: textarea
+  herotitle:
+    label: Hoofdtitel
+    type: text
+  herotext:
+    label: Intro onder de hoofdtitel
+    type: textarea
+  heroimage:
+    label: Foto bovenaan
+    type: files
+    multiple: false
+    uploads: image
+  intro:
+    label: Over Tess
+    type: textarea
+    size: large
+  storyimage:
+    label: Foto bij Over Tess
+    type: files
+    multiple: false
+    uploads: image
+  steps:
+    label: Stappen op de homepage
+    type: structure
+    fields:
+      heading:
+        label: Stap
+        type: text
+  treatmentimage:
+    label: Foto bij het traject
+    type: files
+    multiple: false
+    uploads: image

@@ -1,21 +1,62 @@
-title: Default Page
-
+title: Inhoudspagina
 columns:
   main:
     width: 2/3
-    sections:
-      fields:
-        type: fields
+    fields:
+      heading:
+        label: Paginakop (optioneel)
+        type: text
+      description:
+        label: Beschrijving voor zoekmachines
+        type: textarea
+      text:
+        label: Introductie
+        type: textarea
+        size: large
+      sections:
+        label: Tekstonderdelen
+        type: structure
         fields:
+          heading:
+            label: Tussentitel
+            type: text
           text:
+            label: Tekst
             type: textarea
-            size: huge
+      steps:
+        label: Stappen behandeltraject (optioneel)
+        type: structure
+        fields:
+          heading:
+            label: Stap
+            type: text
+          text:
+            label: Toelichting
+            type: textarea
+      accordiontitle:
+        label: Titel van uitklapbare onderdelen
+        type: text
+      accordionintro:
+        label: Uitleg bij de uitklapbare onderdelen
+        type: textarea
+      questions:
+        label: Vragen of uitklapbare onderdelen
+        type: structure
+        fields:
+          question:
+            label: Vraag of titel
+            type: text
+          answer:
+            label: Antwoord
+            type: textarea
   sidebar:
     width: 1/3
+    fields:
+      cover:
+        label: Introductiefoto (optioneel)
+        type: files
+        multiple: false
+        uploads: image
     sections:
-      pages:
-        type: pages
-        template: default
       files:
         type: files
-

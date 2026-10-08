@@ -1,5 +1,69 @@
-title: Site
-
-sections:
+title: Samen voor Tess
+tabs:
   pages:
-    type: pages
+    label: Pagina's
+    sections:
+      pages:
+        type: pages
+  settings:
+    label: Site-instellingen
+    fields:
+      description:
+        label: Websitebeschrijving
+        type: textarea
+      logo:
+        label: Huidig logo
+        type: files
+        multiple: false
+        query: site.files
+        uploads: image
+      organisation:
+        label: Organisatie
+        type: text
+      organisationdetails:
+        label: Adres, ondernemingsnummer en rekeninggegevens
+        type: textarea
+      contactemail:
+        label: Contactadres
+        type: email
+      instagram:
+        label: Instagram Samen voor Tess (volledige URL)
+        type: url
+      instagramtess:
+        label: Instagram Tess (volledige URL)
+        type: url
+      bankaccount:
+        label: Rekeningnummer voor overschrijvingen
+        type: text
+        help: Wordt bij Help Tess en in de footer getoond.
+      fundraiser:
+        label: Externe steunactie (optioneel)
+        type: url
+        help: Alleen een bevestigde URL invullen. Dit is geen betaalintegratie.
+      raised:
+        label: Opgehaald bedrag in euro
+        type: number
+        min: 0
+        step: 0.01
+        width: 1/2
+      goal:
+        label: Doelbedrag in euro
+        type: number
+        min: 0
+        step: 0.01
+        width: 1/2
+        help: Laat leeg zolang er geen bevestigd doelbedrag is. Dan blijft een duidelijk gemarkeerde voorbeeldbalk zichtbaar.
+      milestones:
+        label: Mijlpalen onder de voortgangsbalk
+        type: structure
+        fields:
+          amount:
+            label: Bedrag (bijvoorbeeld € 25.000)
+            type: text
+          label:
+            label: Omschrijving
+            type: text
+    sections:
+      files:
+        label: Logo en sitebestanden
+        type: files
