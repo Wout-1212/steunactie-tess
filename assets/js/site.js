@@ -24,11 +24,12 @@ amountButtons.forEach(button => button.addEventListener('click', () => {
 amountInput?.addEventListener('input', () => amountButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.amount === amountInput.value))));
 document.querySelector('[data-share]')?.addEventListener('click', async () => {
   const status = document.querySelector('[data-share-status]');
+  const copy = document.querySelector('[data-share]').dataset;
   try {
-    if (navigator.share) { await navigator.share({title: 'Samen voor Tess', url: location.href.split('#')[0]}); }
-    else if (navigator.clipboard) { await navigator.clipboard.writeText(location.href.split('#')[0]); status.textContent = 'Link gekopieerd. Deel hem met vrienden en familie.'; }
-    else { status.textContent = 'Deel deze link: ' + location.href.split('#')[0]; }
-  } catch (error) { if (error.name !== 'AbortError') status.textContent = 'Deel deze link: ' + location.href.split('#')[0]; }
+    if (navigator.share) { await navigator.share({title: copy.shareTitle, url: location.href.split('#')[0]}); }
+    else if (navigator.clipboard) { await navigator.clipboard.writeText(location.href.split('#')[0]); status.textContent = copy.shareCopied; }
+    else { status.textContent = copy.shareFallback + ' ' + location.href.split('#')[0]; }
+  } catch (error) { if (error.name !== 'AbortError') status.textContent = copy.shareFallback + ' ' + location.href.split('#')[0]; }
 });
 
 document.querySelector('[data-contact-email]')?.addEventListener('submit', event => {
@@ -36,8 +37,9 @@ document.querySelector('[data-contact-email]')?.addEventListener('submit', event
   const form = event.currentTarget;
   if (!form.dataset.contactEmail || !form.reportValidity()) return;
   const data = new FormData(form);
-  const subject = 'Vraag voor Samen voor Tess van ' + data.get('name');
-  const body = 'Naam: ' + data.get('name') + '\nE-mailadres: ' + data.get('email') + '\n\n' + data.get('message');
+  const copy = JSON.parse(form.dataset.contactCopy);
+  const subject = copy.subject + ' ' + data.get('name');
+  const body = copy.name + ': ' + data.get('name') + '\n' + copy.email + ': ' + data.get('email') + '\n\n' + data.get('message');
   location.href = 'mailto:' + form.dataset.contactEmail + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-  form.querySelector('[data-contact-status]').textContent = 'Je bericht is nog niet verzonden. Verstuur het vanuit je e-mailprogramma.';
+  form.querySelector('[data-contact-status]').textContent = copy.status;
 });

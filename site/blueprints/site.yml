@@ -67,3 +67,57 @@ tabs:
       files:
         label: Logo en sitebestanden
         type: files
+  texts:
+    label: Gedeelde websiteteksten
+    fields:
+      copyganaarinhoud:
+        label: "Ga naar inhoud"
+        type: text
+      copysamenvoortesshome:
+        label: "Samen voor Tess, home"
+        type: text
+      copysamenvoortess:
+        label: "Samen voor Tess"
+        type: text
+      copymenu:
+        label: "Menu"
+        type: text
+      copyhoofdnavigatie:
+        label: "Hoofdnavigatie"
+        type: text
+      copycontact:
+        label: "Contact"
+        type: text
+      copyhelptess:
+        label: "Help Tess"
+        type: text
+      footertagline:
+        label: "Hoop op herstel"
+        type: text
+      copysteuntess:
+        label: "Steun Tess"
+        type: text
+      copyexternesteunactie:
+        label: "Externe steunactie ↗"
+        type: text
+      copyoverdevzw:
+        label: "Over de vzw"
+        type: text
+      websitecredit:
+        label: "Website door Ceyda & Wout · KdG"
+        type: text
+      copywiljetesshelpen:
+        label: "Wil je Tess helpen?"
+        type: text
+      copyelkebijdragegrootofkleinmaakteenverschil:
+        label: "Elke bijdrage, groot of klein, maakt een verschil."
+        type: text
+      banklabel:
+        label: "Rekeningnummer voor overschrijvingen"
+        type: text
+      instagramlabel:
+        label: "Instagram"
+        type: text
+      instagramtesslabel:
+        label: "Tess op Instagram"
+        type: text

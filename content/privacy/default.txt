@@ -32,3 +32,15 @@ Questions: - question: Welke gegevens verzamelen we?
   answer: De definitieve informatie wordt door de opdrachtgever aangeleverd.
 - question: Contact voor privacyvragen
   answer: De definitieve informatie wordt door de opdrachtgever aangeleverd.
+
+----
+
+Copyhetbehandeltraject: Het behandeltraject
+
+----
+
+Coverlabel: Foto bij privacy
+
+----
+
+Footerlabel: Privacybeleid

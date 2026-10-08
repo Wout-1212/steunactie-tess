@@ -22,3 +22,15 @@ Questions: - question: Hoe kan ik Tess helpen?
   answer: Nieuwe berichten verschijnen op de pagina Updates.
 - question: Hoe kan ik contact opnemen?
   answer: De contactgegevens worden binnenkort toegevoegd op de homepage.
+
+----
+
+Copyhetbehandeltraject: Het behandeltraject
+
+----
+
+Navtitle: FAQ
+
+----
+
+Coverlabel: Foto bij faq

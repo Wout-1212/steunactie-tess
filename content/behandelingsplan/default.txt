@@ -29,3 +29,15 @@ Steps: - heading: Diagnose & doorverwijzing
   text: De toelichting volgt.
 - heading: Herstel & nazorg
   text: De toelichting volgt.
+
+----
+
+Copyhetbehandeltraject: Het behandeltraject
+
+----
+
+Navtitle: Ziekte & behandeling
+
+----
+
+Coverlabel: Foto bij behandelingsplan

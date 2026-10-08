@@ -50,3 +50,7 @@ npm run build
 ```
 
 De productiebuild schrijft de gecomprimeerde CSS naar `assets/css/site.css`. Bewerk dit gegenereerde bestand niet rechtstreeks. Het bestand blijft in Git zodat de website zonder Node.js op de PHP-host kan draaien. Node.js en de npm-pakketten zijn alleen nodig om de styling opnieuw te bouwen. Er wordt geen Tailwind-CDN gebruikt. Fonts worden lokaal in dezelfde CSS-bundel geladen.
+
+## Teksten beheren in Kirby
+
+Alle websiteteksten staan in de contentbestanden en hebben velden in het Panel. De homepage gebruikt `content/home/home.txt`; de andere pagina’s gebruiken hun eigen contentbestand. Header, footer en de gedeelde oproep tot steun gebruiken `content/site.txt` (Panel: Gedeelde websiteteksten). Updateknoppen en de melding zonder updates staan in `content/updates/updates.txt`, ook voor de homepage en losse updates. Fototeksten, formulierlabels en JavaScript-meldingen zijn eveneens bewerkbaar. PHP bevat de opbouw en logica, zonder vaste websiteteksten.

@@ -20,3 +20,15 @@ Sections: - heading: Hoe het begon
   text: De definitieve tekst volgt.
 - heading: Waarom steun zo belangrijk is
   text: De definitieve tekst volgt.
+
+----
+
+Copyhetbehandeltraject: Het behandeltraject
+
+----
+
+Navtitle: Haar verhaal
+
+----
+
+Coverlabel: Foto bij haar verhaal

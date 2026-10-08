@@ -36,3 +36,11 @@ Questions: - question: Over Samen voor Tess
   answer: De definitieve tekst wordt door de opdrachtgever aangeleverd.
 - question: Contact
   answer: De definitieve tekst wordt door de opdrachtgever aangeleverd.
+
+----
+
+Copyhetbehandeltraject: Het behandeltraject
+
+----
+
+Coverlabel: Foto bij algemene voorwaarde

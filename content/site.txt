@@ -11,3 +11,82 @@ Organisation: Samen voor Tess
 ----
 
 Bankaccount: BE97 7340 5272 3549
+
+----
+
+Copyganaarinhoud: Ga naar inhoud
+
+----
+
+Copysamenvoortesshome: Samen voor Tess, home
+
+----
+
+Copysamenvoortess: Samen voor Tess
+
+----
+
+Copymenu: Menu
+
+----
+
+Copyhoofdnavigatie: Hoofdnavigatie
+
+----
+
+Copycontact: Contact
+
+----
+
+Copyhelptess: Help Tess
+
+----
+
+Footertagline: Hoop op herstel
+
+----
+
+Copysteuntess: Steun Tess
+
+----
+
+Copyexternesteunactie: Externe steunactie ↗
+
+----
+
+Copyoverdevzw: Over de vzw
+
+----
+
+Websitecredit: Website door Ceyda & Wout · KdG
+
+----
+
+Copywiljetesshelpen: Wil je Tess helpen?
+
+----
+
+Copyelkebijdragegrootofkleinmaakteenverschil: Elke bijdrage, groot of klein, maakt een verschil.
+
+----
+
+Banklabel: Rekeningnummer voor overschrijvingen
+
+----
+
+Instagramlabel: Instagram
+
+----
+
+Instagramtesslabel: Tess op Instagram
+
+----
+
+Milestones: - amount: €25K
+  label: Behandeling
+- amount: €50K
+  label: Operatie
+- amount: €100K
+  label: Volgende stap
+- amount: €250K
+  label: Doelbedrag

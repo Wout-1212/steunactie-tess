@@ -7,3 +7,19 @@ Uuid: ejypxayrbfsgsw4v
 ----
 
 Text: Volg hier het traject van Tess. Nieuwe berichten worden toegevoegd zodra er nieuws is.
+
+----
+
+Copyleesupdate: Lees update →
+
+----
+
+Copybinnenkortleesjehierdeupdatesovertess: Binnenkort lees je hier de updates over Tess.
+
+----
+
+Copyfotobijupdate: Foto bij update
+
+----
+
+Copyalleupdates: ← Alle updates

@@ -38,3 +38,162 @@ fields:
     type: files
     multiple: false
     uploads: image
+  herokicker:
+    label: "Samen voor Tess"
+    type: text
+  copyhelptess:
+    label: "Help Tess"
+    type: text
+  copyleeshaarverhaal:
+    label: "Lees haar verhaal"
+    type: text
+  storytitle:
+    label: "Over Tess"
+    type: text
+  copyleesmeeroverhaar:
+    label: "Lees meer over haar →"
+    type: text
+  progresstitle:
+    label: "Donatievoortgang"
+    type: text
+  copyvoorbeeldweergave14endemijlpalenzijnvoorlopigdebevestig:
+    label: "Voorbeeldweergave: 14% en de mijlpalen zijn voorlopig. De bevestigde cijfers volgen."
+    type: text
+  copydemijlpalenzijnvoorlopigenwordennogbevestigd:
+    label: "De mijlpalen zijn voorlopig en worden nog bevestigd."
+    type: text
+  contributiontitle:
+    label: "Manieren om bij te dragen"
+    type: text
+  copydoneerdirect:
+    label: "Doneer direct"
+    type: text
+  copydraagbijaandebehandelingvantess:
+    label: "Draag bij aan de behandeling van Tess."
+    type: text
+  copydeelhaarverhaal:
+    label: "Deel haar verhaal"
+    type: text
+  copydeelditverhaalenvergroothetbereik:
+    label: "Deel dit verhaal en vergroot het bereik."
+    type: text
+  copykominactie:
+    label: "Kom in actie"
+    type: text
+  copyorganiseereeninzamelactiesponsorloopquizofconcert:
+    label: "Organiseer een inzamelactie, sponsorloop, quiz of concert."
+    type: text
+  copysteunenalsbedrijf:
+    label: "Steunen als bedrijf?"
+    type: text
+  copyneemcontactopomtebesprekenhoejekuntbijdragen:
+    label: "Neem contact op om te bespreken hoe je kunt bijdragen."
+    type: text
+  updatestitle:
+    label: "Updates"
+    type: text
+  copybekijkalleupdates:
+    label: "Bekijk alle updates ↓"
+    type: text
+  treatmenttitle:
+    label: "Het traject van Tess"
+    type: text
+  copyleesmeeroverhetbehandelplan:
+    label: "Lees meer over het behandelplan →"
+    type: text
+  donationtitle:
+    label: "Help Tess vandaag nog"
+    type: text
+  donationintro:
+    label: "Elke bijdrage brengt Tess dichter bij haar behandeling en herstel."
+    type: text
+  copykieseenvoorbeeldbedrag:
+    label: "Kies een voorbeeldbedrag"
+    type: text
+  copyanderbedrag:
+    label: "Ander bedrag (€)"
+    type: text
+  copybedrag:
+    label: "Bedrag"
+    type: text
+  copyganaardeexternesteunactie:
+    label: "Ga naar de externe steunactie ↗"
+    type: text
+  copyhetgekozenbedragwordtnietdoorgegevenjekiesthetbedragopd:
+    label: "Het gekozen bedrag wordt niet doorgegeven; je kiest het bedrag op de externe steunactie."
+    type: text
+  copyonlinedonerenisbinnenkortbeschikbaar:
+    label: "Online doneren is binnenkort beschikbaar."
+    type: text
+  copyeenvraagoftip:
+    label: "Een vraag of tip?"
+    type: text
+  contacttitle:
+    label: "Contact"
+    type: text
+  contactintro:
+    label: "Heb je een vraag of een tip? Laat het ons weten."
+    type: text
+  copycontactmetsamenvoortess:
+    label: "Contact met Samen voor Tess"
+    type: text
+  copynaam:
+    label: "Naam"
+    type: text
+  copyemailadres:
+    label: "E-mailadres"
+    type: text
+  copyvraagbericht:
+    label: "Vraag / bericht"
+    type: text
+  copyopenemailbericht:
+    label: "Open e-mailbericht"
+    type: text
+  copyhetcontactformulierwordtbeschikbaarzodrahetcontactadres:
+    label: "Het contactformulier wordt beschikbaar zodra het contactadres is toegevoegd."
+    type: text
+  copyditopentjeemailprogrammaverstuurhetberichtdaaromcontact:
+    label: "Dit opent je e-mailprogramma. Verstuur het bericht daar om contact op te nemen."
+    type: text
+  copystuurjeberichtnaar:
+    label: "Stuur je bericht naar"
+    type: text
+  copyfotovantessvolgt:
+    label: "Foto van Tess volgt"
+    type: text
+  copyfotobijhaarverhaal:
+    label: "Foto bij haar verhaal"
+    type: text
+  copyfotobijhetbehandeltraject:
+    label: "Foto bij het behandeltraject"
+    type: text
+  progressprefix:
+    label: "opgehaald van €"
+    type: text
+  progresslabel:
+    label: "Voortgang van het donatiedoel"
+    type: text
+  sampleamount:
+    label: "XX.XXX"
+    type: text
+  samplegoal:
+    label: "XXX.XXX"
+    type: text
+  emailfallback:
+    label: "Stuur je bericht naar"
+    type: text
+  mailsubject:
+    label: "Vraag voor Samen voor Tess van"
+    type: text
+  mailstatus:
+    label: "Je bericht is nog niet verzonden. Verstuur het vanuit je e-mailprogramma."
+    type: text
+  sharecopied:
+    label: "Link gekopieerd. Deel hem met vrienden en familie."
+    type: text
+  sharefallback:
+    label: "Deel deze link:"
+    type: text
+  navtitle:
+    label: Naam in het menu
+    type: text

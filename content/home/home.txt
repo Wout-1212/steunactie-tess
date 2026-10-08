@@ -22,3 +22,215 @@ Steps: - heading: Diagnose & doorverwijzing
 - heading: Gespecialiseerde therapie
 - heading: Intensieve behandelfase
 - heading: Herstel & nazorg
+
+----
+
+Herokicker: Samen voor Tess
+
+----
+
+Copyhelptess: Help Tess
+
+----
+
+Copyleeshaarverhaal: Lees haar verhaal
+
+----
+
+Storytitle: Over Tess
+
+----
+
+Copyleesmeeroverhaar: Lees meer over haar →
+
+----
+
+Progresstitle: Donatievoortgang
+
+----
+
+Copyvoorbeeldweergave14endemijlpalenzijnvoorlopigdebevestig: Voorbeeldweergave: 14% en de mijlpalen zijn voorlopig. De bevestigde cijfers volgen.
+
+----
+
+Copydemijlpalenzijnvoorlopigenwordennogbevestigd: De mijlpalen zijn voorlopig en worden nog bevestigd.
+
+----
+
+Contributiontitle: Manieren om bij te dragen
+
+----
+
+Copydoneerdirect: Doneer direct
+
+----
+
+Copydraagbijaandebehandelingvantess: Draag bij aan de behandeling van Tess.
+
+----
+
+Copydeelhaarverhaal: Deel haar verhaal
+
+----
+
+Copydeelditverhaalenvergroothetbereik: Deel dit verhaal en vergroot het bereik.
+
+----
+
+Copykominactie: Kom in actie
+
+----
+
+Copyorganiseereeninzamelactiesponsorloopquizofconcert: Organiseer een inzamelactie, sponsorloop, quiz of concert.
+
+----
+
+Copysteunenalsbedrijf: Steunen als bedrijf?
+
+----
+
+Copyneemcontactopomtebesprekenhoejekuntbijdragen: Neem contact op om te bespreken hoe je kunt bijdragen.
+
+----
+
+Updatestitle: Updates
+
+----
+
+Copybekijkalleupdates: Bekijk alle updates ↓
+
+----
+
+Treatmenttitle: Het traject van Tess
+
+----
+
+Copyleesmeeroverhetbehandelplan: Lees meer over het behandelplan →
+
+----
+
+Donationtitle: Help Tess vandaag nog
+
+----
+
+Donationintro: Elke bijdrage brengt Tess dichter bij haar behandeling en herstel.
+
+----
+
+Copykieseenvoorbeeldbedrag: Kies een voorbeeldbedrag
+
+----
+
+Copyanderbedrag: Ander bedrag (€)
+
+----
+
+Copybedrag: Bedrag
+
+----
+
+Copyganaardeexternesteunactie: Ga naar de externe steunactie ↗
+
+----
+
+Copyhetgekozenbedragwordtnietdoorgegevenjekiesthetbedragopd: Het gekozen bedrag wordt niet doorgegeven; je kiest het bedrag op de externe steunactie.
+
+----
+
+Copyonlinedonerenisbinnenkortbeschikbaar: Online doneren is binnenkort beschikbaar.
+
+----
+
+Copyeenvraagoftip: Een vraag of tip?
+
+----
+
+Contacttitle: Contact
+
+----
+
+Contactintro: Heb je een vraag of een tip? Laat het ons weten.
+
+----
+
+Copycontactmetsamenvoortess: Contact met Samen voor Tess
+
+----
+
+Copynaam: Naam
+
+----
+
+Copyemailadres: E-mailadres
+
+----
+
+Copyvraagbericht: Vraag / bericht
+
+----
+
+Copyopenemailbericht: Open e-mailbericht
+
+----
+
+Copyhetcontactformulierwordtbeschikbaarzodrahetcontactadres: Het contactformulier wordt beschikbaar zodra het contactadres is toegevoegd.
+
+----
+
+Copyditopentjeemailprogrammaverstuurhetberichtdaaromcontact: Dit opent je e-mailprogramma. Verstuur het bericht daar om contact op te nemen.
+
+----
+
+Copystuurjeberichtnaar: Stuur je bericht naar
+
+----
+
+Copyfotovantessvolgt: Foto van Tess volgt
+
+----
+
+Copyfotobijhaarverhaal: Foto bij haar verhaal
+
+----
+
+Copyfotobijhetbehandeltraject: Foto bij het behandeltraject
+
+----
+
+Progressprefix: opgehaald van €
+
+----
+
+Progresslabel: Voortgang van het donatiedoel
+
+----
+
+Sampleamount: XX.XXX
+
+----
+
+Samplegoal: XXX.XXX
+
+----
+
+Emailfallback: Stuur je bericht naar
+
+----
+
+Mailsubject: Vraag voor Samen voor Tess van
+
+----
+
+Mailstatus: Je bericht is nog niet verzonden. Verstuur het vanuit je e-mailprogramma.
+
+----
+
+Sharecopied: Link gekopieerd. Deel hem met vrienden en familie.
+
+----
+
+Sharefallback: Deel deze link:
+
+----
+
+Navtitle: Home

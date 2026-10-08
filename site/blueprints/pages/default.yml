@@ -3,6 +3,18 @@ columns:
   main:
     width: 2/3
     fields:
+      copyhetbehandeltraject:
+        label: "Het behandeltraject"
+        type: text
+      footerlabel:
+        label: Naam in de footer (optioneel)
+        type: text
+      navtitle:
+        label: Naam in het menu
+        type: text
+      coverlabel:
+        label: Fotobeschrijving
+        type: text
       heading:
         label: Paginakop (optioneel)
         type: text
