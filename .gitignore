@@ -49,5 +49,9 @@ Icon
 
 /site/config/.license
 
+
+
+/node_modules
+
 # Frontend build dependencies
 /node_modules/
