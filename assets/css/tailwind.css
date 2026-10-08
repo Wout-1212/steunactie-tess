@@ -37,8 +37,8 @@
   em { @apply not-italic; }
   a, button, input, summary { @apply touch-manipulation; }
   button, summary { @apply cursor-pointer; }
-  :focus-visible { @apply outline-3 outline-offset-4 outline-[#db9b20]; }
-  time { @apply mb-3 block text-xs text-pink-dark; }
+  :focus-visible { @apply outline-3 outline-offset-4 outline-ink; }
+  time { @apply mb-3 block text-sm text-pink-dark; }
 }
 
 /* Scoped styles for editable Kirby rich text and native pseudo-elements. */
