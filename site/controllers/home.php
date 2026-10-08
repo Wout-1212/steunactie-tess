@@ -1,16 +1,35 @@
 <?php
 
-return function ($site) {
+return function ($site, $kirby) {
+    // Each source gets its own field so scraping/Mollie can fill them separately later.
+    $raised = $site->raised_steunactie()->toFloat()
+        + $site->raised_gofundme()->toFloat()
+        + $site->raised_other()->toFloat();
     $goal = $site->goal()->toFloat();
-    $raised = max(0, $site->raised()->toFloat());
-    $hasTotals = $goal > 0 && $site->raised()->isNotEmpty();
+    $hasGoal = $goal > 0;
+
+    $locale = strtok($kirby->language()?->locale(LC_ALL) ?? 'nl_BE', '.');
+    $euro = new NumberFormatter($locale, NumberFormatter::CURRENCY);
+    $euro->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, 0);
+    $format = fn (float $amount) => $euro->formatCurrency($amount, 'EUR');
+
+    $milestones = [];
+    foreach ($site->milestones()->toStructure()->sortBy('amount', 'asc', SORT_NUMERIC) as $milestone) {
+        $milestones[] = [
+            'amount' => $format($milestone->amount()->toFloat()),
+            'label' => $milestone->label()->value(),
+            'reached' => $raised >= $milestone->amount()->toFloat(),
+        ];
+    }
 
     return [
         'progress' => [
-            'goal' => $goal,
-            'raised' => $raised,
-            'hasTotals' => $hasTotals,
-            'percent' => $hasTotals ? min(100, round($raised / $goal * 100)) : 14,
+            'hasGoal' => $hasGoal,
+            'raised' => $format($raised),
+            'goal' => $format($goal),
+            // Round down so the bar never shows 100% before the goal is actually reached.
+            'percent' => $hasGoal ? (int) min(100, floor($raised / $goal * 100)) : 0,
+            'milestones' => $milestones,
         ],
     ];
 };

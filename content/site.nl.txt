@@ -2,7 +2,56 @@ Title: Samen voor Tess
 
 ----
 
+Goal: 250000
+
+----
+
+Raised-steunactie: 30000
+
+----
+
+Raised-gofundme: 
+
+----
+
+Raised-other: 
+
+----
+
+Milestones:
+
+- 
+  amount: 25000
+  label: Behandeling
+- 
+  amount: 50000
+  label: Operatie
+- 
+  amount: 100000
+  label: Volgende stap
+- 
+  amount: 250000
+  label: Doelbedrag
+
+----
+
+Cta-title: Wil je Tess helpen?
+
+----
+
+Cta-text: Elke bijdrage, groot of klein, maakt een verschil.
+
+----
+
+Footer-tagline: Hoop op herstel
+
+----
+
 Description: Samen steunen we Tess op weg naar behandeling en herstel.
+
+----
+
+Logo: 
 
 ----
 
@@ -10,27 +59,24 @@ Organisation: Samen voor Tess
 
 ----
 
+Organisationdetails: 
+
+----
+
+Contactemail: 
+
+----
+
+Instagram: 
+
+----
+
+Instagramtess: 
+
+----
+
 Bankaccount: BE97 7340 5272 3549
 
 ----
 
-Cta_title: Wil je Tess helpen?
-
-----
-
-Cta_text: Elke bijdrage, groot of klein, maakt een verschil.
-
-----
-
-Footer_tagline: Hoop op herstel
-
-----
-
-Milestones: - amount: €25K
-  label: Behandeling
-- amount: €50K
-  label: Operatie
-- amount: €100K
-  label: Volgende stap
-- amount: €250K
-  label: Doelbedrag
+Fundraiser: 

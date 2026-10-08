@@ -37,10 +37,10 @@ return [
         'home.treatment.more' => 'Lees meer over het behandelplan →',
         'home.treatment.image' => 'Foto bij het behandeltraject',
 
-        'progress.of-goal' => 'opgehaald van €',
+        'progress.of-goal' => 'opgehaald van',
         'progress.label' => 'Voortgang van het donatiedoel',
-        'progress.sample-raised' => 'XX.XXX',
-        'progress.sample-goal' => 'XXX.XXX',
+        'progress.sample-raised' => '€ XX.XXX',
+        'progress.sample-goal' => '€ XXX.XXX',
 
         'share.title' => 'Deel het verhaal van Tess',
         'share.close' => 'Sluiten',

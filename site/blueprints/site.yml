@@ -24,6 +24,64 @@ tabs:
           query: page.photos.toFile
           cover: true
           ratio: 4/3
+  donations:
+    label: Donaties
+    icon: heart
+    fields:
+      goal:
+        label: Doelbedrag
+        type: number
+        min: 0
+        step: 1
+        before: €
+        help: Laat leeg zolang er geen bevestigd doelbedrag is. Dan toont de site een gemarkeerde voorbeeldbalk.
+        translate: false
+      raised_info:
+        label: Opgehaald
+        type: info
+        text: Vul per bron het opgehaalde bedrag in. De site telt ze op en berekent het percentage automatisch.
+      raised_steunactie:
+        label: Externe steunactie
+        type: number
+        min: 0
+        step: 1
+        before: €
+        width: 1/3
+        translate: false
+      raised_gofundme:
+        label: GoFundMe
+        type: number
+        min: 0
+        step: 1
+        before: €
+        width: 1/3
+        translate: false
+      raised_other:
+        label: Overschrijvingen en andere giften
+        type: number
+        min: 0
+        step: 1
+        before: €
+        width: 1/3
+        translate: false
+      milestones:
+        label: Mijlpalen onder de voortgangsbalk
+        type: structure
+        sortBy: amount asc
+        columns:
+          amount: true
+          label: true
+        fields:
+          amount:
+            label: Bedrag
+            type: number
+            min: 0
+            step: 1
+            before: €
+            required: true
+          label:
+            label: Omschrijving
+            type: text
   texts:
     label: Teksten
     fields:
@@ -77,31 +135,6 @@ tabs:
         type: url
         help: Alleen een bevestigde URL invullen. Dit is geen betaalintegratie.
         translate: false
-      raised:
-        label: Opgehaald bedrag in euro
-        type: number
-        min: 0
-        step: 0.01
-        width: 1/2
-        translate: false
-      goal:
-        label: Doelbedrag in euro
-        type: number
-        min: 0
-        step: 0.01
-        width: 1/2
-        help: Laat leeg zolang er geen bevestigd doelbedrag is. Dan blijft een duidelijk gemarkeerde voorbeeldbalk zichtbaar.
-        translate: false
-      milestones:
-        label: Mijlpalen onder de voortgangsbalk
-        type: structure
-        fields:
-          amount:
-            label: Bedrag (bijvoorbeeld € 25.000)
-            type: text
-          label:
-            label: Omschrijving
-            type: text
     sections:
       files:
         label: Logo en sitebestanden
