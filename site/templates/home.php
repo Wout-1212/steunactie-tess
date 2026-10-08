@@ -1,34 +1,184 @@
 <?php snippet('header') ?>
-<section class="bg-hero text-white"><div class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)] grid grid-cols-1 md:min-h-[460px] md:grid-cols-2 lg:min-h-[560px]"><div class="self-center py-12 md:py-[65px] md:pr-[45px] lg:py-[90px]"><p class="mb-4 text-xs font-bold tracking-[.12em] uppercase"><?= $page->herokicker()->esc() ?></p><h1><?= $page->herotitle()->esc() ?></h1><p class="mb-7 max-w-[380px] text-hero-copy"><?= $page->herotext()->esc() ?></p><div class="flex flex-wrap gap-3"><a class="inline-flex min-h-11 items-center justify-center rounded-[5px] border px-[21px] py-[11px] text-sm font-bold border-transparent bg-pink text-donation-ink hover:bg-pink-dark hover:text-white" href="#help-tess"><?= $page->copyhelptess()->esc() ?></a><a class="inline-flex min-h-11 items-center justify-center rounded-[5px] border px-[21px] py-[11px] text-sm font-bold border-current bg-transparent text-white hover:bg-pink-dark" href="<?= page('haar-verhaal')->url() ?>"><?= $page->copyleeshaarverhaal()->esc() ?></a></div></div><?php snippet('picture',['source'=>$page->heroimage(),'label'=>$page->copyfotovantessvolgt()->value(),'class'=>'hero-media']) ?></div></section>
-<section class="py-[42px] md:py-[72px]"><div class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)] grid grid-cols-1 items-center gap-[26px] md:grid-cols-2 md:gap-8 lg:gap-16"><?php snippet('picture',['source'=>$page->storyimage(),'label'=>$page->copyfotobijhaarverhaal()->value()]) ?><div><h2><?= $page->storytitle()->esc() ?></h2><div class="prose"><?= $page->intro()->kirbytext() ?></div><a class="mt-3 inline-block text-sm font-bold text-pink-dark hover:underline" href="<?= page('haar-verhaal')->url() ?>"><?= $page->copyleesmeeroverhaar()->esc() ?></a></div></div></section>
-<section class="scroll-mt-28 donation-progress py-6 md:py-7 bg-pink text-donation-ink [&_h2]:text-donation-ink" id="donatievoortgang"><div class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)]">
-<h2 class="mb-[15px] text-[clamp(.95rem,1.55vw,1.15rem)] leading-[1.3] tracking-[.055em] text-donation-ink uppercase"><?= $page->progresstitle()->esc() ?></h2>
-<?php
-$goal = $site->goal()->toFloat();
-$raised = max(0, $site->raised()->toFloat());
-$hasTotals = $goal > 0 && $site->raised()->isNotEmpty();
-$percent = $hasTotals ? min(100, round($raised / $goal * 100)) : 14;
-?>
-<div class="mb-3 flex flex-wrap items-baseline justify-between gap-3 text-donation-ink [&_strong]:text-[clamp(1.45rem,2.5vw,1.8rem)] [&_strong]:leading-[1.2] [&_span]:max-w-[165px] [&_span]:text-right [&_span]:text-sm [&_span]:leading-normal [&_b]:ml-[6px] [&_b]:inline-block md:gap-5 md:[&_span]:max-w-none md:[&_span]:text-sm md:[&_b]:ml-3 max-xs:items-start max-xs:[&_span]:max-w-[140px]"><strong>€ <?= $hasTotals ? number_format($raised, 0, ',', '.') : $page->sampleamount()->esc() ?></strong><span><?= $page->progressprefix()->esc() ?> <?= $hasTotals ? number_format($goal, 0, ',', '.') : $page->samplegoal()->esc() ?> <b><?= $percent ?>%</b></span></div>
-<?php if ($hasTotals): ?>
-<progress class="donation-bar" value="<?= $percent ?>" max="100" aria-label="<?= $page->progresslabel()->esc() ?>"><?= $percent ?>%</progress>
-<?php else: ?>
-<div class="block h-4 w-full overflow-hidden rounded-full border border-progress-line bg-white [&_span]:block [&_span]:h-full [&_span]:rounded-full [&_span]:bg-blush" aria-hidden="true"><span class="w-[14%]"></span></div>
-<?php endif ?>
-<div class="mt-[13px] grid grid-cols-2 gap-4 text-center text-sm leading-normal text-donation-ink [&_strong]:text-base [&_strong]:tracking-[.04em] [&_span]:block md:grid-cols-4 md:gap-4">
-<?php foreach ($site->milestones()->toStructure() as $item): ?><div><strong><?= $item->amount()->esc() ?></strong><span><?= $item->label()->esc() ?></span></div><?php endforeach ?>
-</div>
-</div></section>
-<section class="py-[42px] md:py-[72px]"><div class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)]"><h2><?= $page->contributiontitle()->esc() ?></h2><div class="mt-7 grid grid-cols-1 gap-[18px] md:grid-cols-2 lg:grid-cols-4">
-<a class="relative rounded-lg border border-line bg-white p-[22px] text-left text-ink transition-transform duration-150 hover:-translate-y-[3px] hover:border-pink motion-reduce:transition-none [&_p]:text-base [&_p]:text-muted [&>span:last-child]:absolute [&>span:last-child]:top-[19px] [&>span:last-child]:right-[17px] [&>span:last-child]:text-pink" href="#help-tess"><span class="mb-5 flex size-[34px] items-center justify-center rounded-[5px] bg-blush text-pink-dark" aria-hidden="true">♡</span><h3><?= $page->copydoneerdirect()->esc() ?></h3><p><?= $page->copydraagbijaandebehandelingvantess()->esc() ?></p><span aria-hidden="true">↗</span></a>
-<button class="relative rounded-lg border border-line bg-white p-[22px] text-left text-ink transition-transform duration-150 hover:-translate-y-[3px] hover:border-pink motion-reduce:transition-none [&_p]:text-base [&_p]:text-muted [&>span:last-child]:absolute [&>span:last-child]:top-[19px] [&>span:last-child]:right-[17px] [&>span:last-child]:text-pink" data-share data-share-title="<?= $site->title()->esc() ?>" data-share-copied="<?= $page->sharecopied()->esc() ?>" data-share-fallback="<?= $page->sharefallback()->esc() ?>"><span class="mb-5 flex size-[34px] items-center justify-center rounded-[5px] bg-blush text-pink-dark" aria-hidden="true">↗</span><h3><?= $page->copydeelhaarverhaal()->esc() ?></h3><p><?= $page->copydeelditverhaalenvergroothetbereik()->esc() ?></p><span aria-hidden="true">↗</span></button>
-<a class="relative rounded-lg border border-line bg-white p-[22px] text-left text-ink transition-transform duration-150 hover:-translate-y-[3px] hover:border-pink motion-reduce:transition-none [&_p]:text-base [&_p]:text-muted [&>span:last-child]:absolute [&>span:last-child]:top-[19px] [&>span:last-child]:right-[17px] [&>span:last-child]:text-pink" href="#contact"><span class="mb-5 flex size-[34px] items-center justify-center rounded-[5px] bg-blush text-pink-dark" aria-hidden="true">↗</span><h3><?= $page->copykominactie()->esc() ?></h3><p><?= $page->copyorganiseereeninzamelactiesponsorloopquizofconcert()->esc() ?></p><span aria-hidden="true">↗</span></a>
-<a class="relative rounded-lg border border-line bg-white p-[22px] text-left text-ink transition-transform duration-150 hover:-translate-y-[3px] hover:border-pink motion-reduce:transition-none [&_p]:text-base [&_p]:text-muted [&>span:last-child]:absolute [&>span:last-child]:top-[19px] [&>span:last-child]:right-[17px] [&>span:last-child]:text-pink" href="#contact"><span class="mb-5 flex size-[34px] items-center justify-center rounded-[5px] bg-blush text-pink-dark" aria-hidden="true">↗</span><h3><?= $page->copysteunenalsbedrijf()->esc() ?></h3><p><?= $page->copyneemcontactopomtebesprekenhoejekuntbijdragen()->esc() ?></p><span aria-hidden="true">↗</span></a></div><p data-share-status role="status"></p></div></section>
-<section class="py-[42px] md:py-[72px] bg-blush"><div class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)]"><h2><?= $page->updatestitle()->esc() ?></h2><?php snippet('update-cards') ?><a class="inline-flex min-h-11 items-center justify-center rounded-[5px] border px-[21px] py-[11px] text-sm font-bold border-transparent bg-pink text-donation-ink hover:bg-pink-dark hover:text-white" href="<?= page('updates')->url() ?>"><?= $page->copybekijkalleupdates()->esc() ?></a></div></section>
-<section class="py-[42px] md:py-[72px]"><div class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)] grid grid-cols-1 items-center gap-[26px] md:grid-cols-2 md:gap-8 lg:gap-16"><div><h2><?= $page->treatmenttitle()->esc() ?></h2><ol class="steps"><?php foreach($page->steps()->toStructure() as $step): ?><li><?= $step->heading()->esc() ?></li><?php endforeach ?></ol><a class="mt-3 inline-block text-sm font-bold text-pink-dark hover:underline" href="<?= page('behandelingsplan')->url() ?>"><?= $page->copyleesmeeroverhetbehandelplan()->esc() ?></a></div><?php snippet('picture',['source'=>$page->treatmentimage(),'label'=>$page->copyfotobijhetbehandeltraject()->value()]) ?></div></section>
-<section class="scroll-mt-28 py-8 md:py-[42px] bg-pink text-donation-ink [&_h2]:text-donation-ink" id="help-tess"><div class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)] grid grid-cols-1 items-center gap-[26px] md:grid-cols-2 md:gap-8 lg:gap-16"><div><h2><?= $page->donationtitle()->esc() ?></h2><p><?= $page->donationintro()->esc() ?></p><?php snippet('bank-account') ?></div><div class="[&_label]:mb-[6px] [&_label]:block [&_label]:text-sm [&_input]:mb-3 [&_input]:min-h-12 [&_input]:w-full [&_input]:rounded-[5px] [&_input]:border-0 [&_input]:bg-white [&_input]:px-[14px] [&_input]:py-[9px] [&_input]:text-ink"><div class="mb-[15px] grid grid-cols-2 gap-3 xs:grid-cols-4 [&_button]:min-h-12 [&_button]:rounded-[5px] [&_button]:border-2 [&_button]:border-white [&_button]:bg-white [&_button]:text-pink-dark [&_button[aria-pressed=true]]:bg-pink-dark [&_button[aria-pressed=true]]:text-white" role="group" aria-label="<?= $page->copykieseenvoorbeeldbedrag()->esc() ?>"><?php foreach([10,25,50,100] as $amount): ?><button type="button" data-amount="<?= $amount ?>" aria-pressed="false">€ <?= $amount ?></button><?php endforeach ?></div><label for="amount"><?= $page->copyanderbedrag()->esc() ?></label><input id="amount" type="number" min="1" step="1" inputmode="numeric" class="text-base" placeholder="<?= $page->copybedrag()->esc() ?>">
-<?php if($site->fundraiser()->isNotEmpty()): ?><a class="inline-flex min-h-11 items-center justify-center rounded-[5px] border px-[21px] py-[11px] text-sm font-bold border-transparent bg-white text-pink-dark hover:bg-pink-dark hover:text-white w-full" href="<?= $site->fundraiser()->esc() ?>"><?= $page->copyganaardeexternesteunactie()->esc() ?></a><p class="mt-3 text-xs"><?= $page->copyhetgekozenbedragwordtnietdoorgegevenjekiesthetbedragopd()->esc() ?></p><?php endif ?></div></div></section>
-<section class="scroll-mt-28 py-[42px] md:py-[72px]" id="contact"><div class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)] grid grid-cols-1 items-center gap-[26px] md:grid-cols-2 md:gap-8 lg:gap-16"><div><p class="mb-4 text-xs font-bold tracking-[.12em] uppercase"><?= $page->copyeenvraagoftip()->esc() ?></p><h2><?= $page->contacttitle()->esc() ?></h2><p><?= $page->contactintro()->esc() ?></p></div><form class="contact-form [&_label]:mb-[5px] [&_label]:block [&_label]:text-sm [&_label]:text-pink-dark [&_input]:mb-[15px] [&_input]:w-full [&_input]:rounded-[5px] [&_input]:border [&_input]:border-line [&_input]:bg-white [&_input]:px-3 [&_input]:py-[10px] [&_textarea]:mb-[15px] [&_textarea]:w-full [&_textarea]:rounded-[5px] [&_textarea]:border [&_textarea]:border-line [&_textarea]:bg-white [&_textarea]:px-3 [&_textarea]:py-[10px] [&_fieldset:disabled]:opacity-55 [&_button:disabled]:cursor-default [&_.contact-note]:text-muted" data-contact-copy="<?= esc(json_encode(['subject' => $page->mailsubject()->value(), 'name' => $page->copynaam()->value(), 'email' => $page->copyemailadres()->value(), 'status' => $page->mailstatus()->value()], JSON_UNESCAPED_UNICODE)) ?>" data-contact-email="<?= $site->contactemail()->esc() ?>">
-<fieldset class="min-w-0 border-0 p-0" <?= $site->contactemail()->isEmpty() ? 'disabled' : '' ?>><legend class="sr-only"><?= $page->copycontactmetsamenvoortess()->esc() ?></legend><div class="grid grid-cols-1 gap-0 md:grid-cols-2 md:gap-[18px]"><div><label for="contact-name"><?= $page->copynaam()->esc() ?></label><input id="contact-name" name="name" autocomplete="name" required maxlength="120"></div><div><label for="contact-email"><?= $page->copyemailadres()->esc() ?></label><input id="contact-email" name="email" type="email" autocomplete="email" required maxlength="254"></div></div><label for="contact-message"><?= $page->copyvraagbericht()->esc() ?></label><textarea id="contact-message" name="message" rows="5" required maxlength="5000"></textarea><button class="inline-flex min-h-11 items-center justify-center rounded-[5px] border px-[21px] py-[11px] text-sm font-bold border-transparent bg-pink text-donation-ink hover:bg-pink-dark hover:text-white" type="submit"><?= $page->copyopenemailbericht()->esc() ?></button></fieldset>
-<?php if($site->contactemail()->isEmpty()): ?><p class="contact-note mt-3 text-xs"><?= $page->copyhetcontactformulierwordtbeschikbaarzodrahetcontactadres()->esc() ?></p><?php else: ?><p class="contact-note mt-3 text-xs"><?= $page->copyditopentjeemailprogrammaverstuurhetberichtdaaromcontact()->esc() ?></p><noscript><p><?= $page->copystuurjeberichtnaar()->esc() ?> <a href="mailto:<?= $site->contactemail()->esc() ?>"><?= $site->contactemail()->esc() ?></a>.</p></noscript><?php endif ?><p class="contact-note mt-3 text-xs" data-contact-status role="status"></p></form></div></section>
+<section class="bg-hero text-white">
+    <div
+        class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)] grid grid-cols-1 md:min-h-[460px] md:grid-cols-2 lg:min-h-[560px]">
+        <div class="self-center py-12 md:py-[65px] md:pr-[45px] lg:py-[90px]">
+            <p class="mb-4 text-xs font-bold tracking-[.12em] uppercase"><?= $page->herokicker()->esc() ?></p>
+            <h1><?= $page->herotitle()->esc() ?></h1>
+            <p class="mb-7 max-w-[380px] text-hero-copy"><?= $page->herotext()->esc() ?></p>
+            <div class="flex flex-wrap gap-3"><a
+                    class="inline-flex min-h-11 items-center justify-center rounded-[5px] border px-[21px] py-[11px] text-sm font-bold border-transparent bg-pink text-donation-ink hover:bg-pink-dark hover:text-white"
+                    href="#help-tess"><?= $page->copyhelptess()->esc() ?></a><a
+                    class="inline-flex min-h-11 items-center justify-center rounded-[5px] border px-[21px] py-[11px] text-sm font-bold border-current bg-transparent text-white hover:bg-pink-dark"
+                    href="<?= page('haar-verhaal')->url() ?>"><?= $page->copyleeshaarverhaal()->esc() ?></a></div>
+        </div>
+        <?php snippet('picture', ['source' => $page->heroimage(), 'label' => $page->copyfotovantessvolgt()->value(), 'class' => 'hero-media']) ?>
+    </div>
+</section>
+<section class="py-[42px] md:py-[72px]">
+    <div
+        class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)] grid grid-cols-1 items-center gap-[26px] md:grid-cols-2 md:gap-8 lg:gap-16">
+        <?php snippet('picture', ['source' => $page->storyimage(), 'label' => $page->copyfotobijhaarverhaal()->value()]) ?>
+        <div>
+            <h2><?= $page->storytitle()->esc() ?></h2>
+            <div class="prose"><?= $page->intro()->kirbytext() ?></div><a
+                class="mt-3 inline-block text-sm font-bold text-pink-dark hover:underline"
+                href="<?= page('haar-verhaal')->url() ?>"><?= $page->copyleesmeeroverhaar()->esc() ?></a>
+        </div>
+    </div>
+</section>
+<section class="scroll-mt-28 donation-progress py-6 md:py-7 bg-pink text-donation-ink [&_h2]:text-donation-ink"
+    id="donatievoortgang">
+    <div class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)]">
+        <h2
+            class="mb-[15px] text-[clamp(.95rem,1.55vw,1.15rem)] leading-[1.3] tracking-[.055em] text-donation-ink uppercase">
+            <?= $page->progresstitle()->esc() ?></h2>
+        <?php
+        $goal = $site->goal()->toFloat();
+        $raised = max(0, $site->raised()->toFloat());
+        $hasTotals = $goal > 0 && $site->raised()->isNotEmpty();
+        $percent = $hasTotals ? min(100, round($raised / $goal * 100)) : 14;
+        ?>
+        <div
+            class="mb-3 flex flex-wrap items-baseline justify-between gap-3 text-donation-ink [&_strong]:text-[clamp(1.45rem,2.5vw,1.8rem)] [&_strong]:leading-[1.2] [&_span]:max-w-[165px] [&_span]:text-right [&_span]:text-sm [&_span]:leading-normal [&_b]:ml-[6px] [&_b]:inline-block md:gap-5 md:[&_span]:max-w-none md:[&_span]:text-sm md:[&_b]:ml-3 max-xs:items-start max-xs:[&_span]:max-w-[140px]">
+            <strong>€
+                <?= $hasTotals ? number_format($raised, 0, ',', '.') : $page->sampleamount()->esc() ?></strong><span><?= $page->progressprefix()->esc() ?>
+                <?= $hasTotals ? number_format($goal, 0, ',', '.') : $page->samplegoal()->esc() ?>
+                <b><?= $percent ?>%</b></span></div>
+        <?php if ($hasTotals): ?>
+            <progress class="donation-bar" value="<?= $percent ?>" max="100"
+                aria-label="<?= $page->progresslabel()->esc() ?>"><?= $percent ?>%</progress>
+        <?php else: ?>
+            <div class="block h-4 w-full overflow-hidden rounded-full border border-progress-line bg-white [&_span]:block [&_span]:h-full [&_span]:rounded-full [&_span]:bg-blush"
+                aria-hidden="true"><span class="w-[14%]"></span></div>
+        <?php endif ?>
+        <div
+            class="mt-[13px] grid grid-cols-2 gap-4 text-center text-sm leading-normal text-donation-ink [&_strong]:text-base [&_strong]:tracking-[.04em] [&_span]:block md:grid-cols-4 md:gap-4">
+            <?php foreach ($site->milestones()->toStructure() as $item): ?>
+                <div><strong><?= $item->amount()->esc() ?></strong><span><?= $item->label()->esc() ?></span></div>
+            <?php endforeach ?>
+        </div>
+    </div>
+</section>
+<section class="py-[42px] md:py-[72px]">
+    <div class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)]">
+        <h2><?= $page->contributiontitle()->esc() ?></h2>
+        <div class="mt-7 grid grid-cols-1 gap-[18px] md:grid-cols-2 lg:grid-cols-4">
+            <a class="relative rounded-lg border border-line bg-white p-[22px] text-left text-ink transition-transform duration-150 hover:-translate-y-[3px] hover:border-pink motion-reduce:transition-none [&_p]:text-base [&_p]:text-muted [&>span:last-child]:absolute [&>span:last-child]:top-[19px] [&>span:last-child]:right-[17px] [&>span:last-child]:text-pink"
+                href="#help-tess"><span
+                    class="mb-5 flex size-[34px] items-center justify-center rounded-[5px] bg-blush text-pink-dark"
+                    aria-hidden="true">♡</span>
+                <h3><?= $page->copydoneerdirect()->esc() ?></h3>
+                <p><?= $page->copydraagbijaandebehandelingvantess()->esc() ?></p><span aria-hidden="true">↗</span>
+            </a>
+            <button
+                class="relative rounded-lg border border-line bg-white p-[22px] text-left text-ink transition-transform duration-150 hover:-translate-y-[3px] hover:border-pink motion-reduce:transition-none [&_p]:text-base [&_p]:text-muted [&>span:last-child]:absolute [&>span:last-child]:top-[19px] [&>span:last-child]:right-[17px] [&>span:last-child]:text-pink"
+                data-share data-share-title="<?= $site->title()->esc() ?>"
+                data-share-copied="<?= $page->sharecopied()->esc() ?>"
+                data-share-fallback="<?= $page->sharefallback()->esc() ?>"><span
+                    class="mb-5 flex size-[34px] items-center justify-center rounded-[5px] bg-blush text-pink-dark"
+                    aria-hidden="true">↗</span>
+                <h3><?= $page->copydeelhaarverhaal()->esc() ?></h3>
+                <p><?= $page->copydeelditverhaalenvergroothetbereik()->esc() ?></p><span aria-hidden="true">↗</span>
+            </button>
+            <a class="relative rounded-lg border border-line bg-white p-[22px] text-left text-ink transition-transform duration-150 hover:-translate-y-[3px] hover:border-pink motion-reduce:transition-none [&_p]:text-base [&_p]:text-muted [&>span:last-child]:absolute [&>span:last-child]:top-[19px] [&>span:last-child]:right-[17px] [&>span:last-child]:text-pink"
+                href="#contact"><span
+                    class="mb-5 flex size-[34px] items-center justify-center rounded-[5px] bg-blush text-pink-dark"
+                    aria-hidden="true">↗</span>
+                <h3><?= $page->copykominactie()->esc() ?></h3>
+                <p><?= $page->copyorganiseereeninzamelactiesponsorloopquizofconcert()->esc() ?></p><span
+                    aria-hidden="true">↗</span>
+            </a>
+            <a class="relative rounded-lg border border-line bg-white p-[22px] text-left text-ink transition-transform duration-150 hover:-translate-y-[3px] hover:border-pink motion-reduce:transition-none [&_p]:text-base [&_p]:text-muted [&>span:last-child]:absolute [&>span:last-child]:top-[19px] [&>span:last-child]:right-[17px] [&>span:last-child]:text-pink"
+                href="#contact"><span
+                    class="mb-5 flex size-[34px] items-center justify-center rounded-[5px] bg-blush text-pink-dark"
+                    aria-hidden="true">↗</span>
+                <h3><?= $page->copysteunenalsbedrijf()->esc() ?></h3>
+                <p><?= $page->copyneemcontactopomtebesprekenhoejekuntbijdragen()->esc() ?></p><span
+                    aria-hidden="true">↗</span>
+            </a>
+        </div>
+        <p data-share-status role="status"></p>
+    </div>
+</section>
+<section class="py-[42px] md:py-[72px] bg-blush">
+    <div class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)]">
+        <h2><?= $page->updatestitle()->esc() ?></h2><?php snippet('update-cards') ?><a
+            class="inline-flex min-h-11 items-center justify-center rounded-[5px] border px-[21px] py-[11px] text-sm font-bold border-transparent bg-pink text-donation-ink hover:bg-pink-dark hover:text-white"
+            href="<?= page('updates')->url() ?>"><?= $page->copybekijkalleupdates()->esc() ?></a>
+    </div>
+</section>
+<section class="py-[42px] md:py-[72px]">
+    <div
+        class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)] grid grid-cols-1 items-center gap-[26px] md:grid-cols-2 md:gap-8 lg:gap-16">
+        <div>
+            <h2><?= $page->treatmenttitle()->esc() ?></h2>
+            <ol class="steps"><?php foreach ($page->steps()->toStructure() as $step): ?>
+                    <li><?= $step->heading()->esc() ?></li><?php endforeach ?>
+            </ol><a class="mt-3 inline-block text-sm font-bold text-pink-dark hover:underline"
+                href="<?= page('behandelingsplan')->url() ?>"><?= $page->copyleesmeeroverhetbehandelplan()->esc() ?></a>
+        </div>
+        <?php snippet('picture', ['source' => $page->treatmentimage(), 'label' => $page->copyfotobijhetbehandeltraject()->value()]) ?>
+    </div>
+</section>
+<section class="scroll-mt-28 py-8 md:py-[42px] bg-pink text-donation-ink [&_h2]:text-donation-ink" id="help-tess">
+    <div
+        class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)] grid grid-cols-1 items-center gap-[26px] md:grid-cols-2 md:gap-8 lg:gap-16">
+        <div>
+            <h2><?= $page->donationtitle()->esc() ?></h2>
+            <p><?= $page->donationintro()->esc() ?></p><?php snippet('bank-account') ?>
+        </div>
+        <div
+            class="[&_label]:mb-[6px] [&_label]:block [&_label]:text-sm [&_input]:mb-3 [&_input]:min-h-12 [&_input]:w-full [&_input]:rounded-[5px] [&_input]:border-0 [&_input]:bg-white [&_input]:px-[14px] [&_input]:py-[9px] [&_input]:text-ink">
+            <div class="mb-[15px] grid grid-cols-2 gap-3 xs:grid-cols-4 [&_button]:min-h-12 [&_button]:rounded-[5px] [&_button]:border-2 [&_button]:border-white [&_button]:bg-white [&_button]:text-pink-dark [&_button[aria-pressed=true]]:bg-pink-dark [&_button[aria-pressed=true]]:text-white"
+                role="group" aria-label="<?= $page->copykieseenvoorbeeldbedrag()->esc() ?>">
+                <?php foreach ([10, 25, 50, 100] as $amount): ?><button type="button" data-amount="<?= $amount ?>"
+                        aria-pressed="false">€ <?= $amount ?></button><?php endforeach ?></div><label
+                for="amount"><?= $page->copyanderbedrag()->esc() ?></label><input id="amount" type="number" min="1"
+                step="1" inputmode="numeric" class="text-base" placeholder="<?= $page->copybedrag()->esc() ?>">
+            <?php if ($site->fundraiser()->isNotEmpty()): ?><a
+                    class="inline-flex min-h-11 items-center justify-center rounded-[5px] border px-[21px] py-[11px] text-sm font-bold border-transparent bg-white text-pink-dark hover:bg-pink-dark hover:text-white w-full"
+                    href="<?= $site->fundraiser()->esc() ?>"><?= $page->copyganaardeexternesteunactie()->esc() ?></a>
+                <p class="mt-3 text-xs"><?= $page->copyhetgekozenbedragwordtnietdoorgegevenjekiesthetbedragopd()->esc() ?>
+                </p><?php endif ?>
+        </div>
+    </div>
+</section>
+<section class="scroll-mt-28 py-[42px] md:py-[72px]" id="contact">
+    <div
+        class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)] grid grid-cols-1 items-center gap-[26px] md:grid-cols-2 md:gap-8 lg:gap-16">
+        <div>
+            <p class="mb-4 text-xs font-bold tracking-[.12em] uppercase"><?= $page->copyeenvraagoftip()->esc() ?></p>
+            <h2><?= $page->contacttitle()->esc() ?></h2>
+            <p><?= $page->contactintro()->esc() ?></p>
+        </div>
+        <form
+            class="contact-form [&_label]:mb-[5px] [&_label]:block [&_label]:text-sm [&_label]:text-pink-dark [&_input]:mb-[15px] [&_input]:w-full [&_input]:rounded-[5px] [&_input]:border [&_input]:border-line [&_input]:bg-white [&_input]:px-3 [&_input]:py-[10px] [&_textarea]:mb-[15px] [&_textarea]:w-full [&_textarea]:rounded-[5px] [&_textarea]:border [&_textarea]:border-line [&_textarea]:bg-white [&_textarea]:px-3 [&_textarea]:py-[10px] [&_fieldset:disabled]:opacity-55 [&_button:disabled]:cursor-default [&_.contact-note]:text-muted"
+            data-contact-copy="<?= esc(json_encode(['subject' => $page->mailsubject()->value(), 'name' => $page->copynaam()->value(), 'email' => $page->copyemailadres()->value(), 'status' => $page->mailstatus()->value()], JSON_UNESCAPED_UNICODE)) ?>"
+            data-contact-email="<?= $site->contactemail()->esc() ?>">
+            <fieldset class="min-w-0 border-0 p-0" <?= $site->contactemail()->isEmpty() ? 'disabled' : '' ?>>
+                <legend class="sr-only"><?= $page->copycontactmetsamenvoortess()->esc() ?></legend>
+                <div class="grid grid-cols-1 gap-0 md:grid-cols-2 md:gap-[18px]">
+                    <div><label for="contact-name"><?= $page->copynaam()->esc() ?></label><input id="contact-name"
+                            name="name" autocomplete="name" required maxlength="120"></div>
+                    <div><label for="contact-email"><?= $page->copyemailadres()->esc() ?></label><input
+                            id="contact-email" name="email" type="email" autocomplete="email" required maxlength="254">
+                    </div>
+                </div><label for="contact-message"><?= $page->copyvraagbericht()->esc() ?></label><textarea
+                    id="contact-message" name="message" rows="5" required maxlength="5000"></textarea><button
+                    class="inline-flex min-h-11 items-center justify-center rounded-[5px] border px-[21px] py-[11px] text-sm font-bold border-transparent bg-pink text-donation-ink hover:bg-pink-dark hover:text-white"
+                    type="submit"><?= $page->copyopenemailbericht()->esc() ?></button>
+            </fieldset>
+            <?php if ($site->contactemail()->isEmpty()): ?>
+                <p class="contact-note mt-3 text-xs">
+                    <?= $page->copyhetcontactformulierwordtbeschikbaarzodrahetcontactadres()->esc() ?></p><?php else: ?>
+                <p class="contact-note mt-3 text-xs">
+                    <?= $page->copyditopentjeemailprogrammaverstuurhetberichtdaaromcontact()->esc() ?></p><noscript>
+                    <p><?= $page->copystuurjeberichtnaar()->esc() ?> <a
+                            href="mailto:<?= $site->contactemail()->esc() ?>"><?= $site->contactemail()->esc() ?></a>.</p>
+                </noscript><?php endif ?>
+            <p class="contact-note mt-3 text-xs" data-contact-status role="status"></p>
+        </form>
+    </div>
+</section>
 <?php snippet('footer') ?>
