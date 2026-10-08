@@ -1,5 +1,11 @@
 {
+  "scripts": {
+    "watch": "tailwindcss -i assets/css/src/app.css -o assets/css/app.css --watch",
+    "build": "tailwindcss -i assets/css/src/app.css -o assets/css/app.css --minify"
+  },
   "dependencies": {
+    "@fontsource-variable/caveat": "^5.2.0",
+    "@fontsource-variable/montserrat": "^5.2.0",
     "@tailwindcss/cli": "^4.3.0",
     "tailwindcss": "^4.3.3"
   }
