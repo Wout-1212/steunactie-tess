@@ -42,8 +42,12 @@ return [
         'progress.sample-raised' => 'XX.XXX',
         'progress.sample-goal' => 'XXX.XXX',
 
+        'share.title' => 'Deel het verhaal van Tess',
+        'share.close' => 'Sluiten',
+        'share.email' => 'E-mail',
+        'share.link-label' => 'Of kopieer de link',
+        'share.copy' => 'Kopieer',
         'share.copied' => 'Link gekopieerd. Deel hem met vrienden en familie.',
-        'share.fallback' => 'Deel deze link:',
 
         'donation.amounts' => 'Kies een voorbeeldbedrag',
         'donation.other-amount' => 'Ander bedrag (€)',

@@ -83,6 +83,14 @@ tabs:
               donate: Naar het donatieblok
               share: Pagina delen
               contact: Naar het contactformulier
+          icon:
+            label: Icoon
+            type: select
+            options:
+              heart: Hart (doneren)
+              share: Delen
+              megaphone: Megafoon (actie)
+              building: Gebouw (bedrijf)
           title:
             label: Titel
             type: text

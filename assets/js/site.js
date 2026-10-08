@@ -63,14 +63,25 @@
     amountButtons.forEach(other => other.setAttribute('aria-pressed', String(other === button)));
   }));
   amountInput?.addEventListener('input', () => amountButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.amount === amountInput.value))));
-  document.querySelector('[data-share]')?.addEventListener('click', async () => {
-    const status = document.querySelector('[data-share-status]');
-    const copy = document.querySelector('[data-share]').dataset;
-    try {
-      if (navigator.share) { await navigator.share({ title: copy.shareTitle, url: location.href.split('#')[0] }); }
-      else if (navigator.clipboard) { await navigator.clipboard.writeText(location.href.split('#')[0]); status.textContent = copy.shareCopied; }
-      else { status.textContent = copy.shareFallback + ' ' + location.href.split('#')[0]; }
-    } catch (error) { if (error.name !== 'AbortError') status.textContent = copy.shareFallback + ' ' + location.href.split('#')[0]; }
+  // Use the native share sheet where available (mostly phones), otherwise open the share dialog.
+  const shareButton = document.querySelector('[data-share]');
+  const shareDialog = document.querySelector('[data-share-dialog]');
+  shareButton?.addEventListener('click', async () => {
+    if (navigator.share) {
+      try { await navigator.share({ title: shareButton.dataset.shareTitle, url: shareButton.dataset.shareUrl }); return; }
+      catch (error) { if (error.name === 'AbortError') return; }
+    }
+    shareDialog.querySelector('[data-share-status]').textContent = '';
+    shareDialog.showModal();
+  });
+  shareDialog?.addEventListener('click', event => { if (event.target === shareDialog) shareDialog.close(); });
+  shareDialog?.querySelector('[data-share-copy]').addEventListener('click', async () => {
+    const input = shareDialog.querySelector('#share-link');
+    const status = shareDialog.querySelector('[data-share-status]');
+    input.select();
+    // The Clipboard API only exists on https/localhost; fall back to the selected input elsewhere.
+    try { await navigator.clipboard.writeText(input.value); } catch { document.execCommand('copy'); }
+    status.textContent = status.dataset.copied;
   });
 
   document.querySelector('[data-contact-email]')?.addEventListener('submit', event => {

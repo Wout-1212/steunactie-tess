@@ -19,7 +19,6 @@
   --color-hero: #332b30;
   --color-hero-placeholder: #493738;
   --color-hero-copy: #ede3e3;
-  --color-progress-line: #f3ced2;
   --font-sans: Montserrat, Arial, sans-serif;
   --font-name: Caveat, cursive;
   --breakpoint-xs: 22.5625rem;
@@ -54,8 +53,8 @@
   summary::-webkit-details-marker { display: none; }
   summary::after { @apply absolute right-[18px] text-pink-dark; content: '+'; }
   details[open] summary::after { content: '−'; }
-  .donation-bar { @apply block h-4 w-full appearance-none overflow-hidden rounded-full border border-progress-line bg-white; }
-  .donation-bar::-webkit-progress-bar { @apply bg-white; }
+  .donation-bar { @apply block h-4 w-full appearance-none overflow-hidden rounded-full border-2 border-blush bg-transparent; }
+  .donation-bar::-webkit-progress-bar { @apply bg-transparent; }
   .donation-bar::-webkit-progress-value { @apply rounded-full bg-blush; }
   .donation-bar::-moz-progress-bar { @apply rounded-full bg-blush; }
   .update-timeline article { @apply relative border-l-2 border-line pb-10 pl-[30px]; }

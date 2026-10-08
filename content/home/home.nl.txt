@@ -43,15 +43,19 @@ Contribute_title: Manieren om bij te dragen
 ----
 
 Contribute_cards: - action: donate
+  icon: heart
   title: Doneer direct
   text: Draag bij aan de behandeling van Tess.
 - action: share
+  icon: share
   title: Deel haar verhaal
   text: Deel dit verhaal en vergroot het bereik.
 - action: contact
+  icon: megaphone
   title: Kom in actie
   text: Organiseer een inzamelactie, sponsorloop, quiz of concert.
 - action: contact
+  icon: building
   title: Steunen als bedrijf?
   text: Neem contact op om te bespreken hoe je kunt bijdragen.
 
