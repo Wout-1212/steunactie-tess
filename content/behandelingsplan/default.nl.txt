@@ -32,12 +32,8 @@ Steps: - heading: Diagnose & doorverwijzing
 
 ----
 
-Copyhetbehandeltraject: Het behandeltraject
+Steps_title: Het behandeltraject
 
 ----
 
 Navtitle: Ziekte & behandeling
-
-----
-
-Coverlabel: Foto bij behandelingsplan

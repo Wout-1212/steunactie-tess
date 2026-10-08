@@ -5,6 +5,18 @@ tabs:
     sections:
       pages:
         type: pages
+  texts:
+    label: Teksten
+    fields:
+      cta_title:
+        label: Titel oproepblok onderaan pagina's
+        type: text
+      cta_text:
+        label: Tekst oproepblok
+        type: text
+      footer_tagline:
+        label: Slogan in de footer
+        type: text
   settings:
     label: Site-instellingen
     fields:
@@ -17,6 +29,7 @@ tabs:
         multiple: false
         query: site.files
         uploads: image
+        translate: false
       organisation:
         label: Organisatie
         type: text
@@ -26,26 +39,32 @@ tabs:
       contactemail:
         label: Contactadres
         type: email
+        translate: false
       instagram:
         label: Instagram Samen voor Tess (volledige URL)
         type: url
+        translate: false
       instagramtess:
         label: Instagram Tess (volledige URL)
         type: url
+        translate: false
       bankaccount:
         label: Rekeningnummer voor overschrijvingen
         type: text
         help: Wordt bij Help Tess en in de footer getoond.
+        translate: false
       fundraiser:
         label: Externe steunactie (optioneel)
         type: url
         help: Alleen een bevestigde URL invullen. Dit is geen betaalintegratie.
+        translate: false
       raised:
         label: Opgehaald bedrag in euro
         type: number
         min: 0
         step: 0.01
         width: 1/2
+        translate: false
       goal:
         label: Doelbedrag in euro
         type: number
@@ -53,6 +72,7 @@ tabs:
         step: 0.01
         width: 1/2
         help: Laat leeg zolang er geen bevestigd doelbedrag is. Dan blijft een duidelijk gemarkeerde voorbeeldbalk zichtbaar.
+        translate: false
       milestones:
         label: Mijlpalen onder de voortgangsbalk
         type: structure
@@ -67,57 +87,3 @@ tabs:
       files:
         label: Logo en sitebestanden
         type: files
-  texts:
-    label: Gedeelde websiteteksten
-    fields:
-      copyganaarinhoud:
-        label: "Ga naar inhoud"
-        type: text
-      copysamenvoortesshome:
-        label: "Samen voor Tess, home"
-        type: text
-      copysamenvoortess:
-        label: "Samen voor Tess"
-        type: text
-      copymenu:
-        label: "Menu"
-        type: text
-      copyhoofdnavigatie:
-        label: "Hoofdnavigatie"
-        type: text
-      copycontact:
-        label: "Contact"
-        type: text
-      copyhelptess:
-        label: "Help Tess"
-        type: text
-      footertagline:
-        label: "Hoop op herstel"
-        type: text
-      copysteuntess:
-        label: "Steun Tess"
-        type: text
-      copyexternesteunactie:
-        label: "Externe steunactie ↗"
-        type: text
-      copyoverdevzw:
-        label: "Over de vzw"
-        type: text
-      websitecredit:
-        label: "Website door Ceyda & Wout · KdG"
-        type: text
-      copywiljetesshelpen:
-        label: "Wil je Tess helpen?"
-        type: text
-      copyelkebijdragegrootofkleinmaakteenverschil:
-        label: "Elke bijdrage, groot of klein, maakt een verschil."
-        type: text
-      banklabel:
-        label: "Rekeningnummer voor overschrijvingen"
-        type: text
-      instagramlabel:
-        label: "Instagram"
-        type: text
-      instagramtesslabel:
-        label: "Tess op Instagram"
-        type: text

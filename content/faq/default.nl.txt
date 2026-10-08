@@ -25,12 +25,4 @@ Questions: - question: Hoe kan ik Tess helpen?
 
 ----
 
-Copyhetbehandeltraject: Het behandeltraject
-
-----
-
 Navtitle: FAQ
-
-----
-
-Coverlabel: Foto bij faq

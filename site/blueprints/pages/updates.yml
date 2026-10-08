@@ -15,15 +15,3 @@ columns:
       text:
         label: Introductie
         type: textarea
-      copyleesupdate:
-        label: "Lees update →"
-        type: text
-      copybinnenkortleesjehierdeupdatesovertess:
-        label: "Binnenkort lees je hier de updates over Tess."
-        type: text
-      copyfotobijupdate:
-        label: "Foto bij update"
-        type: text
-      copyalleupdates:
-        label: "← Alle updates"
-        type: text

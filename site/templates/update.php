@@ -2,7 +2,7 @@
 <article class="py-[42px] md:py-[72px]">
     <div class="mx-auto w-[calc(100%-40px)] lg:w-[calc(100%-64px)] !max-w-[800px] [&_h1]:mt-6 [&_.media]:my-6"><a
             class="mt-3 inline-block text-sm font-bold text-pink-dark hover:underline"
-            href="<?= $page->parent()->url() ?>"><?= $page->parent()->copyalleupdates()->esc() ?></a>
+            href="<?= $page->parent()->url() ?>"><?= t('updates.back') ?></a>
         <h1><?= $page->title()->esc() ?></h1><?php if ($page->date()->isNotEmpty()): ?><time
                 datetime="<?= $page->date()->toDate('Y-m-d') ?>"><?= $page->date()->toDate('d-m-Y') ?></time><?php endif ?><?php if ($page->cover()->isNotEmpty()): ?><?php snippet('picture', ['source' => $page->cover(), 'label' => $page->title()->value()]) ?><?php endif ?>
         <div class="prose"><?= $page->text()->kirbytext() ?></div>

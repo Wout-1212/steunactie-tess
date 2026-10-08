@@ -4,7 +4,7 @@
         <?php if ($page->questions()->isEmpty()): ?>
             <?php if ($page->cover()->isNotEmpty()): ?>
                 <div class="grid grid-cols-1 items-center gap-[26px] md:grid-cols-2 md:gap-8 lg:gap-16 mb-10">
-                    <?php snippet('picture', ['source' => $page->cover(), 'label' => $page->coverlabel()->or($page->title())->value()]) ?>
+                    <?php snippet('picture', ['source' => $page->cover(), 'label' => $page->title()->value()]) ?>
                     <div>
                         <h1><?= $page->heading()->or($page->title())->esc() ?></h1>
                         <div class="prose"><?= $page->text()->kirbytext() ?></div>
@@ -25,7 +25,7 @@
         <?php if ($page->steps()->isNotEmpty()): ?>
             <div
                 class="grid grid-cols-1 gap-[26px] py-[18px] md:grid-cols-[1fr_1.3fr] md:gap-16 md:py-[26px] [&_h2]:text-[1.3rem]">
-                <h2><?= $page->copyhetbehandeltraject()->esc() ?></h2>
+                <h2><?= $page->steps_title()->esc() ?></h2>
                 <ol class="steps"><?php foreach ($page->steps()->toStructure() as $step): ?>
                         <li><strong><?= $step->heading()->esc() ?></strong><?= $step->text()->kirbytext() ?></li>
                     <?php endforeach ?>

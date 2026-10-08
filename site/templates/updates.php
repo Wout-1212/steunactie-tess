@@ -10,11 +10,11 @@
                     <h2><a href="<?= $item->url() ?>"><?= $item->title()->esc() ?></a></h2>
                     <p><?= $item->text()->excerpt(250)->esc() ?></p><a
                         class="mt-3 inline-block text-sm font-bold text-pink-dark hover:underline"
-                        href="<?= $item->url() ?>"><?= page('updates')->copyleesupdate()->esc() ?></a>
+                        href="<?= $item->url() ?>"><?= t('updates.read') ?></a>
                 </article><?php endforeach ?>
             <?php if ($items->isEmpty()): ?>
                 <p class="mb-6 rounded-lg border border-dashed border-line bg-white p-6 text-muted">
-                    <?= page('updates')->copybinnenkortleesjehierdeupdatesovertess()->esc() ?>
+                    <?= t('updates.empty') ?>
                 </p><?php endif ?>
         </div>
     </div>

@@ -23,12 +23,4 @@ Sections: - heading: Hoe het begon
 
 ----
 
-Copyhetbehandeltraject: Het behandeltraject
-
-----
-
 Navtitle: Haar verhaal
-
-----
-
-Coverlabel: Foto bij haar verhaal

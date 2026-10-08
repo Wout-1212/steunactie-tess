@@ -6,11 +6,13 @@ fields:
     type: date
     required: true
     default: today
+    translate: false
   cover:
     label: Foto (optioneel)
     type: files
     multiple: false
     uploads: image
+    translate: false
   text:
     label: Update
     type: textarea

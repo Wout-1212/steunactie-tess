@@ -35,12 +35,4 @@ Questions: - question: Welke gegevens verzamelen we?
 
 ----
 
-Copyhetbehandeltraject: Het behandeltraject
-
-----
-
-Coverlabel: Foto bij privacy
-
-----
-
 Footerlabel: Privacybeleid

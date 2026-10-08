@@ -2,198 +2,139 @@ title: Home
 options:
   changeStatus: false
   delete: false
-fields:
-  description:
-    label: Beschrijving voor zoekmachines
-    type: textarea
-  herotitle:
-    label: Hoofdtitel
-    type: text
-  herotext:
-    label: Intro onder de hoofdtitel
-    type: textarea
-  heroimage:
-    label: Foto bovenaan
-    type: files
-    multiple: false
-    uploads: image
-  intro:
+tabs:
+  hero:
+    label: Hero
+    columns:
+      main:
+        width: 2/3
+        fields:
+          hero_kicker:
+            label: Bovenschrift
+            type: text
+          hero_title:
+            label: Hoofdtitel
+            type: text
+          hero_text:
+            label: Intro onder de hoofdtitel
+            type: textarea
+      sidebar:
+        width: 1/3
+        fields:
+          hero_image:
+            label: Foto
+            type: files
+            multiple: false
+            uploads: image
+            translate: false
+  story:
     label: Over Tess
-    type: textarea
-    size: large
-  storyimage:
-    label: Foto bij Over Tess
-    type: files
-    multiple: false
-    uploads: image
-  steps:
-    label: Stappen op de homepage
-    type: structure
+    columns:
+      main:
+        width: 2/3
+        fields:
+          story_title:
+            label: Titel
+            type: text
+          story_text:
+            label: Tekst
+            type: textarea
+            size: large
+      sidebar:
+        width: 1/3
+        fields:
+          story_image:
+            label: Foto
+            type: files
+            multiple: false
+            uploads: image
+            translate: false
+  donate:
+    label: Doneren
     fields:
-      heading:
-        label: Stap
+      progress_title:
+        label: Titel boven de voortgangsbalk
         type: text
-  treatmentimage:
-    label: Foto bij het traject
-    type: files
-    multiple: false
-    uploads: image
-  herokicker:
-    label: "Samen voor Tess"
-    type: text
-  copyhelptess:
-    label: "Help Tess"
-    type: text
-  copyleeshaarverhaal:
-    label: "Lees haar verhaal"
-    type: text
-  storytitle:
-    label: "Over Tess"
-    type: text
-  copyleesmeeroverhaar:
-    label: "Lees meer over haar →"
-    type: text
-  progresstitle:
-    label: "Donatievoortgang"
-    type: text
-  copyvoorbeeldweergave14endemijlpalenzijnvoorlopigdebevestig:
-    label: "Voorbeeldweergave: 14% en de mijlpalen zijn voorlopig. De bevestigde cijfers volgen."
-    type: text
-  copydemijlpalenzijnvoorlopigenwordennogbevestigd:
-    label: "De mijlpalen zijn voorlopig en worden nog bevestigd."
-    type: text
-  contributiontitle:
-    label: "Manieren om bij te dragen"
-    type: text
-  copydoneerdirect:
-    label: "Doneer direct"
-    type: text
-  copydraagbijaandebehandelingvantess:
-    label: "Draag bij aan de behandeling van Tess."
-    type: text
-  copydeelhaarverhaal:
-    label: "Deel haar verhaal"
-    type: text
-  copydeelditverhaalenvergroothetbereik:
-    label: "Deel dit verhaal en vergroot het bereik."
-    type: text
-  copykominactie:
-    label: "Kom in actie"
-    type: text
-  copyorganiseereeninzamelactiesponsorloopquizofconcert:
-    label: "Organiseer een inzamelactie, sponsorloop, quiz of concert."
-    type: text
-  copysteunenalsbedrijf:
-    label: "Steunen als bedrijf?"
-    type: text
-  copyneemcontactopomtebesprekenhoejekuntbijdragen:
-    label: "Neem contact op om te bespreken hoe je kunt bijdragen."
-    type: text
-  updatestitle:
-    label: "Updates"
-    type: text
-  copybekijkalleupdates:
-    label: "Bekijk alle updates ↓"
-    type: text
-  treatmenttitle:
-    label: "Het traject van Tess"
-    type: text
-  copyleesmeeroverhetbehandelplan:
-    label: "Lees meer over het behandelplan →"
-    type: text
-  donationtitle:
-    label: "Help Tess vandaag nog"
-    type: text
-  donationintro:
-    label: "Elke bijdrage brengt Tess dichter bij haar behandeling en herstel."
-    type: text
-  copykieseenvoorbeeldbedrag:
-    label: "Kies een voorbeeldbedrag"
-    type: text
-  copyanderbedrag:
-    label: "Ander bedrag (€)"
-    type: text
-  copybedrag:
-    label: "Bedrag"
-    type: text
-  copyganaardeexternesteunactie:
-    label: "Ga naar de externe steunactie ↗"
-    type: text
-  copyhetgekozenbedragwordtnietdoorgegevenjekiesthetbedragopd:
-    label: "Het gekozen bedrag wordt niet doorgegeven; je kiest het bedrag op de externe steunactie."
-    type: text
-  copyonlinedonerenisbinnenkortbeschikbaar:
-    label: "Online doneren is binnenkort beschikbaar."
-    type: text
-  copyeenvraagoftip:
-    label: "Een vraag of tip?"
-    type: text
-  contacttitle:
-    label: "Contact"
-    type: text
-  contactintro:
-    label: "Heb je een vraag of een tip? Laat het ons weten."
-    type: text
-  copycontactmetsamenvoortess:
-    label: "Contact met Samen voor Tess"
-    type: text
-  copynaam:
-    label: "Naam"
-    type: text
-  copyemailadres:
-    label: "E-mailadres"
-    type: text
-  copyvraagbericht:
-    label: "Vraag / bericht"
-    type: text
-  copyopenemailbericht:
-    label: "Open e-mailbericht"
-    type: text
-  copyhetcontactformulierwordtbeschikbaarzodrahetcontactadres:
-    label: "Het contactformulier wordt beschikbaar zodra het contactadres is toegevoegd."
-    type: text
-  copyditopentjeemailprogrammaverstuurhetberichtdaaromcontact:
-    label: "Dit opent je e-mailprogramma. Verstuur het bericht daar om contact op te nemen."
-    type: text
-  copystuurjeberichtnaar:
-    label: "Stuur je bericht naar"
-    type: text
-  copyfotovantessvolgt:
-    label: "Foto van Tess volgt"
-    type: text
-  copyfotobijhaarverhaal:
-    label: "Foto bij haar verhaal"
-    type: text
-  copyfotobijhetbehandeltraject:
-    label: "Foto bij het behandeltraject"
-    type: text
-  progressprefix:
-    label: "opgehaald van €"
-    type: text
-  progresslabel:
-    label: "Voortgang van het donatiedoel"
-    type: text
-  sampleamount:
-    label: "XX.XXX"
-    type: text
-  samplegoal:
-    label: "XXX.XXX"
-    type: text
-  emailfallback:
-    label: "Stuur je bericht naar"
-    type: text
-  mailsubject:
-    label: "Vraag voor Samen voor Tess van"
-    type: text
-  mailstatus:
-    label: "Je bericht is nog niet verzonden. Verstuur het vanuit je e-mailprogramma."
-    type: text
-  sharecopied:
-    label: "Link gekopieerd. Deel hem met vrienden en familie."
-    type: text
-  sharefallback:
-    label: "Deel deze link:"
-    type: text
-  navtitle:
-    label: Naam in het menu
-    type: text
+        help: Bedragen en mijlpalen staan bij Site-instellingen.
+      donation_title:
+        label: Titel donatieblok
+        type: text
+      donation_text:
+        label: Tekst donatieblok
+        type: textarea
+  contribute:
+    label: Bijdragen
+    fields:
+      contribute_title:
+        label: Titel
+        type: text
+      contribute_cards:
+        label: Kaarten
+        type: structure
+        columns:
+          title: true
+          action: true
+        fields:
+          action:
+            label: Actie bij klikken
+            type: select
+            required: true
+            options:
+              donate: Naar het donatieblok
+              share: Pagina delen
+              contact: Naar het contactformulier
+          title:
+            label: Titel
+            type: text
+          text:
+            label: Tekst
+            type: text
+  treatment:
+    label: Updates & traject
+    columns:
+      main:
+        width: 2/3
+        fields:
+          updates_title:
+            label: Titel updates
+            type: text
+          treatment_title:
+            label: Titel traject
+            type: text
+          treatment_steps:
+            label: Stappen
+            type: structure
+            fields:
+              heading:
+                label: Stap
+                type: text
+      sidebar:
+        width: 1/3
+        fields:
+          treatment_image:
+            label: Foto bij het traject
+            type: files
+            multiple: false
+            uploads: image
+            translate: false
+  contact:
+    label: Contact
+    fields:
+      contact_kicker:
+        label: Bovenschrift
+        type: text
+      contact_title:
+        label: Titel
+        type: text
+      contact_text:
+        label: Intro
+        type: textarea
+  meta:
+    label: Menu & zoekmachines
+    fields:
+      navtitle:
+        label: Naam in het menu
+        type: text
+      description:
+        label: Beschrijving voor zoekmachines
+        type: textarea
