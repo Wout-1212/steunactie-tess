@@ -12,19 +12,48 @@ if (siteHeader) {
 }
 const toggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('#navigation');
-if (toggle && nav) {
-  toggle.hidden = false;
-  nav.classList.add('hidden');
-  toggle.addEventListener('click', () => {
-    const open = toggle.getAttribute('aria-expanded') !== 'true';
+if (toggle && nav && siteHeader) {
+  const desktop = window.matchMedia('(min-width: 681px)');
+  const icon = toggle.querySelector('[data-menu-icon]');
+  const background = [document.querySelector('main'), document.querySelector('footer')];
+  let previousOverflow = '';
+  const sizeMenu = () => siteHeader.style.setProperty('--header-height', `${siteHeader.offsetHeight}px`);
+  const setMenu = (open, restoreFocus = false) => {
+    open = open && !desktop.matches;
+    const wasOpen = toggle.getAttribute('aria-expanded') === 'true';
     toggle.setAttribute('aria-expanded', String(open));
     nav.classList.toggle('hidden', !open);
-  });
+    if (icon) icon.textContent = open ? '×' : '☰';
+    background.forEach(element => { if (element) element.inert = open; });
+    if (open && !wasOpen) {
+      previousOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      sizeMenu();
+    } else if (!open && wasOpen) {
+      document.body.style.overflow = previousOverflow;
+    }
+    if (restoreFocus) toggle.focus();
+  };
+  nav.dataset.enhanced = 'true';
+  toggle.hidden = false;
+  sizeMenu();
+  new ResizeObserver(sizeMenu).observe(siteHeader);
+  setMenu(false);
+  toggle.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
   nav.addEventListener('click', event => {
-    if (event.target.closest('a')) { toggle.setAttribute('aria-expanded', 'false'); nav.classList.add('hidden'); }
+    if (event.target.closest('a')) setMenu(false);
   });
+  desktop.addEventListener('change', () => setMenu(false));
+  window.addEventListener('pageshow', () => setMenu(false));
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { toggle.setAttribute('aria-expanded', 'false'); nav.classList.add('hidden'); toggle.focus(); }
+    if (toggle.getAttribute('aria-expanded') !== 'true') return;
+    if (event.key === 'Escape') setMenu(false, true);
+    if (event.key === 'Tab') {
+      const controls = [...siteHeader.querySelectorAll('a, button')].filter(element => element.getClientRects().length);
+      const first = controls[0], last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    }
   });
 }
 const amountInput = document.querySelector('#amount');
