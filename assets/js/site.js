@@ -1,3 +1,15 @@
+const siteHeader = document.querySelector('[data-site-header]');
+if (siteHeader) {
+  const updateHeader = () => {
+    const scrolled = window.scrollY > 12;
+    if (siteHeader.dataset.scrolled !== String(scrolled)) {
+      siteHeader.dataset.scrolled = String(scrolled);
+    }
+  };
+  updateHeader();
+  window.addEventListener('scroll', updateHeader, { passive: true });
+  window.addEventListener('pageshow', updateHeader);
+}
 const toggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('#navigation');
 if (toggle && nav) {
