@@ -41,8 +41,9 @@ tabs:
         type: info
         text: Vul per bron het opgehaalde bedrag in. De site telt ze op en berekent het percentage automatisch.
       raised_steunactie:
-        label: Externe steunactie
+        label: Externe steunactie (reserve)
         type: number
+        help: "{{ site.steunactieStatus }}"
         min: 0
         step: 1
         before: €

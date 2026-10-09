@@ -18,6 +18,9 @@
         <?php else: ?>
             <div class="donation-bar" aria-hidden="true"><span class="block h-full w-[14%] rounded-full bg-blush"></span></div>
         <?php endif ?>
+        <?php if ($progress['hasGoal'] && $progress['donations']): ?>
+            <p class="mt-2 mb-0 flex items-center gap-1.5 text-sm"><?php snippet('icon', ['name' => 'heart', 'class' => 'size-4']) ?><?= tt('progress.donations', ['count' => $progress['donations']]) ?></p>
+        <?php endif ?>
         <div
             class="mt-[13px] grid grid-cols-2 gap-4 text-center text-sm leading-normal [&_strong]:text-base [&_strong]:tracking-[.04em] [&_span]:block md:grid-cols-4 md:gap-4">
             <?php foreach ($progress['milestones'] as $milestone): ?>

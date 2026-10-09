@@ -39,6 +39,7 @@ return [
 
         'progress.of-goal' => 'opgehaald van',
         'progress.label' => 'Voortgang van het donatiedoel',
+        'progress.donations' => '{count} donaties via Steunactie',
         'progress.sample-raised' => '€ XX.XXX',
         'progress.sample-goal' => '€ XXX.XXX',
 
