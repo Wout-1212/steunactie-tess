@@ -8,6 +8,10 @@
         siteHeader.dataset.scrolled = String(scrolled);
       }
     };
+    // Exposed on the root so the mobile menu and the hero (which sits behind the header) can use it.
+    const sizeHeader = () => document.documentElement.style.setProperty('--header-height', `${siteHeader.offsetHeight}px`);
+    sizeHeader();
+    new ResizeObserver(sizeHeader).observe(siteHeader);
     updateHeader();
     window.addEventListener('scroll', updateHeader, { passive: true });
     window.addEventListener('resize', updateHeader);
@@ -20,7 +24,6 @@
     const icon = toggle.querySelector('[data-menu-icon]');
     const background = [document.querySelector('main'), document.querySelector('footer')];
     let previousOverflow = '';
-    const sizeMenu = () => siteHeader.style.setProperty('--header-height', `${siteHeader.offsetHeight}px`);
     const setMenu = (open, restoreFocus = false) => {
       open = open && !desktop.matches;
       const wasOpen = toggle.getAttribute('aria-expanded') === 'true';
@@ -31,7 +34,6 @@
       if (open && !wasOpen) {
         previousOverflow = document.body.style.overflow;
         document.body.style.overflow = 'hidden';
-        sizeMenu();
       } else if (!open && wasOpen) {
         document.body.style.overflow = previousOverflow;
       }
@@ -39,8 +41,6 @@
     };
     nav.dataset.enhanced = 'true';
     toggle.hidden = false;
-    sizeMenu();
-    new ResizeObserver(sizeMenu).observe(siteHeader);
     setMenu(false);
     toggle.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
     nav.addEventListener('click', event => {

@@ -79,4 +79,8 @@ Bankaccount: BE97 7340 5272 3549
 
 ----
 
-Fundraiser: 
+Fundraiser: https://steunactie.be/actie/de-medische-loterij-met-duidelijk-behandelplan-en-uitzicht-op-genezing
+
+----
+
+Gofundme: https://www.gofundme.com/f/me8jby-support-and-hope-for-tess-recovery-and-life

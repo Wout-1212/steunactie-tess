@@ -111,8 +111,10 @@ tabs:
         label: Organisatie
         type: text
       organisationdetails:
-        label: Adres, ondernemingsnummer en rekeninggegevens
+        label: Adres en ondernemingsnummer
         type: textarea
+        buttons: false
+        help: Eén gegeven per regel, zoals in de footer. Het rekeningnummer komt uit het veld hieronder.
       contactemail:
         label: Contactadres
         type: email
@@ -134,6 +136,11 @@ tabs:
         label: Externe steunactie (optioneel)
         type: url
         help: Alleen een bevestigde URL invullen. Dit is geen betaalintegratie.
+        translate: false
+      gofundme:
+        label: GoFundMe-pagina (optioneel)
+        type: url
+        help: Alleen een bevestigde URL invullen. Wordt in de footer onder Steun Tess getoond.
         translate: false
     sections:
       files:

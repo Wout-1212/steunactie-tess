@@ -21,9 +21,9 @@ return [
 
         'footer.menu' => 'Menu',
         'footer.support' => 'Steun Tess',
-        'footer.fundraiser' => 'Externe steunactie ↗',
+        'footer.fundraiser' => 'Steunactie',
         'footer.about' => 'Over de vzw',
-        'footer.credit' => 'Website door Ceyda & Wout · KdG',
+        'footer.credit' => 'Website door Ceyda & Wout - KdG',
         'footer.instagram' => 'Instagram',
         'footer.instagram-tess' => 'Tess op Instagram',
 
