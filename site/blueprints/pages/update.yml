@@ -13,15 +13,45 @@ columns:
     fields:
       text:
         label: Tekst
-        type: textarea
-        size: large
+        type: blocks
+        help: Voeg met + tekst, tussentitels, foto's of citaten toe. Sleep blokken om de volgorde te wijzigen.
+        fieldsets:
+          text: true
+          heading:
+            extends: blocks/heading
+            fields:
+              level:
+                options:
+                  - value: h2
+                    icon: h2
+                    text: H2
+                  - value: h3
+                    icon: h3
+                    text: H3
+          list: true
+          image:
+            extends: blocks/image
+            fields:
+              image:
+                uploads: image
+              ratio: false
+              crop: false
+          gallery:
+            extends: blocks/gallery
+            fields:
+              images:
+                uploads: image
+              ratio: false
+              crop: false
+          quote: true
+          line: true
       photos:
-        label: Foto's
+        label: Foto's onderaan
         type: files
         uploads: image
         layout: cards
         size: small
-        help: De eerste foto wordt getoond op de kaart. Sleep om de volgorde te wijzigen.
+        help: Verschijnen als fotoreeks onder de tekst. De eerste foto wordt getoond op de kaart; zonder foto's hier gebruikt de kaart de eerste foto uit de tekst.
         translate: false
   sidebar:
     width: 1/3

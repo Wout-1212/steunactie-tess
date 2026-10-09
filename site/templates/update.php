@@ -6,7 +6,7 @@
             href="<?= $page->parent()->url() ?>"><?= t('updates.back') ?></a>
         <h1 class="mt-6"><?= $page->title()->esc() ?></h1>
         <time datetime="<?= $page->date()->toDate('Y-m-d') ?>"><?= $page->date()->toLocalDate() ?></time>
-        <div class="prose mt-6"><?= $page->text()->kirbytext() ?></div>
+        <div class="prose mt-6"><?= $page->text()->toBlocks() ?></div>
         <?php if ($photos->isNotEmpty()): ?>
             <section class="mt-10 border-t border-line pt-8" aria-labelledby="photos-title">
                 <h2 id="photos-title" class="text-[1.3rem]"><?= t('updates.photos') ?></h2>
@@ -20,7 +20,9 @@
                     <?php endforeach ?>
                 </div>
             </section>
-            <dialog data-lightbox aria-label="<?= t('lightbox.label') ?>"
+        <?php endif ?>
+        <?php /* Rendered always: photos in the text blocks open here too. */ ?>
+        <dialog data-lightbox aria-label="<?= t('lightbox.label') ?>"
                 class="m-auto max-h-none max-w-none overflow-visible bg-transparent p-0 backdrop:bg-ink/85">
                 <img data-lightbox-image class="block max-h-[85vh] max-w-[92vw] rounded-lg object-contain" alt="">
                 <form method="dialog"><button
@@ -33,6 +35,5 @@
                     class="fixed top-1/2 right-4 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white text-ink hover:bg-blush"
                     aria-label="<?= t('lightbox.next') ?>"><?php snippet('icon', ['name' => 'chevron-right']) ?></button>
             </dialog>
-        <?php endif ?>
     </div>
 </article><?php snippet('cta') ?><?php snippet('footer') ?>
