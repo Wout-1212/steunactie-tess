@@ -1,13 +1,16 @@
   const siteHeader = document.querySelector('[data-site-header]');
   if (siteHeader) {
+    // Over a hero the header stays transparent until the hero has scrolled out from under it.
+    const hero = document.querySelector('[data-hero]');
     const updateHeader = () => {
-      const scrolled = window.scrollY > 12;
+      const scrolled = hero ? hero.getBoundingClientRect().bottom <= siteHeader.offsetHeight : window.scrollY > 12;
       if (siteHeader.dataset.scrolled !== String(scrolled)) {
         siteHeader.dataset.scrolled = String(scrolled);
       }
     };
     updateHeader();
     window.addEventListener('scroll', updateHeader, { passive: true });
+    window.addEventListener('resize', updateHeader);
     window.addEventListener('pageshow', updateHeader);
   }
   const toggle = document.querySelector('.menu-toggle');
