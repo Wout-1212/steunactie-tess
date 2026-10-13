@@ -43,15 +43,16 @@ tabs:
       raised_steunactie:
         label: Externe steunactie (reserve)
         type: number
-        help: "{{ site.steunactieStatus }}"
+        help: "{{ site.fundraiserStatus('steunactie') }}"
         min: 0
         step: 1
         before: €
         width: 1/3
         translate: false
       raised_gofundme:
-        label: GoFundMe
+        label: GoFundMe (reserve)
         type: number
+        help: "{{ site.fundraiserStatus('gofundme') }}"
         min: 0
         step: 1
         before: €
@@ -141,7 +142,7 @@ tabs:
       gofundme:
         label: GoFundMe-pagina (optioneel)
         type: url
-        help: Alleen een bevestigde URL invullen. Wordt in de footer onder Steun Tess getoond.
+        help: Alleen een bevestigde URL invullen. Wordt in de footer onder Steun Tess getoond en het opgehaalde bedrag wordt er automatisch van gelezen.
         translate: false
     sections:
       files:

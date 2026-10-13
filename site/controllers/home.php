@@ -2,11 +2,15 @@
 
 return function ($site, $kirby) {
     // Each source gets its own field so scraping/Mollie can fill them separately later.
-    // Steunactie is read automatically (plugins/tess-steunactie); the Panel field is the fallback.
-    $steunactie = $site->steunactie();
+    // Steunactie and GoFundMe are read automatically (plugins/tess-fundraisers); the Panel fields are the fallback.
+    $steunactie = $site->fundraiserStats('steunactie');
+    $gofundme = $site->fundraiserStats('gofundme');
     $raised = ($steunactie['raised'] ?? $site->raised_steunactie()->toFloat())
-        + $site->raised_gofundme()->toFloat()
+        + ($gofundme['raised'] ?? $site->raised_gofundme()->toFloat())
         + $site->raised_other()->toFloat();
+    $donations = isset($steunactie['donations']) || isset($gofundme['donations'])
+        ? ($steunactie['donations'] ?? 0) + ($gofundme['donations'] ?? 0)
+        : null;
     $goal = $site->goal()->toFloat();
     $hasGoal = $goal > 0;
 
@@ -32,8 +36,8 @@ return function ($site, $kirby) {
             // Round down so the bar never shows 100% before the goal is actually reached.
             'percent' => $hasGoal ? (int) min(100, floor($raised / $goal * 100)) : 0,
             'milestones' => $milestones,
-            'donations' => isset($steunactie['donations'])
-                ? (new NumberFormatter($locale, NumberFormatter::DECIMAL))->format($steunactie['donations'])
+            'donations' => $donations !== null
+                ? (new NumberFormatter($locale, NumberFormatter::DECIMAL))->format($donations)
                 : null,
         ],
     ];

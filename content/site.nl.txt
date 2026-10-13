@@ -10,7 +10,7 @@ Raised-steunactie: 30000
 
 ----
 
-Raised-gofundme: 
+Raised-gofundme: 1700
 
 ----
 
