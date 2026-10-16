@@ -1,0 +1,30 @@
+Title: Disclaimer
+
+----
+
+Uuid: tessdisclaimer26
+
+----
+
+Description: Algemene voorwaarden en privacy van Samen voor Tess.
+
+----
+
+Accordiontitle: Donaties
+
+----
+
+Accordionintro: De informatie over donaties is in voorbereiding. De definitieve teksten worden door de opdrachtgever bevestigd.
+
+----
+
+Questions: - question: Terugbetaling van donaties
+  answer: '[Definitieve tekst over terugbetaling van donaties]'
+- question: Besteding van donaties
+  answer: '[Definitieve tekst over besteding van donaties]'
+- question: Gewijzigde omstandigheden of medische noden
+  answer: '[Definitieve tekst over gewijzigde omstandigheden of medische noden]'
+- question: Donaties door bedrijven
+  answer: '[Definitieve informatie voor bedrijven die een bedrag storten]'
+- question: Fiscale informatie en attesten
+  answer: '[Definitieve fiscale informatie voor bedrijven en eventuele attesten, indien van toepassing]'

@@ -6,7 +6,7 @@ if ($items && isset($limit)) {
 }
 ?>
 <?php if ($items && $items->isNotEmpty()): ?>
-    <div class="my-[26px] grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div class="<?= !empty($homeLayout) ? 'home-update-grid ' : '' ?>my-[26px] grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         <?php foreach ($items as $item): ?>
             <?php snippet('update-card', ['update' => $item]) ?>
         <?php endforeach ?>

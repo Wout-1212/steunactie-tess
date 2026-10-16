@@ -2,9 +2,9 @@
 <?php snippet('home/hero') ?>
 <?php snippet('home/story') ?>
 <?php snippet('home/donation-progress', ['progress' => $progress]) ?>
+<?php snippet('home/treatment') ?>
 <?php snippet('home/contribute') ?>
 <?php snippet('home/updates') ?>
-<?php snippet('home/treatment') ?>
 <?php snippet('home/donation-form') ?>
 <?php snippet('home/contact') ?>
 <?php snippet('footer') ?>

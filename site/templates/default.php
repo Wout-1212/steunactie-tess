@@ -6,13 +6,13 @@
                 <div class="grid grid-cols-1 items-center gap-[26px] md:grid-cols-2 md:gap-8 lg:gap-16 mb-10">
                     <?php snippet('picture', ['source' => $page->cover(), 'label' => $page->title()->value()]) ?>
                     <div>
-                        <h1><?= $page->heading()->or($page->title())->esc() ?></h1>
+                        <h1<?= in_array($page->id(), ['haar-verhaal', 'behandelingsplan', 'faq'], true) ? ' class="content-page-title"' : '' ?>><?= $page->heading()->or($page->title())->esc() ?></h1>
                         <div class="prose"><?= $page->text()->kirbytext() ?></div>
                     </div>
                 </div>
             <?php else: ?>
                 <div class="mb-6 max-w-[780px] md:mb-12">
-                    <h1><?= $page->heading()->or($page->title())->esc() ?></h1>
+                    <h1<?= in_array($page->id(), ['haar-verhaal', 'behandelingsplan', 'faq'], true) ? ' class="content-page-title"' : '' ?>><?= $page->heading()->or($page->title())->esc() ?></h1>
                     <div class="prose"><?= $page->text()->kirbytext() ?></div>
                 </div><?php endif ?>
         <?php endif ?>
@@ -34,7 +34,7 @@
         <?php if ($page->questions()->isNotEmpty()): ?>
             <div class="mt-6 grid grid-cols-1 gap-[26px] md:mt-8 md:grid-cols-[1fr_1.3fr] md:gap-16">
                 <div>
-                    <h1><?= $page->heading()->or($page->title())->esc() ?></h1>
+                    <h1<?= in_array($page->id(), ['haar-verhaal', 'behandelingsplan', 'faq'], true) ? ' class="content-page-title"' : '' ?>><?= $page->heading()->or($page->title())->esc() ?></h1>
                     <div class="prose"><?= $page->text()->kirbytext() ?></div>
                     <?php if ($page->accordionintro()->isNotEmpty()): ?>
                         <p><?= $page->accordionintro()->esc() ?></p><?php endif ?>

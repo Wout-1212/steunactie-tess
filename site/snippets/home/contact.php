@@ -1,4 +1,4 @@
-<section class="scroll-mt-28 py-[42px] md:py-[72px]" id="contact">
+<section class="home-contact scroll-mt-28 py-[42px] md:py-[72px]" id="contact">
     <div
         class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)] grid grid-cols-1 items-center gap-[26px] md:grid-cols-2 md:gap-8 lg:gap-16">
         <div>

@@ -1,6 +1,6 @@
 <?php $cardClass = 'relative rounded-lg border border-line bg-white p-[22px] text-left text-ink transition-transform duration-150 hover:-translate-y-[3px] hover:border-pink motion-reduce:transition-none [&_p]:text-base [&_p]:text-muted [&>span:last-child]:absolute [&>span:last-child]:top-[19px] [&>span:last-child]:right-[17px] [&>span:last-child]:text-pink' ?>
 <?php $cards = $page->contribute_cards()->toStructure() ?>
-<section class="py-[42px] md:py-[72px]">
+<section class="home-contribute py-[42px] md:py-[72px]">
     <div class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)]">
         <h2><?= $page->contribute_title()->esc() ?></h2>
         <div class="mt-7 grid grid-cols-1 gap-[18px] md:grid-cols-2 lg:grid-cols-4">

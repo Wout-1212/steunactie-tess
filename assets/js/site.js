@@ -1,21 +1,55 @@
+  const languagePicker = document.querySelector('[data-language-picker]');
+  if (languagePicker) {
+    const closeLanguagePicker = () => { languagePicker.open = false; };
+    document.addEventListener('click', event => {
+      if (!languagePicker.contains(event.target)) closeLanguagePicker();
+    });
+    languagePicker.addEventListener('focusout', event => {
+      if (!languagePicker.contains(event.relatedTarget)) closeLanguagePicker();
+    });
+    // Close only the language disclosure before Escape reaches the mobile menu.
+    languagePicker.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && languagePicker.open) {
+        event.preventDefault();
+        event.stopPropagation();
+        closeLanguagePicker();
+        languagePicker.querySelector('summary').focus();
+      }
+    });
+    window.addEventListener('resize', closeLanguagePicker);
+    window.addEventListener('pageshow', closeLanguagePicker);
+  }
   const siteHeader = document.querySelector('[data-site-header]');
   if (siteHeader) {
-    // Over a hero the header stays transparent until the hero has scrolled out from under it.
-    const hero = document.querySelector('[data-hero]');
+    // Become opaque as soon as the first visible content reaches the sticky header.
+    // Keep it opaque after that boundary to avoid flashing between sections.
+    const headerContent = [...document.querySelectorAll('main h1, main h2, main p, main img, main .photo-placeholder, main .update-card')];
     const updateHeader = () => {
-      const scrolled = hero ? hero.getBoundingClientRect().bottom <= siteHeader.offsetHeight : window.scrollY > 12;
+      const contentTop = headerContent.reduce((first, element) => {
+        if (!element.getClientRects().length) return first;
+        return Math.min(first, element.getBoundingClientRect().top + window.scrollY);
+      }, Infinity);
+      const headerBottom = siteHeader.getBoundingClientRect().bottom;
+      const scrolled = Number.isFinite(contentTop)
+        ? window.scrollY > 0 && contentTop <= window.scrollY + headerBottom + 2
+        : window.scrollY > 12;
       if (siteHeader.dataset.scrolled !== String(scrolled)) {
         siteHeader.dataset.scrolled = String(scrolled);
       }
     };
     // Exposed on the root so the mobile menu and the hero (which sits behind the header) can use it.
-    const sizeHeader = () => document.documentElement.style.setProperty('--header-height', `${siteHeader.offsetHeight}px`);
+    const sizeHeader = () => {
+      document.documentElement.style.setProperty('--header-height', `${siteHeader.offsetHeight}px`);
+      updateHeader();
+    };
     sizeHeader();
     new ResizeObserver(sizeHeader).observe(siteHeader);
     updateHeader();
     window.addEventListener('scroll', updateHeader, { passive: true });
     window.addEventListener('resize', updateHeader);
     window.addEventListener('pageshow', updateHeader);
+    window.addEventListener('load', updateHeader);
+    document.fonts?.ready.then(updateHeader);
   }
   const toggle = document.querySelector('.menu-toggle');
   const nav = document.querySelector('#navigation');
@@ -52,7 +86,7 @@
       if (toggle.getAttribute('aria-expanded') !== 'true') return;
       if (event.key === 'Escape') setMenu(false, true);
       if (event.key === 'Tab') {
-        const controls = [...siteHeader.querySelectorAll('a, button')].filter(element => element.getClientRects().length);
+        const controls = [...siteHeader.querySelectorAll('a, button, summary')].filter(element => element.getClientRects().length);
         const first = controls[0], last = controls[controls.length - 1];
         if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
         else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
@@ -125,4 +159,26 @@
     const body = copy.name + ': ' + data.get('name') + '\n' + copy.email + ': ' + data.get('email') + '\n\n' + data.get('message');
     location.href = 'mailto:' + form.dataset.contactEmail + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     form.querySelector('[data-contact-status]').textContent = copy.status;
+  });
+
+  // IBAN copy is progressive enhancement; the number is always visible/selectable.
+  document.querySelectorAll('[data-copy-iban]').forEach(button => {
+    button.addEventListener('click', async () => {
+      const status = button.closest('.bank-account').querySelector('[data-bank-status]');
+      try {
+        if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(button.dataset.copyIban);
+        else {
+          const input = document.createElement('textarea');
+          input.value = button.dataset.copyIban;
+          input.style.position = 'fixed';
+          input.style.opacity = '0';
+          document.body.append(input);
+          input.select();
+          let copied;
+          try { copied = document.execCommand('copy'); } finally { input.remove(); button.focus(); }
+          if (!copied) throw new Error('Copy unavailable');
+        }
+        status.textContent = button.dataset.copied;
+      } catch { status.textContent = button.dataset.copyFailed; }
+    });
   });

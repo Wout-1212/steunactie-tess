@@ -62,6 +62,18 @@ tabs:
       donation_text:
         label: Tekst donatieblok
         type: textarea
+      featured_amount:
+        label: Bedrag met label Meest gekozen
+        type: select
+        default: '50'
+        required: true
+        translate: false
+        help: Handmatige keuze; dit label gebruikt geen donatiestatistieken.
+        options:
+          '10': '€ 10'
+          '25': '€ 25'
+          '50': '€ 50'
+          '100': '€ 100'
   contribute:
     label: Bijdragen
     fields:
@@ -109,6 +121,55 @@ tabs:
           treatment_title:
             label: Titel traject
             type: text
+          medical_title:
+            label: Titel medische weegschaal
+            type: text
+            placeholder: Waar gaat jouw steun naartoe?
+          medical_intro:
+            label: Uitleg medische weegschaal
+            type: textarea
+          medical_steps:
+            label: Medische vooruitgang
+            type: structure
+            help: Alleen bevestigde behandelingen invoeren. Dit staat los van opgehaalde donaties. Bestaande trajectstappen blijven behouden.
+            columns:
+              heading: true
+              status: true
+              weight: true
+            fields:
+              heading:
+                label: Onderzoek of behandeling
+                type: text
+                required: true
+              status:
+                label: Status
+                type: select
+                required: true
+                options:
+                  done: Al gedaan
+                  planned: Nog te doen
+              weight:
+                label: Gewicht op de weegschaal
+                type: number
+                default: 1
+                min: 1
+                step: 1
+                help: Gelijke gewichten tellen stappen gelijk mee; dit is geen geldbedrag en geen genezingspercentage.
+                translate: false
+          medical_done_amount:
+            label: Bevestigd bedrag bij Al gedaan (optioneel)
+            type: number
+            min: 0
+            step: 1
+            before: €
+            translate: false
+          medical_planned_amount:
+            label: Bevestigd bedrag bij Nog te doen (optioneel)
+            type: number
+            min: 0
+            step: 1
+            before: €
+            translate: false
           treatment_steps:
             label: Stappen
             type: structure

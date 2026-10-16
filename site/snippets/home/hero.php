@@ -1,21 +1,15 @@
-<?php /* Pulled up by the header height (measured in site.js, with a fallback incl. its 1px border) so the hero sits behind the navbar. */ ?>
-<section data-hero
-    class="relative -mt-[var(--header-height,77px)] flex min-h-[max(600px,90svh)] items-center overflow-hidden bg-hero text-white md:-mt-[var(--header-height,91px)] md:min-h-[max(680px,100svh)]">
-    <?php snippet('picture', ['source' => $page->hero_image(), 'label' => t('home.hero.image'), 'class' => 'hero-media']) ?>
-    <?php /* Overlays keep the white text and transparent navbar readable on any photo, even a very light one. */ ?>
-    <div class="absolute inset-0 bg-hero/70 md:bg-transparent md:bg-linear-to-r md:from-hero/90 md:via-hero/70 md:to-hero/20"
-        aria-hidden="true"></div>
-    <div class="absolute inset-x-0 top-0 h-48 bg-linear-to-b from-hero/85 via-hero/50 to-transparent" aria-hidden="true"></div>
-    <div class="relative mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)]">
-        <div class="max-w-[560px] pt-[calc(var(--header-height,77px)+48px)] pb-12 md:pt-[calc(var(--header-height,91px)+65px)] md:pb-[65px] lg:pt-[calc(var(--header-height,91px)+90px)] lg:pb-[90px]">
-            <p class="mb-4 text-xs font-bold tracking-[.12em] uppercase"><?= $page->hero_kicker()->esc() ?></p>
-            <h1><?= $page->hero_title()->esc() ?></h1>
-            <p class="mb-7 max-w-[380px] text-hero-copy"><?= $page->hero_text()->esc() ?></p>
-            <div class="flex flex-wrap gap-3"><a
-                    class="inline-flex min-h-11 items-center justify-center rounded-[5px] border px-[21px] py-[11px] text-sm font-bold border-transparent bg-pink text-donation-ink hover:bg-pink-dark hover:text-white"
-                    href="#help-tess"><?= t('cta.help') ?></a><a
-                    class="inline-flex min-h-11 items-center justify-center rounded-[5px] border px-[21px] py-[11px] text-sm font-bold border-current bg-transparent text-white hover:bg-pink-dark"
-                    href="<?= page('haar-verhaal')->url() ?>"><?= t('home.hero.story-link') ?></a></div>
+<section data-hero class="home-hero">
+    <div class="page-shell hero-layout">
+        <div class="hero-copy">
+            <h1><?= preg_replace('/\b(Tess)\s+/u', '$1<br>', $page->hero_title()->esc()->value()) ?></h1>
+            <p><?= $page->hero_text()->esc() ?></p>
+            <div class="hero-actions">
+                <a class="design-button" href="#help-tess"><?= t('donation.donate') ?></a>
+                <a class="design-button design-button-outline" href="<?= page('haar-verhaal')->url() ?>"><?= t('home.hero.story-link') ?></a>
+            </div>
+        </div>
+        <div class="hero-portrait">
+            <?php snippet('picture', ['source' => $page->hero_image(), 'label' => t('home.hero.image'), 'class' => 'hero-portrait']) ?>
         </div>
     </div>
 </section>

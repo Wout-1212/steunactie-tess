@@ -10,20 +10,21 @@
     <?= css(url('assets/css/site.css') . '?v=' . filemtime($kirby->root('index') . '/assets/css/site.css')) ?><?= js(url('assets/js/site.js') . '?v=' . filemtime($kirby->root('index') . '/assets/js/site.js'), ['defer' => true]) ?>
 </head>
 
-<body class="bg-paper font-sans text-base leading-[1.65] text-ink">
+<body class="site-design <?= $page->isHomePage() ? 'home-design ' : '' ?>bg-paper font-sans text-base leading-[1.65] text-ink">
     <a class="fixed -top-[100px] left-5 z-50 bg-white p-3 text-pink-dark focus:top-[10px]"
         href="#main"><?= t('skip-link') ?></a>
     <header data-site-header
-        class="sticky top-0 z-40 border-b border-line bg-white text-ink transition-colors duration-200 motion-reduce:transition-none [--nav-accent:var(--color-pink-dark)] data-[scrolled=true]:bg-white/80 data-[scrolled=true]:backdrop-blur-md <?= $page->isHomePage() ? 'data-[scrolled=false]:border-transparent data-[scrolled=false]:bg-transparent data-[scrolled=false]:text-white data-[scrolled=false]:[--nav-accent:var(--color-blush)]' : '' ?>">
+        class="site-header sticky top-0 z-40 text-ink [--nav-accent:var(--color-pink)]">
         <div
             class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)] flex min-h-[76px] flex-wrap items-center justify-between gap-3 py-[14px] md:min-h-[90px] md:flex-nowrap md:gap-[30px] md:py-0">
-            <a class="shrink-0 leading-none [&_img]:h-auto [&_img]:w-auto [&_img]:max-h-16 [&_img]:max-w-[min(164px,42vw)] md:[&_img]:max-w-[164px] [&_img]:[filter:drop-shadow(0_0_.7px_#302a2d)_drop-shadow(0_0_.7px_#302a2d)]"
+            <a class="site-logo shrink-0 leading-none [&_img]:h-auto [&_img]:w-auto [&_img]:max-h-16 [&_img]:max-w-[min(164px,42vw)] md:[&_img]:max-w-[164px] [&_img]:[filter:drop-shadow(0_0_.7px_#27222A)_drop-shadow(0_0_.7px_#27222A)]"
                 href="<?= $site->url() ?>" aria-label="<?= t('nav.home-label') ?>">
                 <?php if ($logo = $site->logo()->toFile()): ?><img src="<?= $logo->url() ?>"
                         alt="<?= $site->title()->esc() ?>">
                 <?php else: ?><img src="<?= url('assets/images/logo.png') ?>" width="2008" height="783"
                         alt="<?= $site->title()->esc() ?>"><?php endif ?>
             </a>
+            <a class="mobile-help design-button" href="<?= page('home')->url() ?>#help-tess"><?= t('cta.help') ?></a>
             <button
                 class="menu-toggle min-h-12 rounded-[5px] border border-line bg-white px-[13px] py-[9px] text-ink md:hidden"
                 aria-expanded="false" aria-controls="navigation" hidden><?= t('nav.toggle') ?><span
@@ -33,11 +34,19 @@
                 <?php foreach (['home', 'haar-verhaal', 'behandelingsplan', 'updates', 'faq'] as $slug): ?>
                     <?php if ($item = page($slug)): ?><a href="<?= $item->url() ?>" <?= $page->is($item) ? 'aria-current="page"' : ($page->isDescendantOf($item) ? 'aria-current="true"' : '') ?>><?= $item->navtitle()->or($item->title())->esc() ?></a><?php endif ?>
                 <?php endforeach ?><a href="<?= page('home')->url() ?>#contact"><?= t('nav.contact') ?></a>
-                <div class="flex justify-center gap-3 uppercase [&_a[aria-current]]:font-bold [&_a[aria-current]]:text-(--nav-accent)"
-                    role="group" aria-label="<?= t('nav.languages') ?>">
-                    <?php foreach ($kirby->languages() as $language): ?><a href="<?= $page->url($language->code()) ?>"
-                            hreflang="<?= $language->code() ?>" lang="<?= $language->code() ?>" <?= $language->code() === $kirby->languageCode() ? 'aria-current="true"' : '' ?>><?= $language->code() ?></a><?php endforeach ?>
-                </div>
+                <details class="language-picker" data-language-picker>
+                    <summary aria-label="<?= t('nav.languages') ?>: <?= strtoupper($kirby->languageCode()) ?>">
+                        <?php snippet('icon', ['name' => 'globe', 'class' => 'language-globe']) ?>
+                        <span><?= strtoupper($kirby->languageCode()) ?></span>
+                    </summary>
+                    <div class="language-options" aria-label="<?= t('nav.languages') ?>">
+                        <?php foreach (['nl', 'fr', 'en'] as $code): ?>
+                            <?php if ($language = $kirby->languages()->find($code)): ?>
+                                <a href="<?= $page->url($language->code()) ?>" hreflang="<?= $language->code() ?>" lang="<?= $language->code() ?>" <?= $language->code() === $kirby->languageCode() ? 'aria-current="true"' : '' ?>><?= strtoupper($language->code()) ?><?php if ($language->code() === $kirby->languageCode()): ?><span aria-hidden="true">✓</span><?php endif ?></a>
+                            <?php endif ?>
+                        <?php endforeach ?>
+                    </div>
+                </details>
                 <a class="inline-flex min-h-11 items-center justify-center rounded-[5px] border px-[21px] py-[11px] text-sm font-bold border-transparent bg-pink text-donation-ink hover:bg-pink-dark hover:text-white"
                     href="<?= page('home')->url() ?>#help-tess"><?= t('cta.help') ?></a>
             </nav>

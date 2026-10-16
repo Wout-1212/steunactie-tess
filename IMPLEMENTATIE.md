@@ -1,6 +1,6 @@
 # Wireframes Tess in Kirby
 
-De PDF-wireframes zijn vertaald naar PHP-templates met responsive Tailwind CSS en kleine JavaScript-interacties. Betalingen zijn nog niet aangesloten. Het aangeleverde transparante PNG-logo wordt gebruikt in header en footer. Definitieve foto's kun je later via het Panel uploaden. De gekozen hoofdkleur staat in `assets/css/tailwind.css` in `@theme` bij `--color-pink` (#DA5050).
+De PDF-wireframes zijn vertaald naar PHP-templates met responsive Tailwind CSS en kleine JavaScript-interacties. Betalingen zijn nog niet aangesloten. Het aangeleverde transparante PNG-logo wordt gebruikt in header en footer. Definitieve foto's kun je later via het Panel uploaden. De gekozen hoofdkleur staat in `assets/css/tailwind.css` in `@theme` bij `--color-pink` (#C43B75).
 
 ## Lokaal bekijken
 
@@ -28,7 +28,7 @@ Betaalintegratie en verwerking van een contactformulier zijn nog niet geïmpleme
 
 Montserrat wordt gebruikt voor alle tekst. Alleen het losse woord Tess wordt automatisch in Caveat gezet, ook in inhoud uit het Panel. De lokale WOFF2-bestanden en fontlicenties staan in `assets/fonts`; er worden geen externe fontverzoeken gedaan door bezoekers.
 
-De header is wit, de footer en zachte achtergrondvlakken zijn #FFD9DE. Het aangeleverde logo heeft witte letters; er staat tijdelijk een fijne donkere schaduw om de letters leesbaar te houden op lichte vlakken. Voor de definitieve versie is een transparante variant met donkere letters wenselijk.
+De homepage heeft de goedgekeurde doorlopende pastelgradiënt; de header is transparant bovenaan en wit na scrollen. Het aangeleverde logo heeft witte letters; er staat tijdelijk een fijne donkere schaduw om de letters leesbaar te houden op lichte vlakken. Voor de definitieve versie is een transparante variant met donkere letters wenselijk.
 
 ## Donatievoortgang en rekeningnummer
 
@@ -54,3 +54,20 @@ De productiebuild schrijft de gecomprimeerde CSS naar `assets/css/site.css`. Bew
 ## Teksten beheren in Kirby
 
 Alle websiteteksten staan in de contentbestanden en hebben velden in het Panel. De homepage gebruikt `content/home/home.txt`; de andere pagina’s gebruiken hun eigen contentbestand. Header, footer en de gedeelde oproep tot steun gebruiken `content/site.txt` (Panel: Gedeelde websiteteksten). Updateknoppen en de melding zonder updates staan in `content/updates/updates.txt`, ook voor de homepage en losse updates. Fototeksten, formulierlabels en JavaScript-meldingen zijn eveneens bewerkbaar. PHP bevat de opbouw en logica, zonder vaste websiteteksten.
+
+
+## Goedgekeurd design en kleuren (16 oktober 2026)
+
+De frontend volgt samen-voor-tess-preview-1.pdf. De exacte kleuren uit Kleurenpallet.pdf zijn: achtergrond boven #F5D7E6, midden #FFF6CE en onder #C8EEF3; titels/accenten #C43B75, gewone tekst #27222A en kaarten #FFFFFF. De verticale gradiënt loopt over de hele homepage. De desktophero heeft tekst en een losse portretfoto naast elkaar; op mobiel staan ze onder elkaar. Foto's blijven via de bestaande Kirby-velden instelbaar. Bestaande voorbeeldinhoud en logo-assets zijn niet vervangen.
+
+### Medische weegschaal beheren
+
+Ga in het Panel naar Home → Updates & traject. Vul onder Medische vooruitgang alleen bevestigde onderzoeken/behandelingen in en kies per item Al gedaan of Nog te doen. Gewicht staat standaard op 1. Een hoger gewicht telt een stap zwaarder mee op de schaal: dit is geen bedrag en geen percentage genezing. De schaal reageert uitsluitend op deze behandelstappen; opgehaalde donaties blijven afzonderlijk in de bestaande progressbar.
+
+De optionele bevestigde bedragen staan uitsluitend in de informatiekaarten Al gedaan en Nog te doen. Onder de schaal staan geen geldlabels. Zonder medische invoer staat de schaal neutraal en tonen de kaarten dat voortgang nog niet bevestigd is. De bestaande treatment_steps en treatment_image blijven beschikbaar in het uitklapbare trajectblok; bestaande content is niet gemigreerd of overschreven.
+
+De homepage behoudt de drie meest recente gepubliceerde updates (de PDF toont er twee). Het gedeelde overzicht blijft alle gepubliceerde updates tonen. Dit behoudt de bestaande inhoudsselectie.
+
+### Bestaande werking
+
+Betalen blijft via de bestaande externe steunactie verlopen; er is geen nieuwe betaalintegratie of bevestigingsmail toegevoegd. De bedragkeuze wordt nog steeds niet doorgestuurd naar de externe site. Contact blijft het bestaande mailto-formulier en blijft uitgeschakeld zolang geen contactadres is ingevuld. Delen, taalkeuze, updategalerijen en het mobiele menu blijven behouden. Nieuw is de progressief verbeterde IBAN-kopieerknop; bij mislukken blijft het nummer zichtbaar om zelf te kopiëren.

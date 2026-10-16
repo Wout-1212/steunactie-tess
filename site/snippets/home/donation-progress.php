@@ -1,4 +1,4 @@
-<section class="scroll-mt-28 py-6 md:py-7 bg-pink text-blush" id="donatievoortgang">
+<section class="home-progress scroll-mt-28 py-6 md:py-7 bg-transparent text-ink" id="donatievoortgang">
     <div class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)]">
         <h2 class="mb-[15px] text-[clamp(.95rem,1.55vw,1.15rem)] leading-[1.3] tracking-[.055em] uppercase">
             <?= $page->progress_title()->esc() ?></h2>
@@ -16,7 +16,7 @@
             <progress class="donation-bar" value="<?= $progress['percent'] ?>" max="100"
                 aria-label="<?= t('progress.label') ?>"><?= $progress['percent'] ?>%</progress>
         <?php else: ?>
-            <div class="donation-bar" aria-hidden="true"><span class="block h-full w-[14%] rounded-full bg-blush"></span></div>
+            <div class="donation-bar" aria-hidden="true"><span class="block h-full w-[14%] rounded-full bg-pink"></span></div>
         <?php endif ?>
         <?php if ($progress['hasGoal'] && $progress['donations']): ?>
             <p class="mt-2 mb-0 flex items-center gap-1.5 text-sm"><?php snippet('icon', ['name' => 'heart', 'class' => 'size-4']) ?><?= tt('progress.donations', ['count' => $progress['donations']]) ?></p>

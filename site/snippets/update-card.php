@@ -1,5 +1,5 @@
 <a href="<?= $update->url() ?>"
-    class="group flex flex-col overflow-hidden rounded-lg border border-line bg-white text-ink transition-transform duration-150 hover:-translate-y-[3px] hover:border-pink motion-reduce:transition-none">
+    class="update-card group flex flex-col overflow-hidden rounded-lg border border-line bg-white text-ink transition-transform duration-150 hover:-translate-y-[3px] hover:border-pink motion-reduce:transition-none">
     <?php if ($photo = $update->thumbnail()): ?>
         <img class="aspect-[4/3] w-full object-cover" src="<?= $photo->crop(640, 480)->url() ?>"
             srcset="<?= $photo->crop(640, 480)->url() ?> 640w, <?= $photo->crop(960, 720)->url() ?> 960w"

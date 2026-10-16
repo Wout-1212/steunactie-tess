@@ -1,7 +1,7 @@
 <?php
-$isHero = ($class ?? '') === 'hero-media';
+$isHero = in_array(($class ?? ''), ['hero-media', 'hero-portrait'], true);
 $mediaClasses = $isHero
-    ? 'media absolute inset-0 size-full object-cover'
+    ? (($class ?? '') === 'hero-portrait' ? 'media portrait-media' : 'media absolute inset-0 size-full object-cover')
     : 'media aspect-[4/3] h-auto w-full rounded-lg object-cover';
 ?>
 <?php if ($image = $source->toFile()): ?>
@@ -9,7 +9,7 @@ $mediaClasses = $isHero
         width="<?= $image->width() ?>" height="<?= $image->height() ?>" loading="<?= $isHero ? 'eager' : 'lazy' ?>">
 <?php else: ?>
     <?php if ($isHero): ?>
-        <div class="<?= $mediaClasses ?> bg-hero-placeholder"></div>
+        <div class="<?= $mediaClasses ?> photo-placeholder" role="img" aria-label="<?= esc($label, 'attr') ?>"><span><?= esc($label) ?></span></div>
     <?php else: ?>
         <div
             class="<?= $mediaClasses ?> flex items-center justify-center border border-line bg-blush text-sm tracking-[.04em] text-pink-dark">
