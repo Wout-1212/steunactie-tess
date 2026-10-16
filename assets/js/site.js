@@ -149,16 +149,24 @@
     lightbox.addEventListener('click', event => { if (event.target === lightbox) lightbox.close(); });
   }
 
-  document.querySelector('[data-contact-email]')?.addEventListener('submit', event => {
+  document.querySelector('[data-contact-form]')?.addEventListener('submit', async event => {
     event.preventDefault();
     const form = event.currentTarget;
-    if (!form.dataset.contactEmail || !form.reportValidity()) return;
-    const data = new FormData(form);
+    if (!form.reportValidity()) return;
     const copy = JSON.parse(form.dataset.contactCopy);
-    const subject = copy.subject + ' ' + data.get('name');
-    const body = copy.name + ': ' + data.get('name') + '\n' + copy.email + ': ' + data.get('email') + '\n\n' + data.get('message');
-    location.href = 'mailto:' + form.dataset.contactEmail + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-    form.querySelector('[data-contact-status]').textContent = copy.status;
+    const status = form.querySelector('[data-contact-status]');
+    const button = form.querySelector('button[type="submit"]');
+    button.disabled = true;
+    status.textContent = copy.sending;
+    try {
+      const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      const result = await response.json();
+      status.textContent = result.message;
+      if (result.ok) form.reset();
+    } catch {
+      status.textContent = copy.error;
+    }
+    button.disabled = false;
   });
 
   // IBAN copy is progressive enhancement; the number is always visible/selectable.
