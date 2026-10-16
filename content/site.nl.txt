@@ -63,7 +63,7 @@ Organisationdetails:
 
 ----
 
-Contactemail: 
+Contactemail: contact@samenvoortess.be
 
 ----
 

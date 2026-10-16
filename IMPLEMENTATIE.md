@@ -22,7 +22,28 @@ Goedgekeurde inhoud, contactgegevens, definitieve foto's en bevestigde donatieto
 
 ## Later
 
-Betaalintegratie en verwerking van een contactformulier zijn nog niet geïmplementeerd. Zodra het contactadres is ingesteld, kan het formulier een bericht in het e-mailprogramma openen. De bedragkeuze is alleen een visuele voorbereiding en verricht geen betaling; het gekozen bedrag wordt ook niet aan een externe steunactie doorgegeven.
+Betaalintegratie en een bevestigingsmail na een donatie zijn nog niet geïmplementeerd. De bedragkeuze is alleen een visuele voorbereiding en verricht geen betaling; het gekozen bedrag wordt ook niet aan een externe steunactie doorgegeven.
+
+## Contactformulier en e-mail (Brevo)
+
+Het contactformulier verstuurt berichten via de SMTP-relay van Brevo naar het Contactadres uit Site-instellingen. Antwoorden gaat rechtstreeks naar de bezoeker (Reply-To). De afhandeling staat in `site/plugins/tess-contact`, de mail in `site/templates/emails/contact.html.php` (opgemaakt) en `contact.text.php` (platte tekst, voor mailprogramma's zonder HTML). De gedeelde opmaak (kop, kader, voettekst) staat in `site/snippets/emails/layout.php` en is herbruikbaar voor latere mails, zoals de donatiebevestiging. Berichten worden niet bewaard op de server. Spam wordt tegengehouden met een verborgen veld, een minimale invultijd en maximaal 5 berichten per IP-adres per uur.
+
+De SMTP-instellingen staan in `site/config/config.php`. Login en SMTP-key horen niet in Git: kopieer `site/config/config.host.example.php` naar `config.samenvoortess.be.php` (en `config.www.samenvoortess.be.php` als www gebruikt wordt) op de server en vul daarin de gegevens uit Brevo in (Settings → SMTP & API → SMTP). Zie ook [Live zetten](#live-zetten).
+
+Lokaal gaat de mail naar Mailpit in plaats van Brevo, via `site/config/config.theagency2627-steunactie-tess.test.php` (host `127.0.0.1`, poort `1025`, zonder login of versleuteling). Verstuurde berichten bekijk je op http://localhost:8025.
+
+In Brevo moet het domein `samenvoortess.be` geauthenticeerd zijn (SPF/DKIM) en `contact@samenvoortess.be` als afzender toegevoegd zijn, anders wordt de mail geweigerd of als spam gemarkeerd.
+
+## Live zetten
+
+Deze stappen gebeuren niet automatisch bij een deploy en moeten op de server zelf gebeuren:
+
+- [ ] **Nieuw configbestand voor de server aanmaken.** Kopieer `site/config/config.host.example.php` naar `site/config/config.samenvoortess.be.php` op de server en vul de Brevo SMTP-login en SMTP-key in. Wordt de site ook via www bereikt, maak dan dezelfde kopie als `config.www.samenvoortess.be.php`. Dit bestand staat bewust niet in Git en moet dus met de hand geüpload worden. Zonder dit bestand verstuurt het contactformulier geen mail.
+- [ ] Het lokale bestand `config.theagency2627-steunactie-tess.test.php` (Mailpit) **niet** naar de server kopiëren.
+- [ ] In Brevo het domein `samenvoortess.be` authenticeren (SPF/DKIM-records bij de domeinbeheerder) en `contact@samenvoortess.be` als afzender toevoegen.
+- [ ] Contactadres invullen in Site-instellingen in het Panel.
+- [ ] `'debug' => true` in `site/config/config.php` uitzetten (of `'debug' => false` in het serverconfigbestand zetten), zodat bezoekers geen foutdetails te zien krijgen.
+- [ ] Het contactformulier op de live site testen en de mail controleren in de inbox en in Brevo (Transactional → Logs).
 
 ## Typografie
 

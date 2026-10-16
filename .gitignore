@@ -49,6 +49,12 @@ Icon
 
 /site/config/.license
 
+# Host-specific config (SMTP credentials)
+# ---------------
+
+/site/config/config.*.php
+!/site/config/config.host.example.php
+
 
 
 /node_modules

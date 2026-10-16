@@ -17,7 +17,7 @@ return function ($site, $kirby) {
     $locale = strtok($kirby->language()?->locale(LC_ALL) ?? 'nl_BE', '.');
     $euro = new NumberFormatter($locale, NumberFormatter::CURRENCY);
     $euro->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, 0);
-    $format = fn (float $amount) => $euro->formatCurrency($amount, 'EUR');
+    $format = fn(float $amount) => $euro->formatCurrency($amount, 'EUR');
 
     $milestones = [];
     foreach ($site->milestones()->toStructure()->sortBy('amount', 'asc', SORT_NUMERIC) as $milestone) {
