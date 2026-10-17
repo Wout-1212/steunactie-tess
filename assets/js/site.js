@@ -194,10 +194,10 @@
   // Subtle motion: content below the fold fades in on scroll, the donation bar fills once.
   const motionAllowed = window.matchMedia('(prefers-reduced-motion: no-preference)').matches && 'IntersectionObserver' in window;
   if (motionAllowed) {
-    const groups = '.content-sections, .content-steps, .content-faq, .content-intro, .content-cover, .grid, .home-update-grid, .medical-cards';
+    const groups = '.content-sections, .content-steps, .content-faq, .content-intro, .content-cover, .grid, .home-update-grid, .medical-cards, .journey';
     const targets = [
       ...document.querySelectorAll(`main > section:not([data-hero]) > div > :not(${groups})`),
-      ...document.querySelectorAll('.content-section, .content-steps > :not(.timeline), .content-faq > :not(.faq-items), .faq-items > details, .timeline > li, main .grid > .update-card, .home-contribute .grid > *, .medical-cards > *')
+      ...document.querySelectorAll('.content-section, .content-steps > :not(.timeline), .content-faq > :not(.faq-items), .faq-items > details, .timeline > li, main .grid > .update-card, .home-contribute .grid > *, .medical-cards > *, .journey > li')
     ].filter(element => element.getBoundingClientRect().top > window.innerHeight * 0.92);
     const reveal = new IntersectionObserver(entries => {
       entries.filter(entry => entry.isIntersecting).forEach((entry, index) => {

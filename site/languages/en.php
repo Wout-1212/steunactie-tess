@@ -29,6 +29,9 @@ return [
         'treatment.scale-label' => 'Medical progress and treatments',
         'treatment.scale-description' => '{done} completed steps and {planned} planned steps. The balance represents weighted treatment steps, not fundraising progress or a recovery percentage.',
         'treatment.unconfirmed' => 'Medical progress has not yet been confirmed.',
+        'journey.done' => 'Completed',
+        'journey.current' => 'In progress',
+        'journey.upcoming' => 'Coming up',
 
     ],
 ];

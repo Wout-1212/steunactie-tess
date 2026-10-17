@@ -29,6 +29,9 @@ return [
         'treatment.scale-label' => 'Avancement médical et traitements',
         'treatment.scale-description' => '{done} étapes réalisées et {planned} étapes prévues. La balance représente les étapes pondérées, pas les dons ni un pourcentage de guérison.',
         'treatment.unconfirmed' => 'L’avancement médical n’est pas encore confirmé.',
+        'journey.done' => 'Terminé',
+        'journey.current' => 'En cours',
+        'journey.upcoming' => 'À venir',
 
     ],
 ];

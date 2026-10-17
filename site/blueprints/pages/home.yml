@@ -115,12 +115,34 @@ tabs:
       main:
         width: 2/3
         fields:
-          updates_title:
-            label: Titel updates
-            type: text
           treatment_title:
             label: Titel traject
             type: text
+          treatment_intro:
+            label: Inleiding traject (optioneel)
+            type: textarea
+            buttons: false
+          treatment_steps:
+            label: Stappen van het traject
+            type: structure
+            help: Wordt als tijdlijn op de homepage getoond. Met de status zie je waar Tess nu staat.
+            columns:
+              heading: true
+              status: true
+            fields:
+              heading:
+                label: Stap
+                type: text
+              status:
+                label: Status (optioneel)
+                type: select
+                options:
+                  done: Afgerond
+                  current: Nu bezig
+                  upcoming: Nog te komen
+              text:
+                label: Korte toelichting (optioneel)
+                type: text
           medical_title:
             label: Titel medische weegschaal
             type: text
@@ -170,18 +192,14 @@ tabs:
             step: 1
             before: €
             translate: false
-          treatment_steps:
-            label: Stappen
-            type: structure
-            fields:
-              heading:
-                label: Stap
-                type: text
+          updates_title:
+            label: Titel updates
+            type: text
       sidebar:
         width: 1/3
         fields:
           treatment_image:
-            label: Foto bij het traject
+            label: Foto bij het traject (optioneel)
             type: files
             multiple: false
             uploads: image

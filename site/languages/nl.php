@@ -29,6 +29,9 @@ return [
         'treatment.scale-label' => 'Medische vooruitgang en behandelingen',
         'treatment.scale-description' => '{done} afgeronde stappen en {planned} geplande stappen. De stand toont de gewogen behandelstappen, niet de donatievoortgang of een genezingspercentage.',
         'treatment.unconfirmed' => 'Medische voortgang nog niet bevestigd.',
+        'journey.done' => 'Afgerond',
+        'journey.current' => 'Nu bezig',
+        'journey.upcoming' => 'Nog te komen',
 
         'skip-link' => 'Ga naar inhoud',
 

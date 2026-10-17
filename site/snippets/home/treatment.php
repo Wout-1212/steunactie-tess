@@ -45,18 +45,10 @@ $currency->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, 0);
                         <?php if ($page->$amountField()->isNotEmpty()): ?><strong><?= esc($currency->formatCurrency(max(0, $page->$amountField()->toFloat()), 'EUR')) ?></strong><?php endif ?>
                     </div>
                     <?php if ($items->isNotEmpty()): ?>
-                        <ul><?php foreach ($items as $item): ?><li><span class="medical-status" aria-hidden="true"><?= $status === 'done' ? 'âœ“' : '' ?></span><span><?= $item->heading()->esc() ?></span></li><?php endforeach ?></ul>
+                        <ul><?php foreach ($items as $item): ?><li><span class="medical-status" aria-hidden="true"><?= $status === 'done' ? '✓' : '' ?></span><span><?= $item->heading()->esc() ?></span></li><?php endforeach ?></ul>
                     <?php else: ?><p class="medical-empty"><?= t('treatment.unconfirmed') ?></p><?php endif ?>
                 </div>
             <?php endforeach ?>
         </div>
-        <?php if ($page->treatment_steps()->isNotEmpty() || $page->treatment_image()->isNotEmpty()): ?>
-            <details class="medical-existing">
-                <summary><?= $page->treatment_title()->esc() ?></summary>
-                <?php if ($page->treatment_steps()->isNotEmpty()): ?><ol class="steps"><?php foreach ($page->treatment_steps()->toStructure() as $step): ?><li><?= $step->heading()->esc() ?></li><?php endforeach ?></ol><?php endif ?>
-                <?php if ($page->treatment_image()->isNotEmpty()): ?><?php snippet('picture', ['source' => $page->treatment_image(), 'label' => t('home.treatment.image')]) ?><?php endif ?>
-            </details>
-        <?php endif ?>
-        <a class="section-link" href="<?= page('behandelingsplan')->url() ?>"><?= t('home.treatment.more') ?></a>
     </div>
 </section>
