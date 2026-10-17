@@ -296,7 +296,7 @@ h1, h2, h3 { color: #C43B75; }
   .site-header { transition: none; }
 }
 
-/* Targeted alignment corrections; existing CTA type, colours and button dimensions remain. */
+/* Targeted alignment corrections; existing CTA type and colours remain (button size: see content pages below). */
 .site-design .site-cta { padding-block: 0; }
 .site-cta > .cta-content {
   min-height: 180px;
@@ -404,4 +404,81 @@ body.site-design:not(.home-design):not(:has(.disclaimer-page)) {
 }
 .site-design:not(.home-design):not(:has(.disclaimer-page)) > .tess-footer {
   background: #FFF6CE;
+}
+
+/* Content pages (Haar verhaal, Ziekte & behandeling, FAQ): one readable column, optional photo per section. */
+.content-page { overflow-wrap: break-word; }
+.content-intro { max-width: 760px; margin: 0 auto 44px; }
+.content-intro .prose { max-width: none; font-size: 17px; line-height: 1.7; }
+.content-cover { max-width: 1040px; margin: 0 auto 56px; }
+.content-cover .media { aspect-ratio: 16 / 9; border-radius: 8px; }
+.content-section { width: 100%; max-width: 760px; margin-inline: auto; padding-block: 40px; border-top: 1px solid #C43B7540; }
+.content-section:first-child { padding-top: 8px; border-top: 0; }
+.content-section h2, .content-steps > h2 { font-size: clamp(24px, 2.6vw, 30px); margin-bottom: 16px; }
+.content-section .prose, .content-steps > .prose { max-width: 68ch; font-size: 16px; line-height: 1.75; }
+.content-section.has-image { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 56px; align-items: start; max-width: 1040px; }
+.content-section.has-image.is-reversed { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); }
+.content-section.is-reversed .content-section-media { order: -1; }
+/* The photo stays in view while visitors read a long section beside it. */
+.content-section-media { position: sticky; top: calc(var(--header-height, 78px) + 24px); margin: 0; }
+.content-section-media img { display: block; width: 100%; height: auto; max-height: 78vh; object-fit: cover; border-radius: 8px; }
+.content-section-media figcaption { margin-top: 10px; font-size: 13px; line-height: 1.5; color: #27222ACC; }
+
+.content-steps { max-width: 760px; margin: 16px auto 0; padding-top: 40px; border-top: 1px solid #C43B7540; }
+.content-intro + .content-steps, .content-cover + .content-steps { margin-top: 0; padding-top: 8px; border-top: 0; }
+.content-steps > .prose { margin-bottom: 8px; }
+.timeline { display: grid; gap: 16px; margin: 28px 0 0; padding: 0; list-style: none; counter-reset: step; }
+.timeline li { position: relative; padding-left: 56px; counter-increment: step; }
+.timeline li::before { content: counter(step); position: absolute; top: 14px; left: 0; z-index: 1; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #C43B75; color: #FFFFFF; font-size: 14px; font-weight: 700; }
+.timeline li::after { content: ''; position: absolute; top: 14px; bottom: -30px; left: 17px; width: 2px; background: #C43B7540; }
+.timeline li:last-child::after { display: none; }
+.timeline-card { padding: 18px 22px; border-radius: 8px; background: #FFFFFF; }
+.timeline-card h3 { margin: 0 0 6px; color: #27222A; font-size: 16px; line-height: 1.4; }
+.timeline-card .prose { max-width: none; font-size: 15px; line-height: 1.7; }
+
+.content-faq { max-width: 760px; margin: 0 auto; }
+.content-sections + .content-faq, .content-steps + .content-faq { margin-top: 40px; }
+.content-faq > h2 { font-size: clamp(22px, 2.4vw, 28px); }
+.content-faq-intro { margin-bottom: 20px; }
+.faq-items { display: grid; gap: 12px; }
+.faq-items details { border: 1px solid #F5D7E6; border-radius: 8px; background: #FFFFFF; transition: border-color 160ms ease, box-shadow 160ms ease; }
+.faq-items details[open] { border-color: #C43B7566; box-shadow: 0 6px 18px #27222A0D; }
+.faq-items summary { padding: 18px 64px 18px 22px; color: #27222A; font-size: 16px; line-height: 1.45; }
+.faq-items summary:hover { color: #C43B75; }
+.faq-items summary::after { top: 50%; right: 18px; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #F5D7E6; color: #C43B75; font-size: 18px; line-height: 1; transform: translateY(-50%); }
+.faq-items .prose { max-width: none; padding: 0 22px 20px; font-size: 15px; line-height: 1.7; }
+
+/* Larger call-to-action button above the footer. */
+.site-cta .cta-content > .design-button { min-height: 56px; padding: 16px 34px; border-radius: 6px; font-size: 16px; font-weight: 700; box-shadow: 0 6px 18px #C43B7533; transition: transform 160ms ease, box-shadow 160ms ease; }
+.site-cta .cta-content > .design-button:hover { opacity: 1; transform: translateY(-2px); box-shadow: 0 10px 24px #C43B7552; }
+
+@media (max-width: 900px) {
+  .content-section.has-image, .content-section.has-image.is-reversed { grid-template-columns: minmax(0, 1fr); gap: 24px; max-width: 760px; }
+  .content-section.has-image .content-section-media { position: static; order: -1; }
+  .content-section-media img { max-height: 520px; }
+}
+@media (max-width: 680px) {
+  .content-intro { margin-bottom: 30px; }
+  .content-intro .prose { font-size: 16px; }
+  .content-cover { margin-bottom: 36px; }
+  .content-cover .media { aspect-ratio: 4 / 3; }
+  .content-section { padding-block: 28px; }
+  .content-section h2, .content-steps > h2 { font-size: 22px; }
+  .content-section .prose, .content-steps > .prose { font-size: 15px; line-height: 1.7; }
+  .content-section.has-image { gap: 18px; }
+  .content-section-media img { max-height: 420px; }
+  .content-steps { padding-top: 28px; }
+  .timeline { gap: 12px; margin-top: 20px; }
+  .timeline li { padding-left: 44px; }
+  .timeline li::before { top: 14px; width: 30px; height: 30px; font-size: 13px; }
+  .timeline li::after { bottom: -26px; left: 14px; }
+  .timeline-card { padding: 16px; }
+  .faq-items summary { padding: 16px 56px 16px 16px; font-size: 15px; }
+  .faq-items summary::after { right: 14px; }
+  .faq-items .prose { padding: 0 16px 16px; }
+  .site-cta .cta-content > .design-button { align-self: stretch; width: 100%; min-height: 54px; padding-inline: 20px; font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-items details, .site-cta .cta-content > .design-button { transition: none; }
+  .site-cta .cta-content > .design-button:hover { transform: none; }
 }
