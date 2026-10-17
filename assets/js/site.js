@@ -190,3 +190,54 @@
       } catch { status.textContent = button.dataset.copyFailed; }
     });
   });
+
+  // Subtle motion: content below the fold fades in on scroll, the donation bar fills once.
+  const motionAllowed = window.matchMedia('(prefers-reduced-motion: no-preference)').matches && 'IntersectionObserver' in window;
+  if (motionAllowed) {
+    const groups = '.content-sections, .content-steps, .content-faq, .content-intro, .content-cover, .grid, .home-update-grid, .medical-cards';
+    const targets = [
+      ...document.querySelectorAll(`main > section:not([data-hero]) > div > :not(${groups})`),
+      ...document.querySelectorAll('.content-section, .content-steps > :not(.timeline), .content-faq > :not(.faq-items), .faq-items > details, .timeline > li, main .grid > .update-card, .home-contribute .grid > *, .medical-cards > *')
+    ].filter(element => element.getBoundingClientRect().top > window.innerHeight * 0.92);
+    const reveal = new IntersectionObserver(entries => {
+      entries.filter(entry => entry.isIntersecting).forEach((entry, index) => {
+        const element = entry.target;
+        // Items entering together appear one after another.
+        element.style.setProperty('--reveal-delay', `${Math.min(index, 4) * 70}ms`);
+        element.classList.add('is-visible');
+        reveal.unobserve(element);
+        const cleanUp = event => {
+          if (event && (event.target !== element || event.propertyName !== 'opacity')) return;
+          element.classList.remove('reveal', 'is-visible');
+          element.style.removeProperty('--reveal-delay');
+          element.removeEventListener('transitionend', cleanUp);
+        };
+        element.addEventListener('transitionend', cleanUp);
+        setTimeout(cleanUp, 1200);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    targets.forEach(element => { element.classList.add('reveal'); reveal.observe(element); });
+
+    const donationBar = document.querySelector('.home-progress .donation-bar');
+    if (donationBar) {
+      const fill = donationBar.matches('progress') ? null : donationBar.querySelector('span');
+      const finalValue = fill ? null : donationBar.value;
+      if (fill) fill.style.width = '0%'; else donationBar.value = 0;
+      const fillBar = new IntersectionObserver(entries => {
+        if (!entries.some(entry => entry.isIntersecting)) return;
+        fillBar.disconnect();
+        if (fill) {
+          requestAnimationFrame(() => fill.style.removeProperty('width'));
+          return;
+        }
+        const start = performance.now();
+        const step = now => {
+          const progress = Math.min((now - start) / 1200, 1);
+          donationBar.value = finalValue * (1 - Math.pow(1 - progress, 3));
+          if (progress < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      }, { threshold: 0.6 });
+      fillBar.observe(donationBar);
+    }
+  }

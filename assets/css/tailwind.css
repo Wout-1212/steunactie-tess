@@ -482,3 +482,61 @@ body.site-design:not(.home-design):not(:has(.disclaimer-page)) {
   .faq-items details, .site-cta .cta-content > .design-button { transition: none; }
   .site-cta .cta-content > .design-button:hover { transform: none; }
 }
+
+/* Subtle motion across the site. Only adds movement; skipped entirely when visitors prefer reduced motion. */
+@keyframes tess-fade-up { from { opacity: 0; translate: 0 16px; } }
+@keyframes tess-fade-down { from { opacity: 0; translate: 0 -6px; } }
+@keyframes tess-fade { from { opacity: 0; } }
+@keyframes tess-pop { from { opacity: 0; scale: .96; } }
+@media (prefers-reduced-motion: no-preference) {
+  /* Page openings */
+  .hero-copy, .content-intro { animation: tess-fade-up .6s cubic-bezier(.22, 1, .36, 1) both; }
+  .hero-portrait, .content-cover { animation: tess-fade-up .7s .12s cubic-bezier(.22, 1, .36, 1) both; }
+
+  /* Scroll reveal (classes are set by site.js only for content below the fold) */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s cubic-bezier(.22, 1, .36, 1) var(--reveal-delay, 0ms), transform .6s cubic-bezier(.22, 1, .36, 1) var(--reveal-delay, 0ms); }
+  .reveal.is-visible { opacity: 1; transform: none; }
+  .donation-bar > span { transition: width 1.2s cubic-bezier(.22, 1, .36, 1); }
+
+  /* Buttons: lift on hover, press on click */
+  .design-button, .site-header nav > a:last-child, main :is(a, button).bg-pink { transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease, background-color .2s ease, color .2s ease; }
+  .design-button:hover, .site-header nav > a:last-child:hover, main :is(a, button).bg-pink:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 6px 16px #C43B7533; }
+  .design-button:active, .site-header nav > a:last-child:active, main :is(a, button).bg-pink:not(:disabled):active,
+  .site-cta .cta-content > .design-button:active { transform: translateY(0) scale(.98); box-shadow: none; transition-duration: .08s; }
+  .amount-picker button { transition: background-color .2s ease, color .2s ease, transform .15s ease; }
+  .amount-picker button:not([aria-pressed="true"]):hover { background: #F5D7E680; }
+  .amount-picker button:active { transform: scale(.97); }
+
+  /* Links: underline slides in from the left */
+  .tess-footer .footer-menu a { background-image: linear-gradient(currentColor, currentColor); background-repeat: no-repeat; background-position: 0 100%; background-size: 0 1px; transition: background-size .25s ease, color .2s ease; }
+  .tess-footer .footer-menu a:is(:hover, :focus-visible) { background-size: 100% 1px; }
+  .site-design .site-footer a, .section-link, .prose a, .language-options a { transition: color .2s ease, background-color .2s ease; }
+  @media (min-width: 681px) {
+    .site-header nav > a:not(:last-child) { background-image: linear-gradient(currentColor, currentColor); background-repeat: no-repeat; background-position: 0 100%; background-size: 0 1px; transition: background-size .25s ease, color .2s ease; }
+    .site-header nav > a:not(:last-child):is(:hover, :focus-visible) { background-size: 100% 1px; }
+  }
+
+  /* Cards */
+  .update-card, .home-contribute .grid > :is(a, button) { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+  .update-card:hover, .home-contribute .grid > :is(a, button):hover { box-shadow: 0 10px 24px #27222A14; }
+  .update-card > img { transition: transform .5s ease; }
+  .update-card:hover > img { transform: scale(1.04); }
+  .home-contribute .grid > :is(a, button) > span:first-child { transition: transform .25s ease; }
+  .home-contribute .grid > :is(a, button):hover > span:first-child { transform: scale(1.08); }
+  .timeline-card, .medical-card, .bank-account, .donation-option { transition: box-shadow .25s ease; }
+  .timeline-card:hover, .medical-card:hover, .bank-account:hover, .donation-option:hover { box-shadow: 0 6px 18px #27222A0F; }
+
+  /* Fold-outs, menu and dialogs */
+  summary { transition: color .2s ease; }
+  .faq-items summary::after { transition: transform .25s ease; }
+  .faq-items details[open] summary::after { transform: translateY(-50%) rotate(180deg); }
+  details[open] > :not(summary) { animation: tess-fade-down .3s ease both; }
+  dialog[open] { animation: tess-pop .25s cubic-bezier(.22, 1, .36, 1); }
+  dialog[open]::backdrop { animation: tess-fade .25s ease; }
+  @media (max-width: 680px) {
+    #navigation[data-enhanced="true"]:not(.hidden) { animation: tess-fade-down .25s ease both; }
+  }
+}
+@media print {
+  .reveal { opacity: 1; transform: none; }
+}
