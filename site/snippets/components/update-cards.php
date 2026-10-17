@@ -4,11 +4,12 @@ $items = page('updates')?->children()->listed()->sortBy('date', 'desc');
 if ($items && isset($limit)) {
     $items = $items->limit($limit);
 }
+$home = !empty($homeLayout);
 ?>
 <?php if ($items && $items->isNotEmpty()): ?>
-    <div class="<?= !empty($homeLayout) ? 'home-update-grid ' : '' ?>my-[26px] grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div data-reveal-group class="my-[26px] grid <?= $home ? 'grid-cols-[1fr] gap-[18px] md:grid-cols-2 md:gap-5 xl:grid-cols-3' : 'grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3' ?>">
         <?php foreach ($items as $item): ?>
-            <?php snippet('update-card', ['update' => $item]) ?>
+            <?php snippet('components/update-card', ['update' => $item, 'homeLayout' => $home]) ?>
         <?php endforeach ?>
     </div>
 <?php else: ?>

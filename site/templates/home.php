@@ -1,4 +1,4 @@
-<?php snippet('header') ?>
+<?php snippet('layout/header') ?>
 <?php snippet('home/hero') ?>
 <?php snippet('home/story') ?>
 <?php snippet('home/journey') ?>
@@ -8,4 +8,4 @@
 <?php snippet('home/donation-form') ?>
 <?php snippet('home/updates') ?>
 <?php snippet('home/contact') ?>
-<?php snippet('footer') ?>
+<?php snippet('layout/footer') ?>

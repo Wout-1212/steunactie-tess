@@ -1,4 +1,4 @@
-<?php snippet('header') ?>
+<?php snippet('layout/header') ?>
 <?php $photos = $page->photos()->toFiles() ?>
 <article class="py-[42px] md:py-[72px]">
     <div class="mx-auto w-[calc(100%-40px)] lg:w-[calc(100%-64px)] max-w-[800px]">
@@ -14,7 +14,7 @@
                     <?php foreach ($photos as $photo): ?>
                         <a href="<?= $photo->resize(1600)->url() ?>" data-lightbox-item
                             class="block overflow-hidden rounded-lg"><img
-                                class="aspect-square w-full object-cover transition-transform duration-200 hover:scale-105 motion-reduce:transition-none"
+                                class="aspect-square w-full object-cover transition-transform duration-200 ease-in-out hover:scale-105 motion-reduce:transition-none"
                                 src="<?= $photo->crop(320, 320)->url() ?>" width="320" height="320"
                                 alt="<?= $photo->alt()->or($page->title())->esc() ?>" loading="lazy"></a>
                     <?php endforeach ?>
@@ -23,17 +23,17 @@
         <?php endif ?>
         <?php /* Rendered always: photos in the text blocks open here too. */ ?>
         <dialog data-lightbox aria-label="<?= t('lightbox.label') ?>"
-                class="m-auto max-h-none max-w-none overflow-visible bg-transparent p-0 backdrop:bg-ink/85">
+                class="m-auto max-h-none max-w-none overflow-visible bg-transparent p-0 backdrop:bg-ink/85 motion-safe:open:animate-pop motion-safe:open:backdrop:animate-fade">
                 <img data-lightbox-image class="block max-h-[85vh] max-w-[92vw] rounded-lg object-contain" alt="">
                 <form method="dialog"><button
                         class="fixed top-4 right-4 flex size-11 items-center justify-center rounded-full bg-white text-ink hover:bg-blush"
-                        aria-label="<?= t('lightbox.close') ?>"><?php snippet('icon', ['name' => 'close']) ?></button></form>
+                        aria-label="<?= t('lightbox.close') ?>"><?php snippet('components/icon', ['name' => 'close']) ?></button></form>
                 <button type="button" data-lightbox-prev
                     class="fixed top-1/2 left-4 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white text-ink hover:bg-blush"
-                    aria-label="<?= t('lightbox.prev') ?>"><?php snippet('icon', ['name' => 'chevron-left']) ?></button>
+                    aria-label="<?= t('lightbox.prev') ?>"><?php snippet('components/icon', ['name' => 'chevron-left']) ?></button>
                 <button type="button" data-lightbox-next
                     class="fixed top-1/2 right-4 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white text-ink hover:bg-blush"
-                    aria-label="<?= t('lightbox.next') ?>"><?php snippet('icon', ['name' => 'chevron-right']) ?></button>
+                    aria-label="<?= t('lightbox.next') ?>"><?php snippet('components/icon', ['name' => 'chevron-right']) ?></button>
             </dialog>
     </div>
-</article><?php snippet('cta') ?><?php snippet('footer') ?>
+</article><?php snippet('layout/cta') ?><?php snippet('layout/footer') ?>

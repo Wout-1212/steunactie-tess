@@ -23,7 +23,7 @@
   if (siteHeader) {
     // Become opaque as soon as the first visible content reaches the sticky header.
     // Keep it opaque after that boundary to avoid flashing between sections.
-    const headerContent = [...document.querySelectorAll('main h1, main h2, main p, main img, main .photo-placeholder, main .update-card')];
+    const headerContent = [...document.querySelectorAll('main h1, main h2, main p, main img, main [data-photo-placeholder], main [data-update-card]')];
     const updateHeader = () => {
       const contentTop = headerContent.reduce((first, element) => {
         if (!element.getClientRects().length) return first;
@@ -51,7 +51,7 @@
     window.addEventListener('load', updateHeader);
     document.fonts?.ready.then(updateHeader);
   }
-  const toggle = document.querySelector('.menu-toggle');
+  const toggle = document.querySelector('[data-menu-toggle]');
   const nav = document.querySelector('#navigation');
   if (toggle && nav && siteHeader) {
     const desktop = window.matchMedia('(min-width: 681px)');
@@ -172,7 +172,7 @@
   // IBAN copy is progressive enhancement; the number is always visible/selectable.
   document.querySelectorAll('[data-copy-iban]').forEach(button => {
     button.addEventListener('click', async () => {
-      const status = button.closest('.bank-account').querySelector('[data-bank-status]');
+      const status = button.closest('[data-bank-account]').querySelector('[data-bank-status]');
       try {
         if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(button.dataset.copyIban);
         else {
@@ -194,10 +194,10 @@
   // Subtle motion: content below the fold fades in on scroll, the donation bar fills once.
   const motionAllowed = window.matchMedia('(prefers-reduced-motion: no-preference)').matches && 'IntersectionObserver' in window;
   if (motionAllowed) {
-    const groups = '.content-sections, .content-steps, .content-faq, .content-intro, .content-cover, .grid, .home-update-grid, .medical-cards, .journey';
+    // Section content fades in as a whole; children of a [data-reveal-group] fade in one by one.
     const targets = [
-      ...document.querySelectorAll(`main > section:not([data-hero]) > div > :not(${groups})`),
-      ...document.querySelectorAll('.content-section, .content-steps > :not(.timeline), .content-faq > :not(.faq-items), .faq-items > details, .timeline > li, main .grid > .update-card, .home-contribute .grid > *, .medical-cards > *, .journey > li')
+      ...document.querySelectorAll('main > section:not([data-hero]) > div > :not([data-reveal-group], [data-no-reveal])'),
+      ...document.querySelectorAll('[data-reveal-group] > :not([data-reveal-group])')
     ].filter(element => element.getBoundingClientRect().top > window.innerHeight * 0.92);
     const reveal = new IntersectionObserver(entries => {
       entries.filter(entry => entry.isIntersecting).forEach((entry, index) => {
@@ -218,7 +218,7 @@
     }, { rootMargin: '0px 0px -8% 0px' });
     targets.forEach(element => { element.classList.add('reveal'); reveal.observe(element); });
 
-    const donationBar = document.querySelector('.home-progress .donation-bar');
+    const donationBar = document.querySelector('[data-donation-bar]');
     if (donationBar) {
       const fill = donationBar.matches('progress') ? null : donationBar.querySelector('span');
       const finalValue = fill ? null : donationBar.value;

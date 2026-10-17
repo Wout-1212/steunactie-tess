@@ -1,30 +1,28 @@
-<section class="home-progress scroll-mt-28 py-6 md:py-7 bg-transparent text-ink" id="donatievoortgang">
+<section class="py-9 text-ink md:py-16" id="donatievoortgang">
     <div class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)]">
-        <h2 class="mb-[15px] text-[clamp(.95rem,1.55vw,1.15rem)] leading-[1.3] tracking-[.055em] uppercase">
+        <h2 class="mb-[18px] text-[13px] leading-[1.3] tracking-[.1em] uppercase">
             <?= $page->progress_title()->esc() ?></h2>
-        <div
-            class="mb-3 flex flex-wrap items-baseline justify-between gap-3 [&_strong]:text-[clamp(1.45rem,2.5vw,1.8rem)] [&_strong]:leading-[1.2] [&_span]:max-w-[165px] [&_span]:text-right [&_span]:text-sm [&_span]:leading-normal [&_b]:ml-[6px] [&_b]:inline-block md:gap-5 md:[&_span]:max-w-none md:[&_span]:text-sm md:[&_b]:ml-3 max-xs:items-start max-xs:[&_span]:max-w-[140px]">
+        <div class="mb-3 flex flex-wrap items-baseline justify-between gap-3 md:gap-5 max-xs:items-start">
             <?php if ($progress['hasGoal']): ?>
-                <strong><?= $progress['raised'] ?></strong><span><?= t('progress.of-goal') ?> <?= $progress['goal'] ?>
-                    <b><?= $progress['percent'] ?>%</b></span>
+                <strong class="text-[32px] leading-[1.2] tracking-[-.02em] text-pink md:text-[40px]"><?= $progress['raised'] ?></strong><span class="max-w-none text-right text-[11px] leading-normal text-ink md:text-[13px]"><?= t('progress.of-goal') ?> <?= $progress['goal'] ?>
+                    <b class="ml-[6px] inline-block md:ml-3"><?= $progress['percent'] ?>%</b></span>
             <?php else: ?>
-                <strong><?= t('progress.sample-raised') ?></strong><span><?= t('progress.of-goal') ?> <?= t('progress.sample-goal') ?>
-                    <b>14%</b></span>
+                <strong class="text-[32px] leading-[1.2] tracking-[-.02em] text-pink md:text-[40px]"><?= t('progress.sample-raised') ?></strong><span class="max-w-none text-right text-[11px] leading-normal text-ink md:text-[13px]"><?= t('progress.of-goal') ?> <?= t('progress.sample-goal') ?>
+                    <b class="ml-[6px] inline-block md:ml-3">14%</b></span>
             <?php endif ?>
         </div>
         <?php if ($progress['hasGoal']): ?>
-            <progress class="donation-bar" value="<?= $progress['percent'] ?>" max="100"
+            <progress data-donation-bar class="donation-bar block h-[15px] w-full appearance-none overflow-hidden rounded-full bg-white" value="<?= $progress['percent'] ?>" max="100"
                 aria-label="<?= t('progress.label') ?>"><?= $progress['percent'] ?>%</progress>
         <?php else: ?>
-            <div class="donation-bar" aria-hidden="true"><span class="block h-full w-[14%] rounded-full bg-pink"></span></div>
+            <div data-donation-bar class="block h-[15px] w-full overflow-hidden rounded-full bg-white" aria-hidden="true"><span class="block h-full w-[14%] rounded-full bg-pink motion-safe:transition-[width] motion-safe:duration-1200 motion-safe:ease-[cubic-bezier(.22,1,.36,1)]"></span></div>
         <?php endif ?>
         <?php if ($progress['hasGoal'] && $progress['donations']): ?>
-            <p class="mt-2 mb-0 flex items-center gap-1.5 text-sm"><?php snippet('icon', ['name' => 'heart', 'class' => 'size-4']) ?><?= tt('progress.donations', ['count' => $progress['donations']]) ?></p>
+            <p class="mt-2 mb-0 flex items-center gap-1.5 text-sm"><?php snippet('components/icon', ['name' => 'heart', 'class' => 'size-4']) ?><?= tt('progress.donations', ['count' => $progress['donations']]) ?></p>
         <?php endif ?>
-        <div
-            class="mt-[13px] grid grid-cols-2 gap-4 text-center text-sm leading-normal [&_strong]:text-base [&_strong]:tracking-[.04em] [&_span]:block md:grid-cols-4 md:gap-4">
+        <div class="mt-4 grid grid-cols-4 gap-2 text-center text-[9px] leading-normal md:gap-4 md:text-[12px]">
             <?php foreach ($progress['milestones'] as $milestone): ?>
-                <div><strong class="inline-flex items-center gap-1"><?php if ($milestone['reached']): ?><?php snippet('icon', ['name' => 'check', 'class' => 'size-4']) ?><?php endif ?><?= $milestone['amount'] ?></strong><span><?= esc($milestone['label']) ?></span></div>
+                <div class="min-w-0 wrap-anywhere"><strong class="inline-flex items-center gap-1 text-[10px] tracking-[.04em] text-pink xs:text-[12px] md:text-[15px]"><?php if ($milestone['reached']): ?><?php snippet('components/icon', ['name' => 'check', 'class' => 'size-4']) ?><?php endif ?><?= $milestone['amount'] ?></strong><span class="block"><?= esc($milestone['label']) ?></span></div>
             <?php endforeach ?>
         </div>
     </div>

@@ -57,7 +57,20 @@ De voortgangsbalk blijft zichtbaar zonder bevestigde cijfers, met XX.XXX, 14% en
 
 ## Tailwind ontwikkelen
 
-De styling gebruikt Tailwind CSS met utility-klassen in `site/templates` en `site/snippets`. De kleuren, lettertypes en responsive breekpunten staan in `assets/css/tailwind.css`. Alleen rijke Kirby-tekst en native pseudo-elementen gebruiken daar beperkte componentregels met `@apply`.
+De styling gebruikt Tailwind CSS. De regel is:
+
+- **In de templates en snippets** (`site/templates`, `site/snippets`): utility-klassen voor alles, dus layout, ruimte, kleur, typografie, responsive gedrag, hover- en focusstijlen en transities.
+- **In `assets/css/tailwind.css`** staat alleen wat utilities niet (overzichtelijk) kunnen:
+  1. design tokens in `@theme` (kleuren, lettertypes, breekpunten, animaties) en basisstijlen voor gewone HTML-elementen;
+  2. inhoud die de templates niet zelf opbouwen: rijke tekst uit het Panel (`.prose`) en de automatische opmaak van de naam Tess (`.tess-name`, toegevoegd door de plugin `tess-typography`);
+  3. pseudo-elementen die iets tekenen (stapnummers, lijnen in de tijdlijnen, het +/−-teken bij uitklapvragen) en onderdelen van de browser zelf (de voortgangsbalk, het standaardpijltje van `details`);
+  4. beweging die JavaScript aanzet (het verschijnen bij scrollen, `.reveal`);
+  5. twee herbruikbare effecten als eigen utility: `lift` (knop komt omhoog bij hover) en `link-underline` (onderlijn schuift in).
+- **Markup die op meerdere plaatsen terugkomt** is een Kirby-snippet met de utility-klassen erin, geen CSS-klasse: `snippet('components/button')` voor de roze knop (varianten `solid`/`outline`, maten `default`, `block`, `small`, `header`, `large`), `snippet('components/heading')` voor de koppen op de homepage en `snippet('components/picture')` voor foto's met placeholder.
+- **Mappen in `site/snippets`:** `layout/` (header, footer en oproepblok, op elke pagina), `components/` (herbruikbare onderdelen zoals knop, kop, foto, icoon en updatekaart), `home/` en `disclaimer/` (onderdelen die alleen op die pagina staan), `blocks/` (weergave van Panel-blokken; deze mapnaam is een vaste Kirby-afspraak) en `emails/` (opmaak van de e-mails).
+- **HTML-e-mails** gebruiken inline stijlen, omdat mailprogramma's geen stylesheets ondersteunen.
+
+Klassenamen zonder utility-vorm bestaan alleen voor die vijf gevallen. JavaScript vindt elementen via `data-`-attributen (zoals `data-menu-toggle`, `data-reveal-group` en `data-donation-bar`), niet via stijlklassen. Breekpunten: `xs` (361px), `md` (681px), `lg` (901px), `xl` (1001px) en `2xl` (1101px).
 
 ```sh
 npm install

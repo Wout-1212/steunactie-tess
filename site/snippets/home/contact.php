@@ -1,10 +1,10 @@
 <?php $status = in_array(get('contact'), ['success', 'invalid', 'rate-limited', 'error'], true) ? get('contact') : null ?>
-<section class="scroll-mt-28 py-[42px] md:py-[72px]" id="contact">
+<section class="py-9 md:py-16" id="contact">
     <div
         class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)] grid grid-cols-1 items-center gap-[26px] md:grid-cols-2 md:gap-8 lg:gap-16">
         <div>
             <p class="mb-4 text-xs font-bold tracking-[.12em] uppercase"><?= $page->contact_kicker()->esc() ?></p>
-            <h2><?= $page->contact_title()->esc() ?></h2>
+            <?php snippet('components/heading', ['text' => $page->contact_title()]) ?>
             <p><?= $page->contact_text()->esc() ?></p>
         </div>
         <form
@@ -25,7 +25,7 @@
                     </div>
                 </div><label for="contact-message"><?= t('contact.message') ?></label><textarea
                     id="contact-message" name="message" rows="5" required maxlength="5000"></textarea><button
-                    class="inline-flex min-h-11 items-center justify-center rounded-[5px] border px-[21px] py-[11px] text-sm font-bold border-transparent bg-pink text-donation-ink hover:bg-pink-dark hover:text-white"
+                    class="inline-flex min-h-11 items-center justify-center rounded-[5px] border px-[21px] py-[11px] text-sm font-bold border-transparent bg-pink text-donation-ink hover:bg-pink-dark hover:text-white motion-safe:lift"
                     type="submit"><?= t('contact.submit') ?></button>
             </fieldset>
             <?php if ($site->contactemail()->isEmpty()): ?>
