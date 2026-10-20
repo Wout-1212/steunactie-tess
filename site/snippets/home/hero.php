@@ -4,7 +4,7 @@
             <h1 class="mb-5 max-w-[330px] text-[36px] leading-[1.14] md:max-w-[500px] md:text-[clamp(38px,4.1vw,56px)]"><?= preg_replace('/\b(Tess)\s+/u', '$1<br>', $page->hero_title()->esc()->value()) ?></h1>
             <p class="mb-[22px] max-w-[435px] text-[15px] md:mb-7 md:text-[17px]"><?= $page->hero_text()->esc() ?></p>
             <div class="flex flex-wrap gap-[10px] md:gap-[14px]">
-                <?php snippet('components/button', ['href' => '#help-tess', 'text' => t('donation.donate')]) ?>
+                <?php snippet('components/button', ['donation' => true, 'href' => '#help-tess', 'text' => t('donation.donate')]) ?>
                 <?php snippet('components/button', ['href' => page('haar-verhaal')->url(), 'text' => t('home.hero.story-link'), 'variant' => 'outline']) ?>
             </div>
         </div>

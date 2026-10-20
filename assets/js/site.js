@@ -241,3 +241,68 @@
       fillBar.observe(donationBar);
     }
   }
+
+  // Native SVG motion keeps both the star and every part of its trail on one rounded path.
+  // Only resize/layout changes rebuild geometry; no JavaScript animation loop is needed.
+  {
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const namespace = 'http://www.w3.org/2000/svg';
+    const make = (name, attrs = {}) => {
+      const node = document.createElementNS(namespace, name);
+      Object.entries(attrs).forEach(([key, value]) => node.setAttribute(key, value));
+      return node;
+    };
+    document.querySelectorAll('.donation-light').forEach((button, index) => {
+      const svg = make('svg', { class: 'donation-orbit', 'aria-hidden': 'true', focusable: 'false' });
+      button.append(svg);
+      let previous = '';
+      const draw = () => {
+        const style = getComputedStyle(button);
+        const box = getComputedStyle(svg);
+        const width = parseFloat(box.width), height = parseFloat(box.height);
+        // The SVG origin is the padding edge; the border centre lies half a border outside it.
+        const left = -parseFloat(style.borderLeftWidth) / 2;
+        const top = -parseFloat(style.borderTopWidth) / 2;
+        const right = width + parseFloat(style.borderRightWidth) / 2;
+        const bottom = height + parseFloat(style.borderBottomWidth) / 2;
+        const radius = Math.max(0, parseFloat(style.borderTopLeftRadius) - parseFloat(style.borderTopWidth) / 2);
+        const signature = `${width},${height},${left},${top},${right},${bottom},${radius},${motion.matches}`;
+        if (signature === previous) return;
+        previous = signature;
+        svg.replaceChildren();
+        if (motion.matches || !width || !height) return;
+        svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+        const r = Math.min(radius, (bottom - top) / 2, (right - left) / 2);
+        const d = `M ${left+r} ${top} H ${right-r} A ${r} ${r} 0 0 1 ${right} ${top+r} V ${bottom-r} A ${r} ${r} 0 0 1 ${right-r} ${bottom} H ${left+r} A ${r} ${r} 0 0 1 ${left} ${bottom-r} V ${top+r} A ${r} ${r} 0 0 1 ${left+r} ${top} Z`;
+        // Allow the 4px trail to straddle the border; never clip the star or its glow.
+        const clipId = `donation-trail-clip-${index}`;
+        const defs = make('defs');
+        const clip = make('clipPath', { id: clipId, clipPathUnits: 'userSpaceOnUse' });
+        clip.append(make('rect', { x: left - 2, y: top - 2, width: right - left + 4, height: bottom - top + 4, rx: r + 2 }));
+        defs.append(clip);
+        svg.append(defs);
+        const group = make('g');
+        group.append(make('animate', { attributeName: 'opacity', values: '0;1;1;0;0', keyTimes: '0;0.03;0.57;0.6;1', dur: '10s', repeatCount: 'indefinite' }));
+        svg.append(group);
+        const measure = make('path', { d, fill: 'none' });
+        group.append(measure);
+        const length = measure.getTotalLength();
+        measure.remove();
+        const trail = make('g', { 'clip-path': `url(#${clipId})` });
+        group.append(trail);
+        [[44, .25, 4], [30, .5, 3.5], [14, 1, 3]].forEach(([tail, opacity, strokeWidth]) => {
+          const path = make('path', { d, fill: 'none', stroke: 'white', 'stroke-width': strokeWidth, 'stroke-linecap': 'round', 'stroke-opacity': opacity, 'stroke-dasharray': `${tail} ${length-tail}`, 'stroke-dashoffset': tail });
+          path.append(make('animate', { attributeName: 'stroke-dashoffset', values: `${tail};${tail-length};${tail-length}`, keyTimes: '0;0.6;1', dur: '10s', repeatCount: 'indefinite' }));
+          trail.append(path);
+        });
+        const star = make('g');
+        star.append(make('path', { d: 'M 0 -9.5 L 2.28 -2.66 L 9.5 0 L 2.28 2.66 L 0 9.5 L -2.28 2.66 L -9.5 0 L -2.28 -2.66 Z', fill: 'white', style: 'filter:drop-shadow(0 0 3px #ffffffaa)' }));
+        star.append(make('animateMotion', { path: d, keyPoints: '0;1;1', keyTimes: '0;0.6;1', calcMode: 'linear', dur: '10s', repeatCount: 'indefinite', rotate: '0' }));
+        group.append(star);
+        svg.querySelectorAll('animate, animateMotion').forEach(animation => animation.beginElement());
+      };
+      new ResizeObserver(draw).observe(button);
+      motion.addEventListener('change', draw);
+      draw();
+    });
+  }

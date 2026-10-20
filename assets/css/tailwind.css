@@ -174,3 +174,10 @@
 @media print {
   .reveal { opacity: 1; transform: none; }
 }
+
+/* The star is fully visible; only its curved trail is clipped to the button. */
+@utility donation-light { position: relative; }
+.donation-orbit { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: inherit; overflow: visible; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) {
+  .donation-orbit { display: none; }
+}
