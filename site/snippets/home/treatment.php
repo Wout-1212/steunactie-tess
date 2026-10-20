@@ -2,9 +2,9 @@
 // Medical progress is deliberately independent of the fundraising controller.
 // Only explicitly classified treatments contribute; financial values never tilt the scale.
 $medicalSteps = $page->medical_steps()->toStructure();
-$done = $medicalSteps->filter(fn ($step) => $step->status()->value() === 'done');
-$planned = $medicalSteps->filter(fn ($step) => $step->status()->value() === 'planned');
-$weight = fn ($items) => array_sum($items->values(fn ($step) => max(1, $step->weight()->or(1)->toFloat())));
+$done = $medicalSteps->filter(fn($step) => $step->status()->value() === 'done');
+$planned = $medicalSteps->filter(fn($step) => $step->status()->value() === 'planned');
+$weight = fn($items) => array_sum($items->values(fn($step) => max(1, $step->weight()->or(1)->toFloat())));
 $doneWeight = $weight($done);
 $plannedWeight = $weight($planned);
 $totalWeight = $doneWeight + $plannedWeight;

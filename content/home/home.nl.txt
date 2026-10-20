@@ -2,90 +2,137 @@ Title: Home
 
 ----
 
-Uuid: rd6clbzyie47npja
+Hero-kicker: Samen voor Tess
 
 ----
 
-Hero_kicker: Samen voor Tess
+Hero-title: Help Tess richting herstel.
 
 ----
 
-Hero_title: Help Tess richting herstel.
+Hero-text: Tess heeft gespecialiseerde behandeling nodig. Samen maken we het verschil.
 
 ----
 
-Hero_text: Tess heeft gespecialiseerde behandeling nodig. Samen maken we het verschil.
+Hero-image: 
 
 ----
 
-Story_title: Over Tess
+Story-title: Over Tess
 
 ----
 
-Story_text: Hier komt het verhaal van Tess: haar situatie, haar uitdagingen en waarom steun belangrijk is voor haar herstel. De definitieve tekst volgt.
+Story-text: Hier komt het verhaal van Tess: haar situatie, haar uitdagingen en waarom steun belangrijk is voor haar herstel. De definitieve tekst volgt.
 
 ----
 
-Progress_title: Donatievoortgang
+Story-image: 
 
 ----
 
-Donation_title: Help Tess vandaag nog
+Progress-title: Donatievoortgang
 
 ----
 
-Donation_text: Elke bijdrage brengt Tess dichter bij haar behandeling en herstel.
+Donation-title: Help Tess vandaag nog
 
 ----
 
-Contribute_title: Manieren om bij te dragen
+Donation-text: Elke bijdrage brengt Tess dichter bij haar behandeling en herstel.
 
 ----
 
-Contribute_cards: - action: donate
+Featured-amount: € 50
+
+----
+
+Contribute-title: Manieren om bij te dragen
+
+----
+
+Contribute-cards:
+
+- 
+  action: donate
   icon: heart
   title: Doneer direct
   text: Draag bij aan de behandeling van Tess.
-- action: share
+- 
+  action: share
   icon: share
   title: Deel haar verhaal
   text: Deel dit verhaal en vergroot het bereik.
-- action: contact
+- 
+  action: contact
   icon: megaphone
   title: Kom in actie
-  text: Organiseer een inzamelactie, sponsorloop, quiz of concert.
-- action: contact
+  text: >
+    Organiseer een inzamelactie,
+    sponsorloop, quiz of concert.
+- 
+  action: contact
   icon: building
   title: Steunen als bedrijf?
-  text: Neem contact op om te bespreken hoe je kunt bijdragen.
+  text: >
+    Neem contact op om te bespreken hoe je
+    kunt bijdragen.
 
 ----
 
-Updates_title: Updates
+Treatment-title: Het traject van Tess
 
 ----
 
-Treatment_title: Het traject van Tess
+Treatment-intro: 
 
 ----
 
-Treatment_steps: - heading: Diagnose & doorverwijzing
-- heading: Gespecialiseerde therapie
-- heading: Intensieve behandelfase
-- heading: Herstel & nazorg
+Medical-title: 
 
 ----
 
-Contact_kicker: Een vraag of tip?
+Medical-intro: 
 
 ----
 
-Contact_title: Contact
+Medical-steps: 
 
 ----
 
-Contact_text: Heb je een vraag of een tip? Laat het ons weten.
+Medical-done-amount: 
+
+----
+
+Medical-planned-amount: 
+
+----
+
+Updates-title: Updates
+
+----
+
+Treatment-image: 
+
+----
+
+Contact-kicker: Een vraag of tip?
+
+----
+
+Contact-title: Contact
+
+----
+
+Contact-text: Heb je een vraag of een tip? Laat het ons weten.
 
 ----
 
 Navtitle: Home
+
+----
+
+Description: 
+
+----
+
+Uuid: rd6clbzyie47npja

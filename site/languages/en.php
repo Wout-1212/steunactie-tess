@@ -32,6 +32,8 @@ return [
         'journey.done' => 'Completed',
         'journey.current' => 'In progress',
         'journey.upcoming' => 'Coming up',
+        'steps.prev' => 'Previous steps',
+        'steps.next' => 'Next steps',
 
     ],
 ];

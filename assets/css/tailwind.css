@@ -16,7 +16,7 @@
  *   2. content the templates do not control: Kirby rich text (.prose) and the automatic Tess name;
  *   3. pseudo-elements that draw something (step numbers, timeline lines, +/− signs) and native
  *      browser parts (progress bar, disclosure marker);
- *   4. motion that JavaScript switches on (scroll reveal);
+ *   4. motion and states that JavaScript switches on (scroll reveal, step track edge fade);
  *   5. two reusable effects as custom utilities (lift, link-underline).
  * - Markup that repeats across templates is a Kirby snippet (button, heading, picture), not a CSS class.
  * - HTML emails keep inline styles, because mail clients ignore stylesheets.
@@ -124,19 +124,20 @@
     .timeline > li::after { bottom: -26px; left: 14px; }
   }
 
-  /* Home journey: number (or ✓ when done) and the line to the next step, solid after a done step. */
-  .journey { counter-reset: journey; }
-  .journey > li { counter-increment: journey; }
-  .journey-marker::before { content: counter(journey); }
-  .journey > .is-done .journey-marker::before { content: '\2713'; }
-  .journey > li::after { content: ''; position: absolute; top: 14px; bottom: -28px; left: 17px; width: 2px; background: var(--color-divider); }
-  .journey > .is-done::after { background: var(--color-pink); }
-  .journey > li:last-child::after { display: none; }
-  @media (min-width: 901px) {
-    .journey-horizontal > li::after { top: 17px; right: -20px; bottom: auto; left: 36px; width: auto; height: 2px; }
-  }
+  /* Step track (home journey): number (or ✓ when done) and the line to the next step,
+     solid after a done step. The line runs down below desktop and sideways from desktop up. */
+  .step-track { counter-reset: step-track; }
+  .step-track > li { counter-increment: step-track; }
+  .step-track-marker::before { content: counter(step-track); }
+  .step-track > .is-done .step-track-marker::before { content: '\2713'; }
+  .step-track > li::after { content: ''; position: absolute; top: 14px; bottom: -28px; left: 17px; width: 2px; background: var(--color-divider); }
+  .step-track > .is-done::after { background: var(--color-pink); }
+  .step-track > li:last-child::after { display: none; }
   @media (max-width: 680px) {
-    .journey > li::after { bottom: -26px; left: 14px; }
+    .step-track > li::after { bottom: -26px; left: 14px; }
+  }
+  @media (min-width: 901px) {
+    .step-track > li::after { top: 17px; right: -20px; bottom: auto; left: 36px; width: auto; height: 2px; }
   }
 
   /* Native progress element parts can only be styled through vendor pseudo-elements. */
@@ -174,3 +175,8 @@
 @media print {
   .reveal { opacity: 1; transform: none; }
 }
+
+/* Step track: fade the edge where more steps are hidden. site.js sets data-more while the row scrolls. */
+[data-step-track-scroller][data-more="end"] { mask-image: linear-gradient(to right, #000 calc(100% - 56px), transparent); }
+[data-step-track-scroller][data-more="start"] { mask-image: linear-gradient(to left, #000 calc(100% - 56px), transparent); }
+[data-step-track-scroller][data-more="both"] { mask-image: linear-gradient(to right, transparent, #000 56px, #000 calc(100% - 56px), transparent); }

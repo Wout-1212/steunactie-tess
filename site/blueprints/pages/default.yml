@@ -62,10 +62,21 @@ columns:
       steps:
         label: Stappen behandeltraject (optioneel)
         type: structure
+        help: De stappen van Ziekte & behandeling staan ook als tijdlijn op de homepage, met titel en status. Met de status zie je daar waar Tess nu staat.
+        columns:
+          heading: true
+          status: true
         fields:
           heading:
             label: Stap
             type: text
+          status:
+            label: Status op de homepage (optioneel)
+            type: select
+            options:
+              done: Afgerond
+              current: Nu bezig
+              upcoming: Nog te komen
           text:
             label: Toelichting
             type: textarea

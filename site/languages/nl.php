@@ -32,6 +32,8 @@ return [
         'journey.done' => 'Afgerond',
         'journey.current' => 'Nu bezig',
         'journey.upcoming' => 'Nog te komen',
+        'steps.prev' => 'Vorige stappen',
+        'steps.next' => 'Volgende stappen',
 
         'skip-link' => 'Ga naar inhoud',
 

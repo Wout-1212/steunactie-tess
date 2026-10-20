@@ -122,27 +122,10 @@ tabs:
             label: Inleiding traject (optioneel)
             type: textarea
             buttons: false
-          treatment_steps:
+          treatment_steps_info:
             label: Stappen van het traject
-            type: structure
-            help: Wordt als tijdlijn op de homepage getoond. Met de status zie je waar Tess nu staat.
-            columns:
-              heading: true
-              status: true
-            fields:
-              heading:
-                label: Stap
-                type: text
-              status:
-                label: Status (optioneel)
-                type: select
-                options:
-                  done: Afgerond
-                  current: Nu bezig
-                  upcoming: Nog te komen
-              text:
-                label: Korte toelichting (optioneel)
-                type: text
+            type: info
+            text: De stappen komen van de pagina [Ziekte & behandeling](/panel/pages/behandelingsplan), zodat beide altijd hetzelfde tonen. Daar pas je ze aan en kies je de status. Passen ze niet naast elkaar, dan scrollt de bezoeker zijwaarts en opent de rij bij de stap die Nu bezig is.
           medical_title:
             label: Titel medische weegschaal
             type: text
