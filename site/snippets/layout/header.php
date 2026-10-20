@@ -29,7 +29,7 @@ $logoClass = 'h-auto w-auto max-h-[44px] max-w-[112px] [filter:drop-shadow(0_0_.
                 <?php else: ?><img class="<?= $logoClass ?>" src="<?= url('assets/images/logo.png') ?>" width="2008" height="783"
                         alt="<?= $site->title()->esc() ?>"><?php endif ?>
             </a>
-            <?php snippet('components/button', ['href' => page('home')->url() . '#help-tess', 'text' => t('cta.help'), 'size' => 'header']) ?>
+            <?php snippet('components/button', ['donation' => true, 'href' => page('home')->url() . '#help-tess', 'text' => t('cta.help'), 'size' => 'header']) ?>
             <button data-menu-toggle
                 class="min-h-[38px] rounded-[5px] border-0 bg-transparent p-[6px] text-[12px] text-pink md:hidden"
                 aria-expanded="false" aria-controls="navigation" hidden><?= t('nav.toggle') ?><span
@@ -53,7 +53,7 @@ $logoClass = 'h-auto w-auto max-h-[44px] max-w-[112px] [filter:drop-shadow(0_0_.
                         <?php endforeach ?>
                     </div>
                 </details>
-                <a class="inline-flex min-h-11 items-center justify-center rounded-[5px] border border-transparent bg-pink px-[21px] py-[11px] text-sm font-bold text-white hover:bg-pink-dark hover:text-white hover:opacity-90 md:max-2xl:px-3 motion-safe:lift"
+                <a class="donation-light inline-flex min-h-11 items-center justify-center rounded-[5px] border border-transparent bg-pink px-[21px] py-[11px] text-sm font-bold text-white hover:bg-pink-dark hover:text-white hover:opacity-90 md:max-2xl:px-3 motion-safe:lift"
                     href="<?= page('home')->url() ?>#help-tess"><?= t('cta.help') ?></a>
             </nav>
         </div>

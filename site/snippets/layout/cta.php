@@ -4,6 +4,6 @@
         <div class="min-w-0">
             <h2><?= $site->cta_title()->esc() ?></h2>
             <p class="text-base"><?= $site->cta_text()->esc() ?></p>
-        </div><?php snippet('components/button', ['href' => page('home')->url() . '#help-tess', 'text' => t('cta.help'), 'size' => 'large']) ?>
+        </div><?php snippet('components/button', ['donation' => true, 'href' => page('home')->url() . '#help-tess', 'text' => t('cta.help'), 'size' => 'large']) ?>
     </div>
 </section>

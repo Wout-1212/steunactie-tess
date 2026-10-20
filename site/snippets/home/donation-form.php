@@ -9,14 +9,14 @@
         <label class="mb-[7px] block text-left text-[13px] text-pink" for="amount"><?= t('donation.other-amount') ?></label>
         <input class="mb-[18px] block min-h-[46px] w-full rounded-[5px] border border-blush bg-white px-[14px] py-[10px] text-ink" id="amount" type="number" min="1" step="1" inputmode="numeric" placeholder="<?= t('donation.amount') ?>">
         <?php if ($site->fundraiser()->isNotEmpty()): ?>
-            <?php snippet('components/button', ['href' => $site->fundraiser()->value(), 'text' => t('donation.fundraiser'), 'size' => 'block']) ?>
+            <?php snippet('components/button', ['donation' => true, 'href' => $site->fundraiser()->value(), 'text' => t('donation.fundraiser'), 'size' => 'block']) ?>
             <p class="mt-[14px] mb-[26px] text-[11px]"><?= t('donation.fundraiser-note') ?></p>
         <?php endif ?>
         <p class="mt-7 mb-[18px] text-[13px]"><?= t('donation.alternatives') ?></p>
         <?php snippet('components/bank-account') ?>
         <?php foreach (['fundraiser' => 'Steunactie', 'gofundme' => 'GoFundMe'] as $field => $label): ?>
             <?php if ($site->$field()->isNotEmpty()): ?>
-                <div class="mb-3 flex flex-wrap items-center justify-between gap-3 rounded-[6px] bg-white p-[14px] text-left text-ink md:gap-x-5 md:gap-y-3 md:px-[18px] md:py-4 motion-safe:transition-shadow motion-safe:duration-250 motion-safe:hover:shadow-card"><div><h3 class="mb-1 text-[13px] leading-[1.35] font-bold text-ink"><?= tt('donation.via', ['platform' => $label]) ?></h3><p class="m-0 text-[12px]"><?= t('donation.' . $field . '-description') ?></p></div><?php snippet('components/button', ['href' => $site->$field()->value(), 'text' => tt('donation.to-platform', ['platform' => $label]), 'variant' => 'outline', 'size' => 'small']) ?></div>
+                <div class="mb-3 flex flex-wrap items-center justify-between gap-3 rounded-[6px] bg-white p-[14px] text-left text-ink md:gap-x-5 md:gap-y-3 md:px-[18px] md:py-4 motion-safe:transition-shadow motion-safe:duration-250 motion-safe:hover:shadow-card"><div><h3 class="mb-1 text-[13px] leading-[1.35] font-bold text-ink"><?= tt('donation.via', ['platform' => $label]) ?></h3><p class="m-0 text-[12px]"><?= t('donation.' . $field . '-description') ?></p></div><?php snippet('components/button', ['donation' => true, 'href' => $site->$field()->value(), 'text' => tt('donation.to-platform', ['platform' => $label]), 'variant' => 'outline', 'size' => 'small']) ?></div>
             <?php endif ?>
         <?php endforeach ?>
     </div>
