@@ -112,11 +112,14 @@ tabs:
       organisation:
         label: Organisatie
         type: text
-      organisationdetails:
-        label: Adres en ondernemingsnummer
-        type: textarea
+      organisationaddress:
+        label: Maatschappelijke zetel
+        type: text
         buttons: false
-        help: Eén gegeven per regel, zoals in de footer. Het rekeningnummer komt uit het veld hieronder.
+      organisationnumber:
+        label: Ondernemingsnummer
+        type: text
+        buttons: false
       contactemail:
         label: Contactadres
         type: email

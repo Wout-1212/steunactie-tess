@@ -59,7 +59,11 @@ Organisation: Samen voor Tess
 
 ----
 
-Organisationdetails: 
+Organisationaddress: Abdis Agnesstraat 32, 8510 MARKE
+
+----
+
+Organisationnumber: 1041.458.910
 
 ----
 
@@ -84,3 +88,7 @@ Fundraiser: https://steunactie.be/actie/de-medische-loterij-met-duidelijk-behand
 ----
 
 Gofundme: https://www.gofundme.com/f/me8jby-support-and-hope-for-tess-recovery-and-life
+
+----
+
+Organisationdetails: 
