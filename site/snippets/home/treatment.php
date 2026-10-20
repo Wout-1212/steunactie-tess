@@ -42,7 +42,7 @@ $currency->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, 0);
                 <div class="rounded-[7px] bg-white p-4 md:px-6 md:py-5 motion-safe:transition-shadow motion-safe:duration-250 motion-safe:hover:shadow-card">
                     <div class="mb-[10px] flex items-baseline justify-between gap-[10px] md:gap-4">
                         <h3 class="m-0 flex items-center gap-2 text-[13px] leading-[1.35] text-ink md:text-[15px]"><?php snippet('components/icon', ['name' => 'heart', 'class' => 'size-4 text-pink']) ?><?= t('treatment.' . $status) ?></h3>
-                        <?php if ($page->$amountField()->isNotEmpty()): ?><strong class="text-pink"><?= esc($currency->formatCurrency(max(0, $page->$amountField()->toFloat()), 'EUR')) ?></strong><?php endif ?>
+                        <?php if ($page->$amountField()->isNotEmpty()): ?><strong data-count-up class="text-right text-pink tabular-nums"><?= esc($currency->formatCurrency(max(0, $page->$amountField()->toFloat()), 'EUR')) ?></strong><?php endif ?>
                     </div>
                     <?php if ($items->isNotEmpty()): ?>
                         <ul class="grid gap-2"><?php foreach ($items as $item): ?><li class="flex items-baseline gap-[10px] text-[13px] md:text-[14px]"><span class="inline-flex size-[18px] shrink-0 items-center justify-center rounded-[50%] border border-pink text-[12px] leading-none <?= $status === 'done' ? 'bg-pink text-white' : 'text-pink' ?>" aria-hidden="true"><?= $status === 'done' ? '✓' : '' ?></span><span><?= $item->heading()->esc() ?></span></li><?php endforeach ?></ul>

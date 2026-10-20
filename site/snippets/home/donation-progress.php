@@ -4,8 +4,8 @@
             <?= $page->progress_title()->esc() ?></h2>
         <div class="mb-3 flex flex-wrap items-baseline justify-between gap-3 md:gap-5 max-xs:items-start">
             <?php if ($progress['hasGoal']): ?>
-                <strong class="text-[32px] leading-[1.2] tracking-[-.02em] text-pink md:text-[40px]"><?= $progress['raised'] ?></strong><span class="max-w-none text-right text-[11px] leading-normal text-ink md:text-[13px]"><?= t('progress.of-goal') ?> <?= $progress['goal'] ?>
-                    <b class="ml-[6px] inline-block md:ml-3"><?= $progress['percent'] ?>%</b></span>
+                <strong data-count-up class="text-[32px] leading-[1.2] tracking-[-.02em] text-pink tabular-nums md:text-[40px]"><?= $progress['raised'] ?></strong><span class="max-w-none text-right text-[11px] leading-normal text-ink md:text-[13px]"><?= t('progress.of-goal') ?> <?= $progress['goal'] ?>
+                    <b data-count-up class="ml-[6px] inline-block text-right tabular-nums md:ml-3"><?= $progress['percent'] ?>%</b></span>
             <?php else: ?>
                 <strong class="text-[32px] leading-[1.2] tracking-[-.02em] text-pink md:text-[40px]"><?= t('progress.sample-raised') ?></strong><span class="max-w-none text-right text-[11px] leading-normal text-ink md:text-[13px]"><?= t('progress.of-goal') ?> <?= t('progress.sample-goal') ?>
                     <b class="ml-[6px] inline-block md:ml-3">14%</b></span>
@@ -18,7 +18,7 @@
             <div data-donation-bar class="block h-[15px] w-full overflow-hidden rounded-full bg-white" aria-hidden="true"><span class="block h-full w-[14%] rounded-full bg-pink motion-safe:transition-[width] motion-safe:duration-1200 motion-safe:ease-[cubic-bezier(.22,1,.36,1)]"></span></div>
         <?php endif ?>
         <?php if ($progress['hasGoal'] && $progress['donations']): ?>
-            <p class="mt-2 mb-0 flex items-center gap-1.5 text-sm"><?php snippet('components/icon', ['name' => 'heart', 'class' => 'size-4']) ?><?= tt('progress.donations', ['count' => $progress['donations']]) ?></p>
+            <p class="mt-2 mb-0 flex items-center gap-1.5 text-sm"><?php snippet('components/icon', ['name' => 'heart', 'class' => 'size-4']) ?><span><?= tt('progress.donations', ['count' => '<span data-count-up class="inline-block tabular-nums">' . $progress['donations'] . '</span>']) ?></span></p>
         <?php endif ?>
         <div class="mt-4 grid grid-cols-4 gap-2 text-center text-[9px] leading-normal md:gap-4 md:text-[12px]">
             <?php foreach ($progress['milestones'] as $milestone): ?>
