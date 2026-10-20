@@ -44,7 +44,8 @@ $fade = 'motion-safe:transition-[color,background-color] motion-safe:duration-20
                 <h2 class="mb-3 text-[15px]"><?= t('footer.about') ?></h2>
                 <address class="text-[13px] leading-[1.9] not-italic wrap-anywhere">
                     <?= $site->organisation()->or($site->title())->esc() ?><br>
-                    <?= isset($organisationNumber[0]) ? esc($organisationNumber[0]) : t('footer.number-placeholder') ?>
+                    <?= $site->organisationnumber()->isNotEmpty() ? 'Ondernemingsnummer: ' . $site->organisationnumber()->esc() : '' ?>
+                    <?= $site->organisationaddress()->isNotEmpty() ? '<br>' . $site->organisationaddress()->esc() : '' ?>
                     <?php if ($site->bankaccount()->isNotEmpty()): ?><br>IBAN <?= $site->bankaccount()->esc() ?><?php endif ?>
                     <br><a class="<?= $link ?> <?= $fade ?>" href="mailto:<?= esc($footerEmail, 'attr') ?>"><?= esc($footerEmail) ?></a>
                 </address>
