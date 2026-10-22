@@ -113,6 +113,23 @@ Kirby::plugin('tess/fundraisers', [
             return $current ?: $cache->get($key . '-last');
         },
 
+        // Total raised over all sources. Each source has its own field so scraping/Mollie can fill them separately;
+        // Steunactie and GoFundMe are read automatically and the Panel fields are only the fallback.
+        'raisedTotal' => function (): float {
+            return ($this->fundraiserStats('steunactie')['raised'] ?? $this->raised_steunactie()->toFloat())
+                + ($this->fundraiserStats('gofundme')['raised'] ?? $this->raised_gofundme()->toFloat())
+                + $this->raised_other()->toFloat();
+        },
+
+        // Number of online donations on the external platforms, or null when neither platform reports it.
+        'onlineDonations' => function (): int|null {
+            $steunactie = $this->fundraiserStats('steunactie');
+            $gofundme = $this->fundraiserStats('gofundme');
+            return isset($steunactie['donations']) || isset($gofundme['donations'])
+                ? ($steunactie['donations'] ?? 0) + ($gofundme['donations'] ?? 0)
+                : null;
+        },
+
         // One-line status for the Panel, so editors can see whether the automatic amount works.
         'fundraiserStatus' => function (string $source): string {
             if (!$stats = $this->fundraiserStats($source)) {

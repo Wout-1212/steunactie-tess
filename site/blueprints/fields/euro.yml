@@ -1,0 +1,6 @@
+# Whole euro amount; numbers are the same in every language.
+type: number
+min: 0
+step: 1
+before: €
+translate: false

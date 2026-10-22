@@ -8,11 +8,17 @@ Gebruik je bestaande Herd-site, of start vanuit de projectmap `composer start` (
 
 ## Inhoud aanpassen
 
-- Site-instellingen: huidig logo, contactadres, organisatiegegevens, Instagram-links, externe steunactie, doelbedrag en opgehaald bedrag.
-- Home: titel, intro, foto's en stappen.
-- Inhoudspagina's: introductie, tekstonderdelen, stappen en uitklapbare onderdelen.
-- Updates: voeg een update toe, vul datum en tekst in en zet de update op Gepubliceerd. Alleen listed updates verschijnen in het overzicht en op de homepage.
-- Foto's: upload afbeeldingen en voeg een beschrijvende alternatieve tekst toe.
+Het Panel opent op de site met deze tabbladen, de vaakst gebruikte eerst:
+
+- **Overzicht:** opgehaald bedrag (inclusief wat automatisch van Steunactie en GoFundMe gelezen wordt), percentage van het doel, aantal online donaties, aantal updates en de trajectstap die op Nu bezig staat. Elk cijfer linkt naar het tabblad waar je het aanpast. Daaronder staan de pagina's en de juridische pagina's.
+- **Updates:** voeg een update toe, vul datum en tekst in en zet de update op Gepubliceerd. Alleen listed updates verschijnen in het overzicht en op de homepage.
+- **Donaties:** doelbedrag, opgehaalde bedragen per bron en mijlpalen.
+- **Traject:** de stappen van het behandeltraject met hun status, en de items van de medische weegschaal. Homepage en de pagina Ziekte & behandeling lezen allebei hieruit.
+- **Instellingen:** logo, organisatiegegevens, contact, Instagram, de links naar Steunactie en GoFundMe, en het oproepblok onderaan de pagina's.
+
+Elke pagina heeft een eigen blueprint met alleen de velden die ze echt toont (`site/blueprints/pages`). Wat op meerdere plaatsen terugkomt staat in `site/blueprints/fields` (bijvoorbeeld `euro`, `photo`, `text-sections`, `questions`), `sections` (de updatelijst) en `tabs` (de tabbladen van de site en het tabblad Menu & zoekmachines). De cijfers op Overzicht komen uit `site/plugins/tess-panel`.
+
+Foto's: upload afbeeldingen en voeg een beschrijvende alternatieve tekst toe.
 
 De bestaande lege conceptpagina's zijn lokaal naar unlisted verplaatst zodat de navigatie werkt. Hun UUID's zijn behouden. Er is niets naar GitHub gepusht of online gedeployd.
 
@@ -26,7 +32,7 @@ Betaalintegratie en een bevestigingsmail na een donatie zijn nog niet geïmpleme
 
 ## Contactformulier en e-mail (Brevo)
 
-Het contactformulier verstuurt berichten via de SMTP-relay van Brevo naar het Contactadres uit Site-instellingen. Antwoorden gaat rechtstreeks naar de bezoeker (Reply-To). De afhandeling staat in `site/plugins/tess-contact`, de mail in `site/templates/emails/contact.html.php` (opgemaakt) en `contact.text.php` (platte tekst, voor mailprogramma's zonder HTML). De gedeelde opmaak (kop, kader, voettekst) staat in `site/snippets/emails/layout.php` en is herbruikbaar voor latere mails, zoals de donatiebevestiging. Berichten worden niet bewaard op de server. Spam wordt tegengehouden met een verborgen veld, een minimale invultijd en maximaal 5 berichten per IP-adres per uur.
+Het contactformulier verstuurt berichten via de SMTP-relay van Brevo naar het Contactadres uit Instellingen. Antwoorden gaat rechtstreeks naar de bezoeker (Reply-To). De afhandeling staat in `site/plugins/tess-contact`, de mail in `site/templates/emails/contact.html.php` (opgemaakt) en `contact.text.php` (platte tekst, voor mailprogramma's zonder HTML). De gedeelde opmaak (kop, kader, voettekst) staat in `site/snippets/emails/layout.php` en is herbruikbaar voor latere mails, zoals de donatiebevestiging. Berichten worden niet bewaard op de server. Spam wordt tegengehouden met een verborgen veld, een minimale invultijd en maximaal 5 berichten per IP-adres per uur.
 
 De SMTP-instellingen staan in `site/config/config.php`. Login en SMTP-key horen niet in Git: kopieer `site/config/config.host.example.php` naar `config.samenvoortess.be.php` (en `config.www.samenvoortess.be.php` als www gebruikt wordt) op de server en vul daarin de gegevens uit Brevo in (Settings → SMTP & API → SMTP). Zie ook [Live zetten](#live-zetten).
 
@@ -41,7 +47,7 @@ Deze stappen gebeuren niet automatisch bij een deploy en moeten op de server zel
 - [ ] **Nieuw configbestand voor de server aanmaken.** Kopieer `site/config/config.host.example.php` naar `site/config/config.samenvoortess.be.php` op de server en vul de Brevo SMTP-login en SMTP-key in. Wordt de site ook via www bereikt, maak dan dezelfde kopie als `config.www.samenvoortess.be.php`. Dit bestand staat bewust niet in Git en moet dus met de hand geüpload worden. Zonder dit bestand verstuurt het contactformulier geen mail.
 - [ ] Het lokale bestand `config.theagency2627-steunactie-tess.test.php` (Mailpit) **niet** naar de server kopiëren.
 - [ ] In Brevo het domein `samenvoortess.be` authenticeren (SPF/DKIM-records bij de domeinbeheerder) en `contact@samenvoortess.be` als afzender toevoegen.
-- [ ] Contactadres invullen in Site-instellingen in het Panel.
+- [ ] Contactadres invullen bij Instellingen in het Panel.
 - [ ] `'debug' => true` in `site/config/config.php` uitzetten (of `'debug' => false` in het serverconfigbestand zetten), zodat bezoekers geen foutdetails te zien krijgen.
 - [ ] Het contactformulier op de live site testen en de mail controleren in de inbox en in Brevo (Transactional → Logs).
 
@@ -53,7 +59,7 @@ De homepage heeft de goedgekeurde doorlopende pastelgradiënt; de header is tran
 
 ## Donatievoortgang en rekeningnummer
 
-De voortgangsbalk blijft zichtbaar zonder bevestigde cijfers, met XX.XXX, 14% en voorbeeldmijlpalen die expliciet als voorlopig worden aangeduid. Vul opgehaald bedrag en doelbedrag in bij Site-instellingen om de echte voortgang te tonen. Mijlpalen zijn afzonderlijk bewerkbaar. Het rekeningnummer BE97 7340 5272 3549 staat bij Help Tess en in de footer en is via Site-instellingen aanpasbaar.
+De voortgangsbalk blijft zichtbaar zonder bevestigde cijfers, met XX.XXX, 14% en voorbeeldmijlpalen die expliciet als voorlopig worden aangeduid. Vul opgehaald bedrag en doelbedrag in bij Donaties om de echte voortgang te tonen. Mijlpalen zijn afzonderlijk bewerkbaar. Het rekeningnummer BE97 7340 5272 3549 staat bij Help Tess en in de footer en is via Instellingen aanpasbaar.
 
 ## Tailwind ontwikkelen
 
@@ -87,7 +93,7 @@ De productiebuild schrijft de gecomprimeerde CSS naar `assets/css/site.css`. Bew
 
 ## Teksten beheren in Kirby
 
-Alle websiteteksten staan in de contentbestanden en hebben velden in het Panel. De homepage gebruikt `content/home/home.txt`; de andere pagina’s gebruiken hun eigen contentbestand. Header, footer en de gedeelde oproep tot steun gebruiken `content/site.txt` (Panel: Gedeelde websiteteksten). Updateknoppen en de melding zonder updates staan in `content/updates/updates.txt`, ook voor de homepage en losse updates. Fototeksten, formulierlabels en JavaScript-meldingen zijn eveneens bewerkbaar. PHP bevat de opbouw en logica, zonder vaste websiteteksten.
+Alle redactionele teksten staan in de contentbestanden en hebben velden in het Panel. De homepage gebruikt `content/home/home.nl.txt`; de andere pagina's gebruiken hun eigen contentbestand (`story`, `treatment`, `faq`, `legal`, `disclaimer`). Zonder eigen template gebruiken ze `site/templates/default.php`. Footer, oproepblok, donatiebedragen en het traject staan in `content/site.nl.txt`. Vaste interfaceteksten (knoppen, formulierlabels, meldingen) staan per taal in `site/languages`. PHP bevat de opbouw en logica.
 
 
 ## Goedgekeurd design en kleuren (16 oktober 2026)
@@ -96,12 +102,11 @@ De frontend volgt samen-voor-tess-preview-1.pdf. De exacte kleuren uit Kleurenpa
 
 ### Medische weegschaal beheren
 
-Ga in het Panel naar Home → Updates & traject. Vul onder Medische vooruitgang alleen bevestigde onderzoeken/behandelingen in en kies per item Al gedaan of Nog te doen. Gewicht staat standaard op 1. Een hoger gewicht telt een stap zwaarder mee op de schaal: dit is geen bedrag en geen percentage genezing. De schaal reageert uitsluitend op deze behandelstappen; opgehaalde donaties blijven afzonderlijk in de bestaande progressbar.
+Ga in het Panel naar het tabblad Traject. Vul onder Medische weegschaal alleen bevestigde onderzoeken/behandelingen in en kies per item Al gedaan of Nog te doen. Titel en uitleg boven de weegschaal staan bij Home → Traject. Gewicht staat standaard op 1. Een hoger gewicht telt een stap zwaarder mee op de schaal: dit is geen bedrag en geen percentage genezing. De schaal reageert uitsluitend op deze behandelstappen; opgehaalde donaties blijven afzonderlijk in de bestaande progressbar.
 
-De optionele bevestigde bedragen staan uitsluitend in de informatiekaarten Al gedaan en Nog te doen. Onder de schaal staan geen geldlabels. Zonder medische invoer staat de schaal neutraal en tonen de kaarten dat voortgang nog niet bevestigd is. De bestaande treatment_steps en treatment_image blijven beschikbaar in het uitklapbare trajectblok; bestaande content is niet gemigreerd of overschreven.
-
+De optionele bevestigde bedragen staan uitsluitend in de informatiekaarten Al gedaan en Nog te doen. Onder de schaal staan geen geldlabels. Zonder medische invoer staat de schaal neutraal en tonen de kaarten dat voortgang nog niet bevestigd is.
 De homepage behoudt de drie meest recente gepubliceerde updates (de PDF toont er twee). Het gedeelde overzicht blijft alle gepubliceerde updates tonen. Dit behoudt de bestaande inhoudsselectie.
 
 ### Bestaande werking
 
-Betalen blijft via de bestaande externe steunactie verlopen; er is geen nieuwe betaalintegratie of bevestigingsmail toegevoegd. De bedragkeuze wordt nog steeds niet doorgestuurd naar de externe site. Contact blijft het bestaande mailto-formulier en blijft uitgeschakeld zolang geen contactadres is ingevuld. Delen, taalkeuze, updategalerijen en het mobiele menu blijven behouden. Nieuw is de progressief verbeterde IBAN-kopieerknop; bij mislukken blijft het nummer zichtbaar om zelf te kopiëren.
+Betalen blijft via de bestaande externe steunactie verlopen; er is geen nieuwe betaalintegratie of bevestigingsmail toegevoegd. De bedragkeuze wordt nog steeds niet doorgestuurd naar de externe site. Het contactformulier blijft uitgeschakeld zolang geen contactadres is ingevuld. Delen, taalkeuze, updategalerijen en het mobiele menu blijven behouden. Nieuw is de progressief verbeterde IBAN-kopieerknop; bij mislukken blijft het nummer zichtbaar om zelf te kopiëren.

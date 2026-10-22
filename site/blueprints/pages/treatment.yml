@@ -1,0 +1,40 @@
+title: Ziekte & behandeling
+options:
+  changeSlug: false
+  delete: false
+tabs:
+  content:
+    label: Inhoud
+    icon: text
+    columns:
+      main:
+        width: 2/3
+        fields:
+          heading:
+            label: Paginakop (optioneel)
+            type: text
+            help: Leeg = de paginatitel.
+          text:
+            label: Introductie
+            type: textarea
+            size: large
+          sections:
+            extends: fields/text-sections
+          steps_title:
+            label: Titel boven de tijdlijn
+            type: text
+          steps_intro:
+            label: Inleiding bij de tijdlijn (optioneel)
+            type: textarea
+          steps_info:
+            label: Stappen van het traject
+            type: info
+            text: De stappen en hun status pas je aan bij [Traject](/panel/site?tab=journey). Ze staan ook op de homepage, zodat beide altijd hetzelfde tonen.
+      sidebar:
+        width: 1/3
+        fields:
+          cover:
+            extends: fields/photo
+            label: Introductiefoto (optioneel)
+            help: Wordt breed onder de introductie getoond.
+  meta: tabs/menu-seo

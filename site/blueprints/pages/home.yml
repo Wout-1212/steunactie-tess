@@ -1,10 +1,13 @@
 title: Home
 options:
+  changeSlug: false
   changeStatus: false
   delete: false
+# Tabs follow the homepage from top to bottom.
 tabs:
   hero:
     label: Hero
+    icon: home
     columns:
       main:
         width: 2/3
@@ -18,17 +21,16 @@ tabs:
           hero_text:
             label: Intro onder de hoofdtitel
             type: textarea
+            buttons: false
       sidebar:
         width: 1/3
         fields:
           hero_image:
+            extends: fields/photo
             label: Foto
-            type: files
-            multiple: false
-            uploads: image
-            translate: false
   story:
     label: Over Tess
+    icon: user
     columns:
       main:
         width: 2/3
@@ -44,41 +46,51 @@ tabs:
         width: 1/3
         fields:
           story_image:
+            extends: fields/photo
             label: Foto
-            type: files
-            multiple: false
-            uploads: image
-            translate: false
+  journey:
+    label: Traject
+    icon: flag
+    columns:
+      main:
+        width: 2/3
+        fields:
+          journey_info:
+            label: Stappen en weegschaal
+            type: info
+            text: De stappen van het traject en de items van de medische weegschaal pas je aan bij [Traject](/panel/site?tab=journey). Hier staan alleen de titels en teksten.
+          treatment_title:
+            label: Titel tijdlijn
+            type: text
+          treatment_intro:
+            label: Inleiding tijdlijn (optioneel)
+            type: textarea
+            buttons: false
+          medical_title:
+            label: Titel medische weegschaal
+            type: text
+            placeholder: Waar gaat jouw steun naartoe?
+          medical_intro:
+            label: Uitleg medische weegschaal (optioneel)
+            type: textarea
+            buttons: false
+            help: Leeg = de standaarduitleg over Al gedaan en Nog te doen.
+      sidebar:
+        width: 1/3
+        fields:
+          treatment_image:
+            extends: fields/photo
+            label: Foto bij de tijdlijn (optioneel)
   donate:
     label: Doneren
+    icon: heart
     fields:
       progress_title:
         label: Titel boven de voortgangsbalk
         type: text
-        help: Bedragen en mijlpalen staan bij Site-instellingen.
-      donation_title:
-        label: Titel donatieblok
-        type: text
-      donation_text:
-        label: Tekst donatieblok
-        type: textarea
-      featured_amount:
-        label: Bedrag met label Meest gekozen
-        type: select
-        default: '50'
-        required: true
-        translate: false
-        help: Handmatige keuze; dit label gebruikt geen donatiestatistieken.
-        options:
-          '10': '€ 10'
-          '25': '€ 25'
-          '50': '€ 50'
-          '100': '€ 100'
-  contribute:
-    label: Bijdragen
-    fields:
+        help: Bedragen en mijlpalen staan bij [Donaties](/panel/site?tab=donations).
       contribute_title:
-        label: Titel
+        label: Titel manieren om bij te dragen
         type: text
       contribute_cards:
         label: Kaarten
@@ -109,102 +121,43 @@ tabs:
           text:
             label: Tekst
             type: text
-  treatment:
-    label: Updates & traject
-    columns:
-      main:
-        width: 2/3
-        fields:
-          treatment_title:
-            label: Titel traject
-            type: text
-          treatment_intro:
-            label: Inleiding traject (optioneel)
-            type: textarea
-            buttons: false
-          treatment_steps_info:
-            label: Stappen van het traject
-            type: info
-            text: De stappen komen van de pagina [Ziekte & behandeling](/panel/pages/behandelingsplan), zodat beide altijd hetzelfde tonen. Daar pas je ze aan en kies je de status. Passen ze niet naast elkaar, dan scrollt de bezoeker zijwaarts en opent de rij bij de stap die Nu bezig is.
-          medical_title:
-            label: Titel medische weegschaal
-            type: text
-            placeholder: Waar gaat jouw steun naartoe?
-          medical_intro:
-            label: Uitleg medische weegschaal
-            type: textarea
-          medical_steps:
-            label: Medische vooruitgang
-            type: structure
-            help: Alleen bevestigde behandelingen invoeren. Dit staat los van opgehaalde donaties. Bestaande trajectstappen blijven behouden.
-            columns:
-              heading: true
-              status: true
-              weight: true
-            fields:
-              heading:
-                label: Onderzoek of behandeling
-                type: text
-                required: true
-              status:
-                label: Status
-                type: select
-                required: true
-                options:
-                  done: Al gedaan
-                  planned: Nog te doen
-              weight:
-                label: Gewicht op de weegschaal
-                type: number
-                default: 1
-                min: 1
-                step: 1
-                help: Gelijke gewichten tellen stappen gelijk mee; dit is geen geldbedrag en geen genezingspercentage.
-                translate: false
-          medical_done_amount:
-            label: Bevestigd bedrag bij Al gedaan (optioneel)
-            type: number
-            min: 0
-            step: 1
-            before: €
-            translate: false
-          medical_planned_amount:
-            label: Bevestigd bedrag bij Nog te doen (optioneel)
-            type: number
-            min: 0
-            step: 1
-            before: €
-            translate: false
-          updates_title:
-            label: Titel updates
-            type: text
-      sidebar:
-        width: 1/3
-        fields:
-          treatment_image:
-            label: Foto bij het traject (optioneel)
-            type: files
-            multiple: false
-            uploads: image
-            translate: false
+      donation_title:
+        label: Titel donatieblok
+        type: text
+      donation_text:
+        label: Tekst donatieblok
+        type: textarea
+        buttons: false
+      featured_amount:
+        label: Bedrag met label Meest gekozen
+        type: select
+        default: '50'
+        required: true
+        translate: false
+        help: Handmatige keuze; dit label gebruikt geen donatiestatistieken.
+        options:
+          '10': '€ 10'
+          '25': '€ 25'
+          '50': '€ 50'
+          '100': '€ 100'
   contact:
-    label: Contact
+    label: Updates & contact
+    icon: email
     fields:
+      updates_title:
+        label: Titel updates
+        type: text
+        help: De drie nieuwste gepubliceerde updates worden getoond. Updates schrijf je bij [Updates](/panel/site?tab=updates).
       contact_kicker:
-        label: Bovenschrift
+        label: Bovenschrift contact
         type: text
+        width: 1/2
       contact_title:
-        label: Titel
+        label: Titel contact
         type: text
+        width: 1/2
       contact_text:
-        label: Intro
+        label: Intro contact
         type: textarea
-  meta:
-    label: Menu & zoekmachines
-    fields:
-      navtitle:
-        label: Naam in het menu
-        type: text
-      description:
-        label: Beschrijving voor zoekmachines
-        type: textarea
+        buttons: false
+  meta: tabs/menu-seo

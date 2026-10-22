@@ -1,0 +1,27 @@
+title: Juridische tekst
+options:
+  changeSlug: false
+  changeStatus: false
+  delete: false
+fields:
+  info:
+    label: Waar verschijnt dit?
+    type: info
+    text: Deze tekst wordt als onderdeel van de [disclaimerpagina](/panel/pages/disclaimer) getoond. De oude link naar deze pagina stuurt bezoekers daar automatisch naartoe.
+  text:
+    label: Introductie
+    type: textarea
+  sections:
+    extends: fields/text-sections
+    label: Tekstonderdelen (optioneel)
+    help: Foto's worden hier niet getoond, alleen tussentitel en tekst.
+  accordiontitle:
+    label: Titel boven de uitklapbare onderdelen
+    type: text
+    help: Wordt weggelaten als hij hetzelfde is als de paginatitel.
+  accordionintro:
+    label: Uitleg bij de uitklapbare onderdelen (optioneel)
+    type: textarea
+  questions:
+    extends: fields/questions
+    label: Uitklapbare onderdelen

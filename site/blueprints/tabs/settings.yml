@@ -1,0 +1,78 @@
+# Settings that rarely change once the site is live.
+label: Instellingen
+icon: settings
+fields:
+  general:
+    label: Algemeen
+    type: headline
+  description:
+    label: Websitebeschrijving
+    type: textarea
+    help: Standaardbeschrijving voor zoekmachines, als een pagina er zelf geen heeft.
+  logo:
+    label: Logo
+    type: files
+    multiple: false
+    query: site.files
+    uploads: image
+    translate: false
+    help: Zonder logo hier toont de site het standaardlogo.
+  organisation_headline:
+    label: Organisatie (footer)
+    type: headline
+  organisation:
+    label: Organisatie
+    type: text
+    width: 1/2
+  organisationnumber:
+    label: Ondernemingsnummer
+    type: text
+    width: 1/2
+  organisationaddress:
+    label: Maatschappelijke zetel
+    type: text
+  bankaccount:
+    label: Rekeningnummer voor overschrijvingen
+    type: text
+    help: Wordt bij Help Tess en in de footer getoond.
+    translate: false
+  contact_headline:
+    label: Contact en sociale media
+    type: headline
+  contactemail:
+    label: Contactadres
+    type: email
+    help: Berichten van het contactformulier komen hier toe. Leeg = formulier uitgeschakeld.
+    translate: false
+  instagram:
+    label: Instagram Samen voor Tess
+    type: url
+    width: 1/2
+    translate: false
+  instagramtess:
+    label: Instagram Tess
+    type: url
+    width: 1/2
+    translate: false
+  platforms_headline:
+    label: Externe donatieplatformen
+    type: headline
+  fundraiser:
+    label: Steunactie-pagina (optioneel)
+    type: url
+    help: Alleen een bevestigde URL invullen. Het opgehaalde bedrag wordt er automatisch van gelezen.
+    translate: false
+  gofundme:
+    label: GoFundMe-pagina (optioneel)
+    type: url
+    help: Alleen een bevestigde URL invullen. Het opgehaalde bedrag wordt er automatisch van gelezen.
+    translate: false
+  cta_headline:
+    label: Oproepblok onderaan de pagina's
+    type: headline
+  cta_title:
+    label: Titel
+    type: text
+  cta_text:
+    label: Tekst
+    type: text

@@ -1,0 +1,11 @@
+label: Vragen
+type: structure
+columns:
+  question: true
+fields:
+  question:
+    label: Vraag of titel
+    type: text
+  answer:
+    label: Antwoord
+    type: textarea

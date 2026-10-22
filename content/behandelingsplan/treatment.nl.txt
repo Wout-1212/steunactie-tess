@@ -21,20 +21,7 @@ Sections: - heading: Waarom gespecialiseerde zorg nodig is
 
 ----
 
-Steps: - heading: Diagnose & doorverwijzing
-  text: De toelichting volgt.
-- heading: Gespecialiseerde therapie
-  text: De toelichting volgt.
-- heading: Intensieve behandelfase
-  text: De toelichting volgt.
-- heading: Herstel & nazorg
-  text: De toelichting volgt.
-- heading: Operatie
-  text: test
-
-----
-
-Steps_title: Het behandeltraject
+Steps-title: Het behandeltraject
 
 ----
 

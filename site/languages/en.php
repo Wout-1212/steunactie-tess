@@ -11,8 +11,6 @@ return [
     'translations' => [
         'donation.most-chosen' => 'Most chosen',
         'footer.transfer' => 'Bank transfer',
-        'footer.address-placeholder' => '[Address to be added]',
-        'footer.number-placeholder' => '[Company/VAT number to be added]',
         'donation.donate' => 'Donate now',
         'donation.alternatives' => 'Prefer another way?',
         'donation.via' => 'Via {platform}',

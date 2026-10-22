@@ -1,0 +1,17 @@
+# How a page is named in the menu and footer, and described to search engines.
+label: Menu & zoekmachines
+icon: search
+fields:
+  navtitle:
+    label: Naam in het menu
+    type: text
+    width: 1/2
+  footerlabel:
+    label: Naam in de footer (optioneel)
+    type: text
+    width: 1/2
+    help: Leeg = zelfde als in het menu.
+  description:
+    label: Beschrijving voor zoekmachines
+    type: textarea
+    help: Leeg = de websitebeschrijving uit Instellingen.

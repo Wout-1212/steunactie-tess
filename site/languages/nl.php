@@ -11,8 +11,6 @@ return [
     'translations' => [
         'donation.most-chosen' => 'Meest gekozen',
         'footer.transfer' => 'Overschrijving',
-        'footer.address-placeholder' => '[Adres nog in te vullen]',
-        'footer.number-placeholder' => '[Ondernemings-/BE-nummer nog in te vullen]',
         'donation.donate' => 'Doneer nu',
         'donation.alternatives' => 'Liever op een andere manier?',
         'donation.via' => 'Via {platform}',

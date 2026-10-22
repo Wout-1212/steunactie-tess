@@ -1,0 +1,33 @@
+# First tab of the Panel: the current numbers at a glance and the pages of the website.
+label: Overzicht
+icon: dashboard
+columns:
+  stats:
+    width: 1/1
+    sections:
+      stats:
+        type: stats
+        headline: In één oogopslag
+        size: medium
+        reports: site.overviewReports
+  pages:
+    width: 1/2
+    sections:
+      pages:
+        type: pages
+        headline: Pagina's
+        query: site.find('home', 'haar-verhaal', 'behandelingsplan', 'faq')
+        status: all
+        create: false
+        sortable: false
+  legal:
+    width: 1/2
+    sections:
+      legal:
+        type: pages
+        headline: Juridisch
+        help: Privacy en algemene voorwaarden worden samen op de disclaimerpagina getoond.
+        query: site.find('disclaimer', 'privacy', 'algemene-voorwaarde')
+        status: all
+        create: false
+        sortable: false

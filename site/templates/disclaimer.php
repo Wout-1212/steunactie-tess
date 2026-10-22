@@ -12,13 +12,9 @@ $legalText = 'prose max-w-none wrap-anywhere';
                 <section class="<?= $sectionClass ?>" id="<?= $anchor ?>" aria-labelledby="<?= $anchor ?>-title">
                     <h2 class="mb-4 text-[23px] md:text-[26px]" id="<?= $anchor ?>-title"><?= $legal->title()->esc() ?></h2>
                     <div class="<?= $legalText ?>"><?= $legal->text()->kirbytext() ?></div>
-                    <?php if ($legal->heading()->isNotEmpty() && $legal->heading()->value() !== $legal->title()->value()): ?><h3 class="mt-7"><?= $legal->heading()->esc() ?></h3><?php endif ?>
                     <?php foreach ($legal->sections()->toStructure() as $section): ?>
                         <h3 class="mt-7"><?= $section->heading()->esc() ?></h3><div class="<?= $legalText ?>"><?= $section->text()->kirbytext() ?></div>
                     <?php endforeach ?>
-                    <?php if ($legal->steps()->isNotEmpty()): ?>
-                        <h3 class="mt-7"><?= $legal->steps_title()->esc() ?></h3><ol class="steps"><?php foreach ($legal->steps()->toStructure() as $step): ?><li class="relative py-[10px] pl-11"><strong><?= $step->heading()->esc() ?></strong><div class="<?= $legalText ?> [&_p]:mt-2 [&_p]:text-[.9rem] [&_p]:text-muted"><?= $step->text()->kirbytext() ?></div></li><?php endforeach ?></ol>
-                    <?php endif ?>
                     <?php
                     // On the combined page, omit accordion headings that repeat the section title.
                     $sectionLabel = preg_replace('/\s+/u', '', mb_strtolower(trim($legal->title()->value())));

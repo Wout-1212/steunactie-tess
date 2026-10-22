@@ -42,7 +42,7 @@ Donation-text: Elke bijdrage brengt Tess dichter bij haar behandeling en herstel
 
 ----
 
-Featured-amount: € 50
+Featured-amount: 50
 
 ----
 
@@ -92,18 +92,6 @@ Medical-title:
 ----
 
 Medical-intro: 
-
-----
-
-Medical-steps: 
-
-----
-
-Medical-done-amount: 
-
-----
-
-Medical-planned-amount: 
 
 ----
 

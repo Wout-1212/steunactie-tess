@@ -1,0 +1,33 @@
+label: Tekstonderdelen
+type: structure
+help: Elk onderdeel kan een eigen foto krijgen. Zonder foto wordt de tekst op volle breedte getoond.
+columns:
+  heading: true
+  image: true
+fields:
+  heading:
+    label: Tussentitel
+    type: text
+  text:
+    label: Tekst
+    type: textarea
+    size: large
+  image:
+    label: Foto (optioneel)
+    type: files
+    multiple: false
+    uploads: image
+    width: 1/2
+  imageposition:
+    label: Plaats van de foto
+    type: select
+    default: auto
+    width: 1/2
+    options:
+      auto: Automatisch afwisselen
+      right: Rechts van de tekst
+      left: Links van de tekst
+    help: Op de gsm staat de foto altijd boven de tekst.
+  caption:
+    label: Onderschrift bij de foto (optioneel)
+    type: text

@@ -1,0 +1,30 @@
+title: Disclaimer
+options:
+  changeSlug: false
+  changeStatus: false
+  delete: false
+tabs:
+  content:
+    label: Inhoud
+    icon: text
+    fields:
+      info:
+        label: Opbouw van deze pagina
+        type: info
+        text: Bovenaan staan [Algemene voorwaarden](/panel/pages/algemene-voorwaarde) en [Privacy](/panel/pages/privacy); die pas je op hun eigen pagina aan. Hieronder staat het laatste onderdeel over donaties.
+      accordiontitle:
+        label: Titel onderdeel donaties
+        type: text
+      accordionintro:
+        label: Uitleg onderdeel donaties
+        type: textarea
+      questions:
+        extends: fields/questions
+        label: Uitklapbare onderdelen over donaties
+  meta:
+    label: Zoekmachines
+    icon: search
+    fields:
+      description:
+        label: Beschrijving voor zoekmachines
+        type: textarea

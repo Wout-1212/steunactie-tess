@@ -1,0 +1,5 @@
+# A single photo, shared by all languages.
+type: files
+multiple: false
+uploads: image
+translate: false

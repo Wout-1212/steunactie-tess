@@ -1,0 +1,25 @@
+title: Veelgestelde vragen
+options:
+  changeSlug: false
+  delete: false
+tabs:
+  content:
+    label: Inhoud
+    icon: text
+    fields:
+      text:
+        label: Introductie
+        type: textarea
+      accordiontitle:
+        label: Titel boven de vragen
+        type: text
+        width: 1/2
+      accordionintro:
+        label: Uitleg bij de vragen (optioneel)
+        type: textarea
+        buttons: false
+        width: 1/2
+      questions:
+        extends: fields/questions
+        help: De eerste vraag staat standaard opengeklapt.
+  meta: tabs/menu-seo

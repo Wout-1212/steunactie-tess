@@ -1,0 +1,40 @@
+label: Donaties
+icon: heart
+fields:
+  goal:
+    extends: fields/euro
+    label: Doelbedrag
+    help: Laat leeg zolang er geen bevestigd doelbedrag is. Dan toont de site een gemarkeerde voorbeeldbalk.
+  raised_info:
+    label: Opgehaald
+    type: info
+    text: Vul per bron het opgehaalde bedrag in. De site telt ze op en berekent het percentage automatisch.
+  raised_steunactie:
+    extends: fields/euro
+    label: Externe steunactie (reserve)
+    help: "{{ site.fundraiserStatus('steunactie') }}"
+    width: 1/3
+  raised_gofundme:
+    extends: fields/euro
+    label: GoFundMe (reserve)
+    help: "{{ site.fundraiserStatus('gofundme') }}"
+    width: 1/3
+  raised_other:
+    extends: fields/euro
+    label: Overschrijvingen en andere giften
+    width: 1/3
+  milestones:
+    label: Mijlpalen onder de voortgangsbalk
+    type: structure
+    sortBy: amount asc
+    columns:
+      amount: true
+      label: true
+    fields:
+      amount:
+        extends: fields/euro
+        label: Bedrag
+        required: true
+      label:
+        label: Omschrijving
+        type: text

@@ -11,8 +11,6 @@ return [
     'translations' => [
         'donation.most-chosen' => 'Le plus choisi',
         'footer.transfer' => 'Virement bancaire',
-        'footer.address-placeholder' => '[Adresse à compléter]',
-        'footer.number-placeholder' => '[Numéro d’entreprise/TVA à compléter]',
         'donation.donate' => 'Faire un don',
         'donation.alternatives' => 'Vous préférez une autre façon ?',
         'donation.via' => 'Via {platform}',

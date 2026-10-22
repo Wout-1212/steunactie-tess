@@ -1,16 +1,9 @@
 <?php
 
 return function ($site, $kirby) {
-    // Each source gets its own field so scraping/Mollie can fill them separately later.
-    // Steunactie and GoFundMe are read automatically (plugins/tess-fundraisers); the Panel fields are the fallback.
-    $steunactie = $site->fundraiserStats('steunactie');
-    $gofundme = $site->fundraiserStats('gofundme');
-    $raised = ($steunactie['raised'] ?? $site->raised_steunactie()->toFloat())
-        + ($gofundme['raised'] ?? $site->raised_gofundme()->toFloat())
-        + $site->raised_other()->toFloat();
-    $donations = isset($steunactie['donations']) || isset($gofundme['donations'])
-        ? ($steunactie['donations'] ?? 0) + ($gofundme['donations'] ?? 0)
-        : null;
+    // Totals come from plugins/tess-fundraisers, so the Panel overview shows the same numbers.
+    $raised = $site->raisedTotal();
+    $donations = $site->onlineDonations();
     $goal = $site->goal()->toFloat();
     $hasGoal = $goal > 0;
 

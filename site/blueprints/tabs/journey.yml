@@ -1,0 +1,64 @@
+# Treatment progress, kept in one place: the homepage and the treatment plan page both read from here.
+label: Traject
+icon: flag
+fields:
+  journey_steps:
+    label: Stappen van het behandeltraject
+    type: structure
+    help: Verschijnen als tijdlijn op de homepage en op de pagina Ziekte & behandeling. Zet de stap waar Tess nu staat op Nu bezig; de tijdlijn opent bij die stap.
+    columns:
+      heading: true
+      status: true
+    fields:
+      heading:
+        label: Stap
+        type: text
+        required: true
+      status:
+        label: Status
+        type: select
+        options:
+          done: Afgerond
+          current: Nu bezig
+          upcoming: Nog te komen
+      text:
+        label: Toelichting (op de pagina Ziekte & behandeling)
+        type: textarea
+  medical_line:
+    type: line
+  medical_steps:
+    label: Medische weegschaal
+    type: structure
+    help: Alleen bevestigde onderzoeken en behandelingen invoeren. Ze bepalen hoe ver de weegschaal op de homepage naar Al gedaan overhelt; dit staat los van de opgehaalde donaties.
+    columns:
+      heading: true
+      status: true
+      weight: true
+    fields:
+      heading:
+        label: Onderzoek of behandeling
+        type: text
+        required: true
+      status:
+        label: Status
+        type: select
+        required: true
+        options:
+          done: Al gedaan
+          planned: Nog te doen
+      weight:
+        label: Gewicht op de weegschaal
+        type: number
+        default: 1
+        min: 1
+        step: 1
+        help: Gelijke gewichten tellen stappen gelijk mee; dit is geen geldbedrag en geen genezingspercentage.
+        translate: false
+  medical_done_amount:
+    extends: fields/euro
+    label: Bevestigd bedrag bij Al gedaan (optioneel)
+    width: 1/2
+  medical_planned_amount:
+    extends: fields/euro
+    label: Bevestigd bedrag bij Nog te doen (optioneel)
+    width: 1/2

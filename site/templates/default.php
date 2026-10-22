@@ -1,6 +1,7 @@
 <?php
 $sections = $page->sections()->toStructure();
-$steps = $page->steps()->toStructure();
+// The journey steps are managed in the Panel (Traject tab) and only shown on the treatment plan page.
+$steps = $page->intendedTemplate()->name() === 'treatment' ? $site->journey_steps()->toStructure() : new Kirby\Cms\Structure();
 $questions = $page->questions()->toStructure();
 $imageCount = 0;
 $sectionHeading = 'mb-4 text-[22px] md:text-[clamp(24px,2.6vw,30px)]';

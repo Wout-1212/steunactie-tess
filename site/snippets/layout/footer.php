@@ -4,8 +4,6 @@ $support = array_filter([
     t('footer.fundraiser') => $site->fundraiser()->value(),
     'GoFundMe' => $site->gofundme()->value(),
 ]);
-// Display only the enterprise number from the existing combined details field.
-preg_match('/\b(?:BE\s*)?\d{4}[.\s]?\d{3}[.\s]?\d{3}\b/iu', $site->organisationdetails()->value(), $organisationNumber);
 $footerEmail = $site->contactemail()->or('contact@samenvoortess.be')->value();
 $isQuietPage = !$page->isHomePage() && $page->intendedTemplate()->name() !== 'disclaimer';
 $link = 'text-ink underline-offset-3 hover:text-pink hover:underline';

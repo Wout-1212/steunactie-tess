@@ -1,0 +1,14 @@
+type: pages
+headline: Updates
+parent: site.find("updates")
+template: update
+status: all
+sortBy: date desc
+layout: cards
+size: small
+empty: Nog geen updates. Klik op "Toevoegen" om de eerste te maken.
+info: "{{ page.date.toDate('d-m-Y') }}"
+image:
+  query: page.thumbnail
+  cover: true
+  ratio: 4/3
