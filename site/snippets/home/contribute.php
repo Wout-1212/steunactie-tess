@@ -11,7 +11,7 @@
                     <button class="<?= $cardClass ?>" data-share data-share-title="<?= $site->title()->esc() ?>"
                         data-share-url="<?= $page->url() ?>" aria-haspopup="dialog">
                 <?php else: ?>
-                    <a class="<?= $cardClass ?><?= $action === 'donate' ? ' donation-light' : '' ?>" href="<?= $action === 'donate' ? '#help-tess' : '#contact' ?>">
+                    <a class="<?= $cardClass ?>" href="<?= $action === 'donate' ? '#help-tess' : '#contact' ?>">
                 <?php endif ?>
                     <span class="col-start-1 row-[1/3] m-0 flex size-[34px] items-center justify-center rounded-[5px] bg-blush text-pink motion-safe:transition-[transform] motion-safe:duration-250 motion-safe:group-hover:[transform:scale(1.08)]"
                         aria-hidden="true"><?php snippet('components/icon', ['name' => $icon]) ?></span>

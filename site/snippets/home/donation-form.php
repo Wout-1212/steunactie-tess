@@ -9,7 +9,7 @@
         <label class="mb-[7px] block text-left text-[13px] text-pink" for="amount"><?= t('donation.other-amount') ?></label>
         <input class="mb-[18px] block min-h-[46px] w-full rounded-[5px] border border-blush bg-white px-[14px] py-[10px] text-ink" id="amount" type="number" min="1" step="1" inputmode="numeric" placeholder="<?= t('donation.amount') ?>">
         <?php if ($site->fundraiser()->isNotEmpty()): ?>
-            <?php snippet('components/button', ['donation' => true, 'href' => $site->fundraiser()->value(), 'text' => t('donation.fundraiser'), 'size' => 'block']) ?>
+            <?php snippet('components/button', ['href' => $site->fundraiser()->value(), 'text' => t('donation.fundraiser'), 'size' => 'block']) ?>
             <p class="mt-[14px] mb-[26px] text-[11px]"><?= t('donation.fundraiser-note') ?></p>
         <?php endif ?>
         <p class="mt-7 mb-[18px] text-[13px]"><?= t('donation.alternatives') ?></p>

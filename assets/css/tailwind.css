@@ -180,3 +180,10 @@
 [data-step-track-scroller][data-more="end"] { mask-image: linear-gradient(to right, #000 calc(100% - 56px), transparent); }
 [data-step-track-scroller][data-more="start"] { mask-image: linear-gradient(to left, #000 calc(100% - 56px), transparent); }
 [data-step-track-scroller][data-more="both"] { mask-image: linear-gradient(to right, transparent, #000 56px, #000 calc(100% - 56px), transparent); }
+
+/* The star is fully visible; only its curved trail is clipped to the button. */
+@utility donation-light { position: relative; }
+.donation-orbit { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: inherit; overflow: visible; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) {
+  .donation-orbit { display: none; }
+}
