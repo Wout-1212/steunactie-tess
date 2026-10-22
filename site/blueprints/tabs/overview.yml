@@ -16,7 +16,7 @@ columns:
       pages:
         type: pages
         headline: Pagina's
-        query: site.find('home', 'haar-verhaal', 'behandelingsplan', 'faq')
+        query: site.find('home', 'haar-verhaal', 'behandelingsplan', 'faq', 'doneren', 'bedankt')
         status: all
         create: false
         sortable: false

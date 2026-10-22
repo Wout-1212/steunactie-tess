@@ -4,7 +4,34 @@ De PDF-wireframes zijn vertaald naar PHP-templates met responsive Tailwind CSS e
 
 ## Lokaal bekijken
 
-Gebruik je bestaande Herd-site, of start vanuit de projectmap `composer start` (PHP en Composer moeten beschikbaar zijn). Open daarna de lokale site en `/panel`.
+Gebruik je bestaande Herd-site, of start vanuit de projectmap `composer start` (PHP en Composer moeten beschikbaar zijn). Open daarna de lokale site en `/panel`. Na een verse `git clone` eerst `composer install` uitvoeren (zie [Composer-pakketten](#composer-pakketten-kirby-en-vendor)).
+
+## Composer-pakketten (kirby en vendor)
+
+De mappen `kirby/` en `vendor/` staan **niet** in Git (zie `.gitignore`). Composer installeert ze:
+
+- `kirby/`: Kirby zelf (pakket `getkirby/cms`, via `getkirby/composer-installer` in deze map gezet);
+- `vendor/`: Kirby's afhankelijkheden (onder meer PHPMailer voor de mails), de Mollie-SDK voor online donaties en de autoloader.
+
+Welke versies precies, staat vast in `composer.lock`; dat bestand staat wél in Git, zodat iedereen exact dezelfde versies krijgt (nu Kirby 5.6.1).
+
+Na elke `git clone` of `git pull` waarin `composer.json` of `composer.lock` veranderd is, en bij elke deploy:
+
+```sh
+composer install
+```
+
+Op de server zonder ontwikkelpakketten en met een geoptimaliseerde autoloader:
+
+```sh
+composer install --no-dev --optimize-autoloader
+```
+
+**Let op:** zonder `kirby/` en `vendor/` werkt de site helemaal niet. Kan de server geen Composer uitvoeren (bijvoorbeeld bij een deploy via FTP), voer dan `composer install --no-dev --optimize-autoloader` lokaal uit en upload beide mappen mee. Wil je ze later toch weer in Git, haal dan de regels `/kirby` en `/vendor` uit `.gitignore` en commit de mappen opnieuw.
+
+Een nieuw pakket toevoegen gaat met `composer require naam/pakket`. Commit daarna `composer.json` en `composer.lock`, niet `kirby/` of `vendor/`.
+
+Kirby bijwerken gaat ook via Composer, bijvoorbeeld `composer update getkirby/cms` (blijft binnen de versie in `composer.json`, nu `^5.2`). Test daarna lokaal, commit `composer.lock` en voer op de server opnieuw `composer install` uit. Pas nooit bestanden in `kirby/` zelf aan: die worden bij elke installatie overschreven.
 
 ## Inhoud aanpassen
 
@@ -44,6 +71,7 @@ In Brevo moet het domein `samenvoortess.be` geauthenticeerd zijn (SPF/DKIM) en `
 
 Deze stappen gebeuren niet automatisch bij een deploy en moeten op de server zelf gebeuren:
 
+- [ ] **Composer-pakketten installeren.** `kirby/` en `vendor/` staan niet in Git: voer op de server bij elke deploy `composer install --no-dev --optimize-autoloader` uit, of upload de lokaal geïnstalleerde mappen `kirby/` en `vendor/` mee (zie [Composer-pakketten](#composer-pakketten-kirby-en-vendor)). Zonder deze mappen werkt de site niet.
 - [ ] **Nieuw configbestand voor de server aanmaken.** Kopieer `site/config/config.host.example.php` naar `site/config/config.samenvoortess.be.php` op de server en vul de Brevo SMTP-login en SMTP-key in. Wordt de site ook via www bereikt, maak dan dezelfde kopie als `config.www.samenvoortess.be.php`. Dit bestand staat bewust niet in Git en moet dus met de hand geüpload worden. Zonder dit bestand verstuurt het contactformulier geen mail.
 - [ ] Het lokale bestand `config.theagency2627-steunactie-tess.test.php` (Mailpit) **niet** naar de server kopiëren.
 - [ ] In Brevo het domein `samenvoortess.be` authenticeren (SPF/DKIM-records bij de domeinbeheerder) en `contact@samenvoortess.be` als afzender toevoegen.

@@ -23,6 +23,10 @@ fields:
     extends: fields/euro
     label: Overschrijvingen en andere giften
     width: 1/3
+  raised_mollie:
+    label: Online via de site
+    type: info
+    text: "{{ site.mollieStatus }}"
   milestones:
     label: Mijlpalen onder de voortgangsbalk
     type: structure

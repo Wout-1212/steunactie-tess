@@ -113,20 +113,22 @@ Kirby::plugin('tess/fundraisers', [
             return $current ?: $cache->get($key . '-last');
         },
 
-        // Total raised over all sources. Each source has its own field so scraping/Mollie can fill them separately;
-        // Steunactie and GoFundMe are read automatically and the Panel fields are only the fallback.
+        // Total raised over all sources. Steunactie and GoFundMe are read automatically (the Panel fields are
+        // only the fallback), donations through the site come from plugins/tess-donations.
         'raisedTotal' => function (): float {
             return ($this->fundraiserStats('steunactie')['raised'] ?? $this->raised_steunactie()->toFloat())
                 + ($this->fundraiserStats('gofundme')['raised'] ?? $this->raised_gofundme()->toFloat())
-                + $this->raised_other()->toFloat();
+                + $this->raised_other()->toFloat()
+                + $this->mollieTotals()['raised'];
         },
 
-        // Number of online donations on the external platforms, or null when neither platform reports it.
+        // Number of online donations (external platforms + the site), or null when no source reports it.
         'onlineDonations' => function (): int|null {
             $steunactie = $this->fundraiserStats('steunactie');
             $gofundme = $this->fundraiserStats('gofundme');
-            return isset($steunactie['donations']) || isset($gofundme['donations'])
-                ? ($steunactie['donations'] ?? 0) + ($gofundme['donations'] ?? 0)
+            $site = $this->mollieTotals()['donations'];
+            return isset($steunactie['donations']) || isset($gofundme['donations']) || $site > 0
+                ? ($steunactie['donations'] ?? 0) + ($gofundme['donations'] ?? 0) + $site
                 : null;
         },
 

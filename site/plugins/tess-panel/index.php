@@ -27,8 +27,18 @@ Kirby::plugin('tess/panel', [
                 $reports[] = [
                     'label' => 'Online donaties',
                     'value' => number_format($donations, 0, ',', '.'),
-                    'info' => 'Steunactie en GoFundMe samen',
+                    'info' => $this->mollieEnabled() ? 'Steunactie, GoFundMe en de site samen' : 'Steunactie en GoFundMe samen',
                     'link' => $panel . '/site?tab=donations',
+                ];
+            }
+
+            if ($held = $this->heldMessages()) {
+                $reports[] = [
+                    'label' => 'Berichten te controleren',
+                    'value' => (string) $held,
+                    'info' => 'Met een link, e-mailadres of telefoonnummer',
+                    'theme' => 'notice',
+                    'link' => $panel . '/donations?filter=held',
                 ];
             }
 

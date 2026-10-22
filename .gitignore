@@ -3,6 +3,8 @@
 
 Icon
 .DS_Store
+Thumbs.db
+desktop.ini
 
 # Temporary files
 # ---------------
@@ -55,10 +57,23 @@ Icon
 /site/config/config.*.php
 !/site/config/config.host.example.php
 
+# Session backups
+# ---------------
 
+/site/sessions-backup
+
+# Node packages
+# ---------------
 
 /node_modules
 
+# Donations database (donor data, never in Git)
+# ---------------
 
+/site/storage
 
-/site/sessions-backup
+# Composer packages: Kirby and its dependencies (installed with `composer install`, see IMPLEMENTATIE.md)
+# ---------------
+
+/vendor
+/kirby

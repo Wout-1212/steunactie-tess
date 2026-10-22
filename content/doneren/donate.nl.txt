@@ -1,0 +1,13 @@
+Title: Doneren
+
+----
+
+Heading: Jouw donatie voor Tess
+
+----
+
+Text: Nog één stap. Vul je gegevens in en laat eventueel een bericht achter voor Tess. Daarna betaal je veilig via Mollie.
+
+----
+
+Uuid: tessdoneren26pay

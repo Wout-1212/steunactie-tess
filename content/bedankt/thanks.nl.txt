@@ -1,0 +1,29 @@
+Title: Bedankt
+
+----
+
+Paid-title: Bedankt, {name}!
+
+----
+
+Paid-text: Je donatie van {amount} is goed ontvangen. Je krijgt zo meteen een bevestiging per mail. Samen brengen we Tess dichter bij haar behandeling en herstel.
+
+----
+
+Pending-title: Je betaling wordt verwerkt
+
+----
+
+Pending-text: We hebben nog geen bevestiging van je betaling ontvangen. Dat kan enkele minuten duren. Zodra ze binnen is, krijg je een bevestiging per mail.
+
+----
+
+Failed-title: Je betaling is niet gelukt
+
+----
+
+Failed-text: Er is niets afgeschreven. Probeer het gerust opnieuw, of kies een andere manier om Tess te steunen.
+
+----
+
+Uuid: tessbedankt26don

@@ -12,6 +12,7 @@ $logoClass = 'h-auto w-auto max-h-[44px] max-w-[112px] md:max-h-[54px] md:max-w-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= $page->title()->esc() ?> | <?= $site->title()->esc() ?></title>
     <meta name="description" content="<?= $page->description()->or($site->description())->esc() ?>">
+    <?php if ($noindex ?? false): ?><meta name="robots" content="noindex"><?php endif ?>
     <?php /* Version the assets by modification time so browsers never keep a stale copy after a rebuild. */ ?>
     <?= css(url('assets/css/site.css') . '?v=' . filemtime($kirby->root('index') . '/assets/css/site.css')) ?><?= js(url('assets/js/site.js') . '?v=' . filemtime($kirby->root('index') . '/assets/js/site.js'), ['defer' => true]) ?>
 </head>
@@ -19,6 +20,9 @@ $logoClass = 'h-auto w-auto max-h-[44px] max-w-[112px] md:max-h-[54px] md:max-w-
 <body class="min-h-screen font-sans text-[15px] leading-[1.65] text-ink <?= $isQuietPage ? 'bg-background-middle' : 'bg-background-bottom' ?>">
     <a class="fixed -top-[100px] left-5 z-50 bg-white p-3 text-pink-dark focus:top-[10px]"
         href="#main"><?= t('skip-link') ?></a>
+    <?php if ($site->mollieTestMode()): ?>
+        <p class="m-0 bg-[#FFD84D] px-4 py-1.5 text-center text-[12px] font-bold text-ink" role="note"><?= t('donation.test-mode') ?></p>
+    <?php endif ?>
     <header data-site-header
         class="sticky top-0 z-40 border-b border-transparent bg-blush text-ink transition-[background-color,border-color] duration-160 data-[scrolled=true]:border-b-[#C43B7514] motion-reduce:transition-none [--nav-accent:var(--color-pink)]">
         <div

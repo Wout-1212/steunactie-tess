@@ -1,0 +1,17 @@
+title: Donatiepagina
+options:
+  changeSlug: false
+  changeStatus: false
+  delete: false
+fields:
+  info:
+    label: Waar verschijnt dit?
+    type: info
+    text: Bezoekers kiezen een bedrag in het donatieblok op de homepage en vullen hier daarna hun gegevens en een optioneel bericht in. Zonder Mollie-sleutel stuurt deze pagina door naar het donatieblok.
+  heading:
+    label: Paginakop
+    type: text
+  text:
+    label: Uitleg boven het formulier
+    type: textarea
+    buttons: false

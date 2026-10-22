@@ -140,6 +140,15 @@ tabs:
           '25': '€ 25'
           '50': '€ 50'
           '100': '€ 100'
+      messages_title:
+        label: Titel donatiemuur
+        type: text
+        placeholder: Recente donaties
+        help: De muur staat naast het donatieblok zodra online doneren via Mollie aanstaat, met de laatste 10 donaties en een knop naar alle donaties. Berichten beheer je bij Donaties in het menu links.
+      messages_intro:
+        label: Inleiding donatiemuur (optioneel)
+        type: textarea
+        buttons: false
   contact:
     label: Updates & contact
     icon: email

@@ -1,0 +1,41 @@
+title: Bedankpagina
+options:
+  changeSlug: false
+  changeStatus: false
+  delete: false
+fields:
+  info:
+    label: Waar verschijnt dit?
+    type: info
+    text: Na een online donatie komt de donateur op deze pagina terug. Welke tekst verschijnt, hangt af van de betaalstatus. In titels en teksten kun je {name} en {amount} gebruiken.
+  paid_headline:
+    label: Betaling gelukt
+    type: headline
+  paid_title:
+    label: Titel
+    type: text
+  paid_text:
+    label: Tekst
+    type: textarea
+    buttons: false
+  pending_headline:
+    label: Betaling nog in verwerking
+    type: headline
+  pending_title:
+    label: Titel
+    type: text
+  pending_text:
+    label: Tekst
+    type: textarea
+    buttons: false
+    help: Ook voor wie de pagina zonder geldige link opent.
+  failed_headline:
+    label: Betaling mislukt of geannuleerd
+    type: headline
+  failed_title:
+    label: Titel
+    type: text
+  failed_text:
+    label: Tekst
+    type: textarea
+    buttons: false

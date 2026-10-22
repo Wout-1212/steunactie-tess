@@ -19,19 +19,42 @@ function tessContactRespond(Language $language, string $status, int|null $code =
     return Response::redirect($language->url() . '?contact=' . $status . '#contact', 303);
 }
 
-// Counts accepted messages per IP within a fixed window; returns false once the limit is reached.
-function tessContactAllow(): bool
-{
-    $cache = kirby()->cache('tess.contact');
-    $key = hash('sha256', __DIR__ . kirby()->visitor()->ip());
-    $entry = $cache->get($key) ?? ['count' => 0, 'until' => time() + option('tess.contact.window') * 60];
+// Shared by the contact and donation forms. $plugin is the plugin name ('contact', 'donations'):
+// its cache and its limit, window and minSeconds options are used.
 
-    if ($entry['count'] >= option('tess.contact.limit')) {
+// Counts accepted submissions per IP within a fixed window; returns false once the limit is reached.
+function tessAllow(string $plugin): bool
+{
+    $cache = kirby()->cache('tess.' . $plugin);
+    $key = hash('sha256', __DIR__ . kirby()->visitor()->ip());
+    $entry = $cache->get($key) ?? ['count' => 0, 'until' => time() + option('tess.' . $plugin . '.window') * 60];
+
+    if ($entry['count'] >= option('tess.' . $plugin . '.limit')) {
         return false;
     }
     $entry['count']++;
     $cache->set($key, $entry, (int) ceil(($entry['until'] - time()) / 60));
     return true;
+}
+
+// A form posted from another site (a browser always sends Origin with a cross-site POST).
+function tessForeignOrigin(): bool
+{
+    $origin = kirby()->request()->header('Origin');
+    return $origin !== null && parse_url($origin, PHP_URL_HOST) !== parse_url(kirby()->url(), PHP_URL_HOST);
+}
+
+// Honeypot filled in, or submitted faster than a person can.
+function tessLooksLikeBot(string $plugin): bool
+{
+    return get('website') !== null && get('website') !== ''
+        || time() - (int) get('started') < option('tess.' . $plugin . '.minSeconds');
+}
+
+// A posted text field; arrays (name[]=…) and invalid UTF-8 count as empty, so they fail validation.
+function tessField(string $key): string
+{
+    return is_string($value = get($key)) && mb_check_encoding($value, 'UTF-8') ? $value : '';
 }
 
 Kirby::plugin('tess/contact', [
@@ -52,26 +75,21 @@ Kirby::plugin('tess/contact', [
             'language' => '*',
             'action' => function (Language $language) {
                 $kirby = kirby();
-                $request = $kirby->request();
 
-                $origin = $request->header('Origin');
-                if ($origin !== null && parse_url($origin, PHP_URL_HOST) !== parse_url($kirby->url(), PHP_URL_HOST)) {
+                if (tessForeignOrigin()) {
                     return tessContactRespond($language, 'error', 403);
                 }
 
                 // Honeypot or too fast: pretend it worked so bots don't learn anything.
-                if (get('website') !== null && get('website') !== ''
-                    || time() - (int) get('started') < option('tess.contact.minSeconds')) {
+                if (tessLooksLikeBot('contact')) {
                     return tessContactRespond($language, 'success');
                 }
 
-                // Arrays (name[]=…) and invalid UTF-8 count as empty, so they fail validation below.
-                $field = fn (string $key) => is_string($value = get($key)) && mb_check_encoding($value, 'UTF-8') ? $value : '';
                 // One line without control characters, since the name also ends up in the subject and Reply-To.
-                $name = Str::trim(preg_replace('/[\s\p{Cc}]+/u', ' ', $field('name')));
-                $email = Str::trim($field('email'));
+                $name = Str::trim(preg_replace('/[\s\p{Cc}]+/u', ' ', tessField('name')));
+                $email = Str::trim(tessField('email'));
                 // Keep line breaks and tabs, drop other control characters.
-                $message = Str::trim(preg_replace('/[^\P{Cc}\n\t]/u', '', str_replace("\r\n", "\n", $field('message'))));
+                $message = Str::trim(preg_replace('/[^\P{Cc}\n\t]/u', '', str_replace("\r\n", "\n", tessField('message'))));
                 $to = (string) $kirby->site()->contactemail()->value();
 
                 if ($name === '' || Str::length($name) > 120
@@ -81,7 +99,7 @@ Kirby::plugin('tess/contact', [
                     return tessContactRespond($language, 'invalid');
                 }
 
-                if (!tessContactAllow()) {
+                if (!tessAllow('contact')) {
                     return tessContactRespond($language, 'rate-limited');
                 }
 

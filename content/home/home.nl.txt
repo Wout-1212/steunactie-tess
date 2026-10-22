@@ -46,6 +46,14 @@ Featured-amount: 50
 
 ----
 
+Messages-title: Recente donaties
+
+----
+
+Messages-intro: Bedankt aan iedereen die Tess steunt.
+
+----
+
 Contribute-title: Manieren om bij te dragen
 
 ----
