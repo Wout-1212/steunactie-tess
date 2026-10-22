@@ -2,7 +2,7 @@
 // Home and disclaimer use the full pink-yellow-aqua gradient; the other pages only pink and yellow.
 $isQuietPage = !$page->isHomePage() && $page->intendedTemplate()->name() !== 'disclaimer';
 $navLink = 'hover:text-pink md:motion-safe:link-underline';
-$logoClass = 'h-auto w-auto max-h-[44px] max-w-[112px] [filter:drop-shadow(0_0_.7px_#27222A)_drop-shadow(0_0_.7px_#27222A)] md:max-h-[54px] md:max-w-[110px] 2xl:max-w-[140px]';
+$logoClass = 'h-auto w-auto max-h-[44px] max-w-[112px] md:max-h-[54px] md:max-w-[110px] 2xl:max-w-[140px]';
 ?>
 <!doctype html>
 <html lang="<?= $kirby->languageCode() ?>">
