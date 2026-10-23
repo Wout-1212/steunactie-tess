@@ -32,6 +32,7 @@ return [
         'journey.upcoming' => 'Nog te komen',
         'steps.prev' => 'Vorige stappen',
         'steps.next' => 'Volgende stappen',
+        'steps.region' => 'Stappen: {title}',
 
         'skip-link' => 'Ga naar inhoud',
 
@@ -47,8 +48,10 @@ return [
         'footer.support' => 'Steun Tess',
         'footer.fundraiser' => 'Steunactie',
         'footer.about' => 'Over de vzw',
+        'footer.company-number' => 'Ondernemingsnummer',
         'footer.credit' => 'Website door Ceyda & Wout, KdG',
         'footer.disclaimer' => 'Disclaimer',
+        'footer.accessibility' => 'Toegankelijkheid',
         'footer.instagram' => 'Instagram',
         'footer.instagram-tess' => 'Tess op Instagram',
 
@@ -88,6 +91,12 @@ return [
         'donation.mollie-note' => 'Je betaalt veilig via Mollie. Daarna kom je terug op deze website.',
         'donation.sending' => 'Je wordt doorgestuurd naar de betaalpagina…',
         'donation.invalid' => 'Controleer het bedrag, je naam en je e-mailadres en probeer het opnieuw.',
+        'donation.amount-help' => 'Hele euro, van € {min} tot € {max}.',
+        'donation.errors-title' => 'Controleer deze velden:',
+        'donation.error-amount' => 'Kies een bedrag in hele euro, van € {min} tot € {max}.',
+        'donation.error-name' => 'Vul je naam in (maximaal 120 tekens).',
+        'donation.error-email' => 'Vul een geldig e-mailadres in, bijvoorbeeld naam@voorbeeld.be.',
+        'donation.error-message' => 'Je bericht mag maximaal {max} tekens lang zijn.',
         'donation.rate-limited' => 'Je hebt al enkele keren geprobeerd te doneren. Probeer het later opnieuw.',
         'donation.error' => 'De betaalpagina kon niet worden geopend. Probeer het later opnieuw of kies een andere manier hieronder.',
         'donation.anonymous' => 'Anoniem',
@@ -121,6 +130,7 @@ return [
         'donation.mail-footer' => 'Je ontvangt deze mail omdat je doneerde via',
 
         'contact.form' => 'Contact met Samen voor Tess',
+        'contact.required' => 'Alle velden zijn verplicht.',
         'contact.name' => 'Naam',
         'contact.email' => 'E-mailadres',
         'contact.message' => 'Vraag / bericht',

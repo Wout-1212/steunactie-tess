@@ -23,7 +23,7 @@ $currency->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, 0);
 <section class="py-9 md:py-16" aria-labelledby="medical-title">
     <div class="mx-auto w-[calc(100%-40px)] max-w-[1120px] md:w-[calc(100%-64px)]">
         <?php snippet('components/heading', ['text' => $page->medical_title()->or(t('treatment.title')), 'id' => 'medical-title']) ?>
-        <p class="max-w-[68ch] max-md:text-[14px]"><?= $page->medical_intro()->or(t('treatment.intro'))->esc() ?></p>
+        <p class="max-w-[68ch]"><?= $page->medical_intro()->or(t('treatment.intro'))->esc() ?></p>
         <svg class="mx-auto my-[18px] block h-auto w-[min(100%,840px)] overflow-visible md:mt-[26px] md:mb-5" viewBox="0 0 800 400" role="img" aria-labelledby="medical-scale-title medical-scale-description">
             <title id="medical-scale-title"><?= t('treatment.scale-label') ?></title>
             <desc id="medical-scale-description"><?= $hasMedicalData ? tt('treatment.scale-description', ['done' => $done->count(), 'planned' => $planned->count()]) : t('treatment.unconfirmed') ?></desc>

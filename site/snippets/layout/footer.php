@@ -21,7 +21,7 @@ $fade = 'motion-safe:transition-[color,background-color] motion-safe:duration-20
                 </div>
             </div>
             <nav aria-label="<?= t('footer.menu') ?>">
-                <h2 class="mb-3 text-[15px]"><?= t('footer.menu') ?></h2>
+                <h2 class="mb-3 text-[19px]"><?= t('footer.menu') ?></h2>
                 <ul class="mx-auto grid w-fit max-w-full grid-cols-2 items-center gap-x-6 gap-y-2 text-center md:mx-0 md:w-auto md:max-w-none md:items-stretch md:gap-x-8 md:text-left">
                     <?php foreach (['home', 'haar-verhaal', 'behandelingsplan'] as $slug): ?>
                         <?php if ($item = page($slug)): ?><li class="text-[13px]"><a class="<?= $link ?> motion-safe:link-underline" href="<?= $item->url() ?>"><?= $item->footerlabel()->or($item->navtitle())->or($item->title())->esc() ?></a></li><?php endif ?>
@@ -32,17 +32,17 @@ $fade = 'motion-safe:transition-[color,background-color] motion-safe:duration-20
                 </ul>
             </nav>
             <div>
-                <h2 class="mb-3 text-[15px]"><?= t('footer.support') ?></h2>
+                <h2 class="mb-3 text-[19px]"><?= t('footer.support') ?></h2>
                 <ul class="grid gap-2">
                     <?php foreach ($support as $label => $url): ?><li class="text-[13px]"><a class="underline <?= $link ?> <?= $fade ?>" href="<?= esc($url, 'attr') ?>"><?= esc($label) ?></a></li><?php endforeach ?>
                     <?php if ($site->bankaccount()->isNotEmpty()): ?><li class="text-[13px]"><a class="underline <?= $link ?> <?= $fade ?>" href="<?= page('home')->url() ?>#bank-transfer"><?= t('footer.transfer') ?></a></li><?php endif ?>
                 </ul>
             </div>
             <div>
-                <h2 class="mb-3 text-[15px]"><?= t('footer.about') ?></h2>
+                <h2 class="mb-3 text-[19px]"><?= t('footer.about') ?></h2>
                 <address class="text-[13px] leading-[1.9] not-italic wrap-anywhere">
                     <?= $site->organisation()->or($site->title())->esc() ?><br>
-                    <?= $site->organisationnumber()->isNotEmpty() ? 'Ondernemingsnummer: ' . $site->organisationnumber()->esc() : '' ?>
+                    <?= $site->organisationnumber()->isNotEmpty() ? t('footer.company-number') . ': ' . $site->organisationnumber()->esc() : '' ?>
                     <?= $site->organisationaddress()->isNotEmpty() ? '<br>' . $site->organisationaddress()->esc() : '' ?>
                     <?php if ($site->bankaccount()->isNotEmpty()): ?><br>IBAN <?= $site->bankaccount()->esc() ?><?php endif ?>
                     <br><a class="<?= $link ?> <?= $fade ?>" href="mailto:<?= esc($footerEmail, 'attr') ?>"><?= esc($footerEmail) ?></a>
@@ -51,7 +51,7 @@ $fade = 'motion-safe:transition-[color,background-color] motion-safe:duration-20
         </div>
         <div class="mt-[30px] flex flex-col items-center justify-between gap-3 border-t border-divider pt-[22px] text-center md:mt-10 md:flex-row md:gap-x-7 md:gap-y-4 md:text-left">
             <p class="m-0 text-[13px]">© <?= date('Y') ?> <?= $site->title()->esc() ?> · <?= t('footer.credit') ?></p>
-            <?php if ($disclaimer = page('disclaimer')): ?><a class="shrink-0 text-[13px] underline <?= $link ?> <?= $fade ?>" href="<?= $disclaimer->url() ?>"><?= t('footer.disclaimer') ?></a><?php endif ?>
+            <?php if ($disclaimer = page('disclaimer')): ?><div class="flex shrink-0 flex-wrap justify-center gap-x-5 gap-y-2"><a class="text-[13px] underline <?= $link ?> <?= $fade ?>" href="<?= $disclaimer->url() ?>"><?= t('footer.disclaimer') ?></a><?php if ($disclaimer->accessibility_text()->isNotEmpty()): ?><a class="text-[13px] underline <?= $link ?> <?= $fade ?>" href="<?= $disclaimer->url() ?>#toegankelijkheid"><?= t('footer.accessibility') ?></a><?php endif ?></div><?php endif ?>
         </div>
     </div>
 </footer>

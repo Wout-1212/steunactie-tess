@@ -10,7 +10,8 @@ $variant ??= 'solid';
 $size ??= 'default';
 $colours = [
     'solid' => 'bg-pink text-white',
-    'outline' => 'bg-transparent text-pink',
+    // White, not transparent: pink on the light pink or blue page background is too faint for small text.
+    'outline' => 'bg-white text-pink',
 ];
 // Each size is a complete set, so no two classes compete for the same property.
 $sizes = [

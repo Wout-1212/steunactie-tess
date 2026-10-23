@@ -27,7 +27,7 @@ Kirby::plugin('tess/typography', [
                 foreach (preg_split('/(\bTess\b)/iu', $node->nodeValue, -1, PREG_SPLIT_DELIM_CAPTURE) as $part) {
                     if (preg_match('/^Tess$/iu', $part)) {
                         $span = $document->createElement('span');
-                        $span->setAttribute('class', 'tess-name font-name text-[1.25em] leading-[.85] font-semibold tracking-normal not-italic');
+                        $span->setAttribute('class', 'tess-name font-name text-[1.25em] leading-[.85] font-bold tracking-normal not-italic');
                         $span->appendChild($document->createTextNode($part));
                         $fragment->appendChild($span);
                     } else {

@@ -35,6 +35,11 @@ RewriteRule ^site/(.*) index.php [L]
 # block direct access to Kirby and the Panel sources
 RewriteRule ^kirby/(.*) index.php [L]
 
+# block Composer packages and development files, in case they are deployed anyway
+# (only the folders in the deploy list of IMPLEMENTATIE.md belong on the server)
+RewriteRule ^(vendor|node_modules|state)/(.*) index.php [L]
+RewriteRule ^[^/]+\.(md|json|lock)$ index.php [L]
+
 # make site links work
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -56,12 +61,43 @@ AddOutputFilterByType DEFLATE application/javascript
 AddOutputFilterByType DEFLATE application/x-javascript
 </IfModule>
 
-# set security headers in all responses
+# no folder listings
+Options -Indexes
+
+# set security headers in all responses, including redirects and error pages
 <IfModule mod_headers.c>
 
 # serve files as plain text if the actual content type is not known
 # (hardens against attacks from malicious file uploads)
 Header set Content-Type "text/plain" "expr=-z %{CONTENT_TYPE}"
-Header set X-Content-Type-Options "nosniff"
+Header always set X-Content-Type-Options "nosniff"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+# SAMEORIGIN, not DENY: the Panel shows page previews in an iframe of the site itself
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Cross-Origin-Opener-Policy "same-origin"
+
+# HTTPS only from now on. Short while testing; on the live site, once HTTPS works on every
+# address, raise it to max-age=31536000. No includeSubDomains or preload (hard to undo).
+<If "%{HTTPS} == 'on'">
+Header always set Strict-Transport-Security "max-age=300"
+</If>
+
+# Content Security Policy, report-only for now: the browser console lists what it would block.
+# Once the console stays clean on the test server, rename the header to Content-Security-Policy
+# and add "frame-ancestors 'self'" (ignored in report-only mode). The Panel needs inline styles,
+# so it gets no CSP. form-action includes Mollie because it also covers the redirect to the checkout.
+<If "%{REQUEST_URI} =~ m#^/(media|assets/css|assets/js)/#">
+# browser cache: Kirby gives every new thumbnail a new address, CSS and JS carry ?v= with their file date
+Header set Cache-Control "public, max-age=31536000, immutable"
+</If>
+<ElseIf "%{REQUEST_URI} =~ m#^/assets/#">
+# fonts and images in assets keep their name when replaced, so only a week
+Header set Cache-Control "public, max-age=604800"
+</ElseIf>
+
+<If "%{REQUEST_URI} !~ m#^/panel#">
+Header always set Content-Security-Policy-Report-Only "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https://www.mollie.com"
+</If>
 
 </IfModule>

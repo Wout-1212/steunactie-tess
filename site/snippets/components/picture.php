@@ -3,10 +3,13 @@
 // $ratio:       aspect-ratio classes (default 4:3).
 // $rounded:     corner radius of the photo (default 8px).
 // $placeholder: 'soft' (pink box) or 'dashed' (transparent box with a dashed border).
-// $portrait:    the hero photo; loads eagerly and uses the large uppercase placeholder label.
+// $portrait:    the hero photo; loads eagerly and first, and uses the large uppercase placeholder label.
+// $sizes:       how wide the photo is shown, so the browser picks the smallest file that is sharp enough
+//               (default: half the page from 681px, the full width below).
 $ratio ??= 'aspect-[4/3]';
 $rounded ??= 'rounded-lg';
 $portrait ??= false;
+$sizes ??= '(min-width: 1120px) 560px, (min-width: 681px) 50vw, 100vw';
 $placeholder ??= $portrait ? 'dashed' : 'soft';
 $placeholderClasses = [
     'soft' => "$rounded border border-line bg-blush text-sm tracking-[.04em] text-pink-dark",
@@ -15,8 +18,9 @@ $placeholderClasses = [
 ];
 ?>
 <?php if ($image = $source->toFile()): ?>
-    <img class="h-auto w-full object-cover <?= $ratio ?> <?= $rounded ?>" src="<?= $image->url() ?>" alt="<?= $image->alt()->or($label)->esc() ?>"
-        width="<?= $image->width() ?>" height="<?= $image->height() ?>" loading="<?= $portrait ? 'eager' : 'lazy' ?>">
+    <img class="h-auto w-full object-cover <?= $ratio ?> <?= $rounded ?>" src="<?= $image->resize(1200)->url() ?>"
+        srcset="<?= $image->srcset([480, 800, 1200, 1600]) ?>" sizes="<?= $sizes ?>" alt="<?= $image->alt()->or($label)->esc() ?>"
+        width="<?= $image->width() ?>" height="<?= $image->height() ?>" <?= $portrait ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"' ?>>
 <?php else: ?>
     <div class="flex h-auto w-full items-center justify-center <?= $ratio ?> <?= $placeholderClasses[$placeholder] ?>" <?= $portrait ? 'data-photo-placeholder role="img" aria-label="' . esc($label, 'attr') . '"' : '' ?>>
         <span><?= esc($label) ?></span></div>

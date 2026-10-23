@@ -30,11 +30,18 @@ function tessDonationStart(Language $language): Response
     $email = Str::trim(tessField('email'));
     $message = tessDonationCleanMessage(tessField('message'));
 
-    if (preg_match('/^\d{1,6}$/', $amount) !== 1
-        || (int) $amount < option('tess.donations.min') || (int) $amount > option('tess.donations.max')
-        || $name === '' || Str::length($name) > 120
-        || !V::email($email) || Str::length($email) > 254
-        || Str::length($message) > option('tess.donations.messageLength')) {
+    $errors = array_keys(array_filter([
+        'amount' => preg_match('/^\d{1,6}$/', $amount) !== 1
+            || (int) $amount < option('tess.donations.min') || (int) $amount > option('tess.donations.max'),
+        'name' => $name === '' || Str::length($name) > 120,
+        'email' => !V::email($email) || Str::length($email) > 254,
+        'message' => Str::length($message) > option('tess.donations.messageLength'),
+    ]));
+    // Show the form again straight away, with what the visitor typed and a message per field.
+    if ($errors !== [] && $page = page('doneren')) {
+        return new Response($page->render(['errors' => $errors]), 'text/html', 422);
+    }
+    if ($errors !== []) {
         return $back('invalid');
     }
 

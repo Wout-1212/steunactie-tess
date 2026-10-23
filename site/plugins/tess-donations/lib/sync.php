@@ -1,6 +1,7 @@
 <?php
 
 use Kirby\Http\Response;
+use Mollie\Api\Exceptions\NotFoundException;
 use Mollie\Api\Resources\Payment;
 
 /**
@@ -28,6 +29,9 @@ function tessDonationWebhook(): Response
         if ($donation && $donation->payment_id === $payment->id) {
             tessDonationSync($donation->reference, $payment);
         }
+    } catch (NotFoundException) {
+        // A payment Mollie doesn't know: made up, or from another account. Handled, nothing to retry.
+        return new Response('', 'text/plain', 200);
     } catch (Throwable $exception) {
         error_log('Donatie: webhook voor ' . $id . ' mislukt: ' . $exception->getMessage());
         return new Response('', 'text/plain', 500);

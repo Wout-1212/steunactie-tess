@@ -1,8 +1,13 @@
 <?php
 
 return [
-    'debug' => true,
+    // Never show error details to visitors. The local host config switches this on.
+    'debug' => false,
     'languages' => true,
+    // Panel login: password plus a code (authenticator app, or by email when none is set up).
+    'auth' => [
+        'methods' => ['password' => ['2fa' => true]],
+    ],
 
     // Brevo SMTP relay. Login and SMTP key live in the host-specific config (see config.host.example.php).
     'email' => [

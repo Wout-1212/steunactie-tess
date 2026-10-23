@@ -65,11 +65,12 @@
 }
 
 @layer base {
-  html { @apply scroll-smooth scroll-pt-[90px] motion-reduce:scroll-auto; }
+  html { @apply scroll-smooth scroll-pt-[calc(var(--header-height,78px)+16px)] motion-reduce:scroll-auto; }
   h1, h2, h3 { @apply mb-4 font-bold leading-[1.2] tracking-[-.025em] text-pink; }
   h1 { @apply text-[clamp(2.3rem,4.8vw,4rem)]; }
   h2 { @apply text-[clamp(1.65rem,3vw,2.15rem)]; }
-  h3 { @apply text-[1.1rem]; }
+  /* At least 18.66px bold counts as large text, so pink passes on every part of the page background. */
+  h3 { @apply text-[1.2rem]; }
   p { @apply mb-4 last:mb-0; }
   em { @apply not-italic; }
   a, button, input, summary { @apply touch-manipulation; }
@@ -82,7 +83,8 @@
   /* Kirby rich text from the Panel: its elements cannot carry classes. */
   .prose { @apply max-w-[70ch]; }
   .prose p { @apply mb-[1.2rem]; }
-  .prose a { @apply text-pink-dark underline motion-safe:transition-[color,background-color] motion-safe:duration-200; }
+  /* Ink with a pink underline: pink text this small is too faint on the light pink and blue page background. */
+  .prose a { @apply text-ink underline decoration-pink decoration-2 underline-offset-2 hover:decoration-[3px] motion-safe:transition-[color,background-color] motion-safe:duration-200; }
   .prose > :first-child { @apply mt-0; }
   .prose h2 { @apply mt-10 text-[1.5rem]; }
   .prose h3 { @apply mt-8; }

@@ -11,6 +11,9 @@ return [
     'translations' => [
         'donation.most-chosen' => 'Le plus choisi',
         'footer.transfer' => 'Virement bancaire',
+        'footer.company-number' => "Numéro d'entreprise",
+        'footer.accessibility' => 'Accessibilité',
+        'contact.required' => 'Tous les champs sont obligatoires.',
         'donation.donate' => 'Faire un don',
         'donation.alternatives' => 'Vous préférez une autre façon ?',
         'donation.via' => 'Via {platform}',
@@ -27,6 +30,12 @@ return [
         'donation.mollie-note' => 'Vous payez en toute sécurité via Mollie. Ensuite, vous revenez sur ce site.',
         'donation.sending' => 'Redirection vers la page de paiement…',
         'donation.invalid' => 'Vérifiez le montant, votre nom et votre adresse e-mail, puis réessayez.',
+        'donation.amount-help' => 'En euros entiers, de {min} € à {max} €.',
+        'donation.errors-title' => 'Vérifiez ces champs :',
+        'donation.error-amount' => 'Choisissez un montant en euros entiers, de {min} € à {max} €.',
+        'donation.error-name' => 'Indiquez votre nom (120 caractères maximum).',
+        'donation.error-email' => 'Indiquez une adresse e-mail valide, par exemple nom@exemple.be.',
+        'donation.error-message' => 'Votre message peut compter {max} caractères maximum.',
         'donation.rate-limited' => 'Vous avez déjà essayé de faire un don plusieurs fois. Réessayez plus tard.',
         'donation.error' => 'La page de paiement n’a pas pu s’ouvrir. Réessayez plus tard ou choisissez une autre façon ci-dessous.',
         'donation.amount' => 'Montant',
@@ -74,6 +83,7 @@ return [
         'journey.upcoming' => 'À venir',
         'steps.prev' => 'Étapes précédentes',
         'steps.next' => 'Étapes suivantes',
+        'steps.region' => 'Étapes : {title}',
 
     ],
 ];

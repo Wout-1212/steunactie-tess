@@ -15,7 +15,8 @@ $home = !empty($homeLayout);
     <?php endif ?>
     <div class="flex flex-1 flex-col <?= $home ? 'p-4' : 'p-5 md:p-6' ?>">
         <time class="<?= $home ? 'text-[12px]' : '' ?>" datetime="<?= $update->date()->toDate('Y-m-d') ?>"><?= $update->date()->toLocalDate() ?></time>
-        <h3 class="<?= $home ? 'mb-[9px] text-[15px] leading-[1.35] text-ink' : '' ?>"><?= $update->title()->esc() ?></h3>
+        <?php /* h3 under a section heading on the homepage, h2 straight under the page title on the updates page. */ ?>
+        <<?= $home ? 'h3' : 'h2' ?> class="<?= $home ? 'mb-[9px] text-[15px] leading-[1.35] text-ink' : 'text-[1.1rem]' ?>"><?= $update->title()->esc() ?></<?= $home ? 'h3' : 'h2' ?>>
         <p class="text-muted <?= $home ? 'mb-[10px] text-[13px] leading-[1.5]' : 'text-base' ?>"><?= $update->summary(140) ?></p>
         <span class="mt-auto pt-3 text-sm font-bold text-pink-dark group-hover:underline"><?= t('updates.read') ?></span>
     </div>

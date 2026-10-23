@@ -28,3 +28,29 @@ Questions: - question: Terugbetaling van donaties
   answer: '[Definitieve informatie voor bedrijven die een bedrag storten]'
 - question: Fiscale informatie en attesten
   answer: '[Definitieve fiscale informatie voor bedrijven en eventuele attesten, indien van toepassing]'
+
+----
+
+Accessibility-title: Toegankelijkheid
+
+----
+
+Accessibility-text:
+
+Samen voor Tess wil dat iedereen deze website kan gebruiken: met een muis of alleen het toetsenbord, met een schermlezer, met vergroting of op een gsm.
+
+### Norm
+
+We streven naar de Web Content Accessibility Guidelines (WCAG) 2.2, niveau AA. We controleren de website met automatische tests en met de hand: met het toetsenbord en met een schermlezer.
+
+### Wat nog niet volledig toegankelijk is
+
+- De website is voorlopig alleen in het Nederlands. Frans en Engels volgen.
+- Elke foto krijgt een beschrijving. Mist er toch een, laat het ons weten.
+- De betaalpagina van Mollie en de pagina's van Steunactie en GoFundMe zijn geen onderdeel van deze website. Op hun toegankelijkheid hebben we geen invloed.
+
+### Een probleem melden
+
+Loop je ergens vast, of kun je iets niet lezen of gebruiken? Mail naar (email: contact@samenvoortess.be). Vermeld de pagina en wat er misloopt. We antwoorden binnen 5 werkdagen en zoeken samen met jou een oplossing.
+
+Laatst bijgewerkt: [datum na de controle op de testserver]

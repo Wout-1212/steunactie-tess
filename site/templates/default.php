@@ -18,7 +18,7 @@ $readingText = 'prose max-w-[68ch] text-[15px] leading-[1.7] md:text-[16px] md:l
         </header>
         <?php if ($page->cover()->isNotEmpty()): ?>
             <div data-no-reveal class="mx-auto mb-9 max-w-[1040px] md:mb-14 motion-safe:animate-fade-up-late">
-                <?php snippet('components/picture', ['source' => $page->cover(), 'label' => $page->title()->value(), 'ratio' => 'aspect-[4/3] md:aspect-[16/9]']) ?>
+                <?php snippet('components/picture', ['source' => $page->cover(), 'label' => $page->title()->value(), 'ratio' => 'aspect-[4/3] md:aspect-[16/9]', 'sizes' => '(min-width: 1104px) 1040px, 100vw']) ?>
             </div>
         <?php endif ?>
 
@@ -44,7 +44,8 @@ $readingText = 'prose max-w-[68ch] text-[15px] leading-[1.7] md:text-[16px] md:l
                         <?php if ($image): ?>
                             <?php /* The photo stays in view while visitors read a long section beside it. */ ?>
                             <figure class="m-0 -order-1 lg:sticky lg:top-[calc(var(--header-height,78px)+24px)]<?= $reversed ? '' : ' lg:order-0' ?>">
-                                <img class="block h-auto max-h-[420px] w-full rounded-lg object-cover md:max-h-[520px] lg:max-h-[78vh]" src="<?= $image->url() ?>" alt="<?= $image->alt()->or($section->heading())->esc('attr') ?>"
+                                <img class="block h-auto max-h-[420px] w-full rounded-lg object-cover md:max-h-[520px] lg:max-h-[78vh]" src="<?= $image->resize(1200)->url() ?>"
+                                    srcset="<?= $image->srcset([480, 800, 1200, 1600]) ?>" sizes="(min-width: 1104px) 460px, (min-width: 800px) 760px, 100vw" alt="<?= $image->alt()->or($section->heading())->esc('attr') ?>"
                                     width="<?= $image->width() ?>" height="<?= $image->height() ?>" loading="lazy">
                                 <?php if ($section->caption()->isNotEmpty()): ?>
                                     <figcaption class="mt-[10px] text-[13px] leading-[1.5] text-[#27222ACC]"><?= $section->caption()->esc() ?></figcaption>

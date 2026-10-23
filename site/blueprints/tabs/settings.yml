@@ -17,6 +17,14 @@ fields:
     uploads: image
     translate: false
     help: Zonder logo hier toont de site het standaardlogo.
+  shareimage:
+    label: Standaard deelafbeelding
+    type: files
+    multiple: false
+    query: site.files
+    uploads: image
+    translate: false
+    help: Het voorbeeld bij delen via WhatsApp, Facebook of Instagram, voor pagina's zonder eigen deelafbeelding. Liefst 1200 × 630 pixels, met logo en foto.
   organisation_headline:
     label: Organisatie (footer)
     type: headline

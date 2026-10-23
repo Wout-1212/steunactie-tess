@@ -14,7 +14,7 @@ $statuses = ['done', 'current', 'upcoming'];
                 aria-label="<?= t('steps.' . $direction) ?>"><?php snippet('components/icon', ['name' => $icon]) ?></button>
         <?php endforeach ?>
     </div>
-    <div data-step-track-scroller role="region" aria-label="<?= esc((string)$label, 'attr') ?>" class="rounded-lg focus-visible:-outline-offset-3 lg:-my-3 lg:snap-x lg:snap-mandatory lg:overflow-x-auto lg:overflow-y-hidden lg:overscroll-x-contain lg:py-3 lg:[scrollbar-width:none] lg:[&::-webkit-scrollbar]:hidden">
+    <div data-step-track-scroller role="region" aria-label="<?= esc(tt('steps.region', ['title' => (string)$label]), 'attr') ?>" class="rounded-lg focus-visible:-outline-offset-3 lg:-my-3 lg:snap-x lg:snap-mandatory lg:overflow-x-auto lg:overflow-y-hidden lg:overscroll-x-contain lg:py-3 lg:[scrollbar-width:none] lg:[&::-webkit-scrollbar]:hidden">
         <ol class="step-track grid gap-3 md:gap-[14px] lg:auto-cols-[minmax(240px,1fr)] lg:grid-flow-col lg:gap-5">
             <?php foreach ($steps as $step): ?>
                 <?php $status = in_array($step->status()->value(), $statuses, true) ? $step->status()->value() : null ?>

@@ -2,7 +2,8 @@
 /** @var \Kirby\Cms\Block $block */
 $image = $block->location() == 'web' ? null : $block->image()->toFile();
 $src = $image ? $image->resize(1200)->url() : $block->src()->value();
-$alt = $block->alt()->or($image?->alt())->esc();
+// The photo is also the link to the lightbox, so it always needs a text: the update title as a last resort.
+$alt = $block->alt()->or($image?->alt())->or($block->parent()->title())->esc();
 // Uploaded photos open in the lightbox, unless the editor set a link.
 $href = $block->link()->isNotEmpty() ? $block->link()->toUrl() : $image?->resize(1600)->url();
 ?>

@@ -11,6 +11,9 @@ return [
     'translations' => [
         'donation.most-chosen' => 'Most chosen',
         'footer.transfer' => 'Bank transfer',
+        'footer.company-number' => 'Company number',
+        'footer.accessibility' => 'Accessibility',
+        'contact.required' => 'All fields are required.',
         'donation.donate' => 'Donate now',
         'donation.alternatives' => 'Prefer another way?',
         'donation.via' => 'Via {platform}',
@@ -27,6 +30,12 @@ return [
         'donation.mollie-note' => 'You pay securely via Mollie. Afterwards you return to this website.',
         'donation.sending' => 'Taking you to the payment page…',
         'donation.invalid' => 'Please check the amount, your name and your email address and try again.',
+        'donation.amount-help' => 'Whole euros, from € {min} to € {max}.',
+        'donation.errors-title' => 'Please check these fields:',
+        'donation.error-amount' => 'Choose an amount in whole euros, from € {min} to € {max}.',
+        'donation.error-name' => 'Enter your name (120 characters at most).',
+        'donation.error-email' => 'Enter a valid email address, for example name@example.com.',
+        'donation.error-message' => 'Your message can be {max} characters at most.',
         'donation.rate-limited' => 'You have already tried to donate several times. Please try again later.',
         'donation.error' => 'The payment page could not be opened. Please try again later or choose another way below.',
         'donation.amount' => 'Amount',
@@ -74,6 +83,7 @@ return [
         'journey.upcoming' => 'Coming up',
         'steps.prev' => 'Previous steps',
         'steps.next' => 'Next steps',
+        'steps.region' => 'Steps: {title}',
 
     ],
 ];

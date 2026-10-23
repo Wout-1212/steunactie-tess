@@ -31,6 +31,12 @@ $legalText = 'prose max-w-none wrap-anywhere';
             <?php if ($page->accordionintro()->isNotEmpty()): ?><div class="<?= $legalText ?>"><?= $page->accordionintro()->kirbytext() ?></div><?php endif ?>
             <?php snippet('disclaimer/legal-questions', ['questions' => $page->questions()->toStructure()]) ?>
         </section>
+        <?php if ($page->accessibility_text()->isNotEmpty()): ?>
+            <section class="<?= $sectionClass ?>" id="toegankelijkheid" aria-labelledby="toegankelijkheid-title">
+                <h2 class="mb-4 text-[23px] md:text-[26px]" id="toegankelijkheid-title"><?= $page->accessibility_title()->or(t('footer.accessibility'))->esc() ?></h2>
+                <div class="<?= $legalText ?>"><?= $page->accessibility_text()->kirbytext() ?></div>
+            </section>
+        <?php endif ?>
     </div>
 </section>
 <?php snippet('layout/cta') ?>

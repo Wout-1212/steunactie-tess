@@ -10,13 +10,13 @@ $steps = $site->journey_steps()->toStructure();
             <p class="max-w-[68ch]"><?= $page->treatment_intro()->esc() ?></p>
         <?php endif ?>
         <?php if ($page->treatment_image()->isNotEmpty()): ?>
-            <div class="mt-6 mb-2 max-w-[760px]"><?php snippet('components/picture', ['source' => $page->treatment_image(), 'label' => t('home.treatment.image'), 'ratio' => 'aspect-[16/9]']) ?></div>
+            <div class="mt-6 mb-2 max-w-[760px]"><?php snippet('components/picture', ['source' => $page->treatment_image(), 'label' => t('home.treatment.image'), 'sizes' => '(min-width: 800px) 760px, 100vw', 'ratio' => 'aspect-[16/9]']) ?></div>
         <?php endif ?>
         <?php if ($steps->isNotEmpty()): ?>
             <?php snippet('components/step-track', ['steps' => $steps, 'label' => $page->treatment_title(), 'class' => 'mt-[22px] md:mt-[30px]']) ?>
         <?php endif ?>
         <?php if ($plan): ?>
-            <a class="mt-[22px] inline-block text-[13px] font-bold text-pink hover:underline motion-safe:transition-[color,background-color] motion-safe:duration-200" href="<?= $plan->url() ?>"><?= t('home.treatment.more') ?></a>
+            <div class="mt-[22px]"><?php snippet('components/button', ['href' => $plan->url(), 'text' => t('home.treatment.more'), 'variant' => 'outline']) ?></div>
         <?php endif ?>
     </div>
 </section>

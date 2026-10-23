@@ -139,6 +139,9 @@ amountInput?.addEventListener("input", () =>
   ),
 );
 
+// After a failed submit, start at the summary of what to fix (it links to each field).
+document.querySelector("[data-error-summary]")?.focus();
+
 // Online donation (only rendered with a Mollie key): message counter, and one submit at a time.
 const donationForm = document.querySelector("[data-donation-form]");
 if (donationForm) {
@@ -516,8 +519,10 @@ if (motionAllowed) {
   }
 
   // Donation buttons get a star that laps their rounded border, trailing light behind it.
-  // SMIL runs each lap natively. JavaScript decides when laps start (at random, or on hover/focus)
-  // and rebuilds the SVG for each new lap or resize, from a random corner in a random direction.
+  // SMIL runs each lap natively. JavaScript decides when laps start (once by itself when the button
+  // is first in view, then only on hover/focus) and rebuilds the SVG for each new lap or resize,
+  // from a random corner in a random direction. Movement that starts by itself stays under five
+  // seconds per button, so it needs no pause button (WCAG 2.2.2).
   {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const make = (name, attrs = {}) => {
@@ -526,7 +531,6 @@ if (motionAllowed) {
       return node;
     };
     const random = (min, max) => min + Math.random() * (max - min);
-    const rest = () => random(9, 16);
     // At most this many stars lap on screen at once, so they never compete for attention.
     const maxLaps = 2;
     // [length, width] per trail layer. Each layer is shorter and wider than the one beneath,
@@ -547,7 +551,8 @@ if (motionAllowed) {
       const svg = make("svg", { class: "donation-orbit", "aria-hidden": "true", focusable: "false" });
       button.append(svg);
       onScreen.observe(svg);
-      const lap = random(6.5, 8.5);
+      // Fade in and out included, a lap stays under five seconds.
+      const lap = random(4, 4.8);
       // The latest lap, timed on this SVG's own clock, which stops while the star is off screen.
       let current = null;
       const running = () => current !== null && svg.getCurrentTime() - current.start < lap;
@@ -612,7 +617,9 @@ if (motionAllowed) {
           trail.append(path);
         });
         const star = make("g");
-        const shape = make("path", { d: starShape, fill: "currentColor", style: `filter:drop-shadow(0 0 ${3 * size}px color-mix(in srgb, currentColor 67%, transparent))` });
+        const shape = make("path", { d: starShape, fill: "currentColor" });
+        // Set through the style property, not a style attribute: the Content Security Policy blocks those.
+        shape.style.filter = `drop-shadow(0 0 ${3 * size}px color-mix(in srgb, currentColor 67%, transparent))`;
         // Twinkle constantly, and turn a quarter in the direction of travel over each lap.
         shape.append(make("animateTransform", { attributeName: "transform", type: "scale", values: `${starSize};${starSize * 0.85};${starSize}`, dur: "0.8s", repeatCount: "indefinite" }));
         shape.append(make("animateTransform", { ...timing, attributeName: "transform", type: "rotate", from: 0, to: clockwise ? 90 : -90, additive: "sum" }));
@@ -626,6 +633,7 @@ if (motionAllowed) {
         draw();
       };
       let timer;
+      // The one lap that starts by itself.
       const schedule = (seconds) => {
         clearTimeout(timer);
         timer = setTimeout(() => {
@@ -634,14 +642,13 @@ if (motionAllowed) {
             return schedule(random(1, 3));
           }
           startLap();
-          schedule(lap + rest());
         }, seconds * 1000);
       };
-      // Hovering or focusing a button sends its star round straight away.
+      // Hovering or focusing a button sends its star round straight away (instead of the automatic lap).
       const greet = () => {
         if (motion.matches || running()) return;
+        clearTimeout(timer);
         startLap();
-        schedule(lap + rest());
       };
       button.addEventListener("mouseenter", greet);
       button.addEventListener("focus", greet);

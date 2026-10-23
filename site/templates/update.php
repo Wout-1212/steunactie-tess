@@ -2,10 +2,10 @@
 <?php $photos = $page->photos()->toFiles() ?>
 <article class="py-[42px] md:py-[72px]">
     <div class="mx-auto w-[calc(100%-40px)] lg:w-[calc(100%-64px)] max-w-[800px]">
-        <a class="inline-block text-sm font-bold text-pink-dark hover:underline"
-            href="<?= $page->parent()->url() ?>"><?= t('updates.back') ?></a>
+        <?php snippet('components/button', ['href' => $page->parent()->url(), 'text' => t('updates.back'), 'variant' => 'outline', 'size' => 'small']) ?>
         <h1 class="mt-6"><?= $page->title()->esc() ?></h1>
-        <time datetime="<?= $page->date()->toDate('Y-m-d') ?>"><?= $page->date()->toLocalDate() ?></time>
+        <?php /* Ink, not the pink date style: 14px pink is too faint on the page background. */ ?>
+        <time class="text-ink" datetime="<?= $page->date()->toDate('Y-m-d') ?>"><?= $page->date()->toLocalDate() ?></time>
         <div class="prose mt-6"><?= $page->text()->toBlocks() ?></div>
         <?php if ($photos->isNotEmpty()): ?>
             <section class="mt-10 border-t border-line pt-8" aria-labelledby="photos-title">

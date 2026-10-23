@@ -8,12 +8,13 @@
             <p><?= $page->contact_text()->esc() ?></p>
         </div>
         <form
-            class="contact-form [&_label]:mb-[5px] [&_label]:block [&_label]:text-sm [&_label]:text-pink-dark [&_input]:mb-[15px] [&_input]:w-full [&_input]:rounded-[5px] [&_input]:border [&_input]:border-line [&_input]:bg-white [&_input]:px-3 [&_input]:py-[10px] [&_textarea]:mb-[15px] [&_textarea]:w-full [&_textarea]:rounded-[5px] [&_textarea]:border [&_textarea]:border-line [&_textarea]:bg-white [&_textarea]:px-3 [&_textarea]:py-[10px] [&_fieldset:disabled]:opacity-55 [&_button:disabled]:cursor-default [&_.contact-note]:text-muted"
+            class="contact-form rounded-lg bg-white p-5 md:p-7 [&_label]:mb-[5px] [&_label]:block [&_label]:text-sm [&_label]:text-pink-dark [&_input]:mb-[15px] [&_input]:w-full [&_input]:rounded-[5px] [&_input]:border [&_input]:border-pink/80 [&_input]:bg-white [&_input]:px-3 [&_input]:py-[10px] [&_textarea]:mb-[15px] [&_textarea]:w-full [&_textarea]:rounded-[5px] [&_textarea]:border [&_textarea]:border-pink/80 [&_textarea]:bg-white [&_textarea]:px-3 [&_textarea]:py-[10px] [&_fieldset:disabled]:opacity-55 [&_button:disabled]:cursor-default [&_.contact-note]:text-muted"
             method="post" action="<?= rtrim($kirby->language()->url(), '/') ?>/contact"
             data-contact-form
             data-contact-copy="<?= esc(json_encode(['sending' => t('contact.sending'), 'error' => t('contact.error')], JSON_UNESCAPED_UNICODE)) ?>">
             <fieldset class="min-w-0 border-0 p-0" <?= $site->contactemail()->isEmpty() ? 'disabled' : '' ?>>
                 <legend class="sr-only"><?= t('contact.form') ?></legend>
+                <p class="mb-4 text-[13px]"><?= t('contact.required') ?></p>
                 <div class="sr-only" aria-hidden="true"><label for="contact-website"><?= t('contact.honeypot') ?></label><input
                         id="contact-website" name="website" tabindex="-1" autocomplete="off"></div>
                 <input type="hidden" name="started" value="<?= time() ?>">

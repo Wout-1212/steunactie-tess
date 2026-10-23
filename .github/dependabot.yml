@@ -1,0 +1,12 @@
+# Weekly pull requests for outdated or vulnerable packages: Kirby and the Mollie SDK (Composer)
+# and the Tailwind build tools (npm). See IMPLEMENTATIE.md for who follows them up.
+version: 2
+updates:
+  - package-ecosystem: composer
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly

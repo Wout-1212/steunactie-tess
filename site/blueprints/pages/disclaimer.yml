@@ -21,6 +21,16 @@ tabs:
       questions:
         extends: fields/questions
         label: Uitklapbare onderdelen over donaties
+      accessibility_headline:
+        label: Toegankelijkheidsverklaring
+        type: headline
+      accessibility_title:
+        label: Titel
+        type: text
+      accessibility_text:
+        label: Tekst
+        type: textarea
+        help: Welke norm we nastreven, wat nog niet toegankelijk is, hoe bezoekers een probleem melden en binnen welke termijn ze antwoord krijgen. Pas de datum aan na elke controle.
   meta:
     label: Zoekmachines
     icon: search

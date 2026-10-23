@@ -1,6 +1,6 @@
 <section class="py-9 text-ink md:py-16" id="donatievoortgang">
     <div class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)]">
-        <h2 class="mb-[18px] text-[13px] leading-[1.3] tracking-[.1em] uppercase">
+        <h2 class="mb-[18px] text-[13px] leading-[1.3] tracking-[.1em] uppercase max-md:text-ink">
             <?= $page->progress_title()->esc() ?></h2>
         <div class="mb-3 flex flex-wrap items-baseline justify-between gap-3 md:gap-5 max-xs:items-start">
             <?php if ($progress['hasGoal']): ?>
@@ -22,7 +22,7 @@
         <?php endif ?>
         <div class="mt-4 grid grid-cols-4 gap-2 text-center text-[9px] leading-normal md:gap-4 md:text-[12px]">
             <?php foreach ($progress['milestones'] as $milestone): ?>
-                <div class="min-w-0 wrap-anywhere"><strong class="inline-flex items-center gap-1 text-[10px] tracking-[.04em] text-pink xs:text-[12px] md:text-[15px]"><?php if ($milestone['reached']): ?><?php snippet('components/icon', ['name' => 'check', 'class' => 'size-4']) ?><?php endif ?><?= $milestone['amount'] ?></strong><span class="block"><?= esc($milestone['label']) ?></span></div>
+                <div class="min-w-0 wrap-anywhere"><strong class="inline-flex items-center gap-1 text-[10px] tracking-[.04em] text-pink max-md:text-ink xs:text-[12px] md:text-[15px]"><?php if ($milestone['reached']): ?><?php snippet('components/icon', ['name' => 'check', 'class' => 'size-4']) ?><?php endif ?><?= $milestone['amount'] ?></strong><span class="block"><?= esc($milestone['label']) ?></span></div>
             <?php endforeach ?>
         </div>
     </div>

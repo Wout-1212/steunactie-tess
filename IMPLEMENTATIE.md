@@ -73,11 +73,45 @@ Deze stappen gebeuren niet automatisch bij een deploy en moeten op de server zel
 
 - [ ] **Composer-pakketten installeren.** `kirby/` en `vendor/` staan niet in Git: voer op de server bij elke deploy `composer install --no-dev --optimize-autoloader` uit, of upload de lokaal geïnstalleerde mappen `kirby/` en `vendor/` mee (zie [Composer-pakketten](#composer-pakketten-kirby-en-vendor)). Zonder deze mappen werkt de site niet.
 - [ ] **Nieuw configbestand voor de server aanmaken.** Kopieer `site/config/config.host.example.php` naar `site/config/config.samenvoortess.be.php` op de server en vul de Brevo SMTP-login en SMTP-key in. Wordt de site ook via www bereikt, maak dan dezelfde kopie als `config.www.samenvoortess.be.php`. Dit bestand staat bewust niet in Git en moet dus met de hand geüpload worden. Zonder dit bestand verstuurt het contactformulier geen mail.
+- [ ] **Alleen deze bestanden en mappen deployen:** `index.php`, `.htaccess`, `favicon.ico`, `assets/`, `content/`, `kirby/`, `media/` (alleen `media/index.html`), `site/` en `vendor/`. **Niet** naar de server: `.git/`, `.claude/`, `.vscode/`, `node_modules/`, `state/`, de `.md`-bestanden, `composer.json/lock`, `package*.json` en `.editorconfig`. `.htaccess` blokkeert ze ook, maar alleen als extra laag. `site/accounts`, `site/sessions`, `site/cache` en `site/storage` van de server nooit overschrijven met een lokale versie.
+- [ ] In het serverconfigbestand ook `url` (het ene adres van de site, met https), `content.salt` en `cookie.key` invullen (zie `config.host.example.php`). Op de testserver daarnaast `'tess.noindex' => true`; op de live site **nooit**.
 - [ ] Het lokale bestand `config.theagency2627-steunactie-tess.test.php` (Mailpit) **niet** naar de server kopiëren.
 - [ ] In Brevo het domein `samenvoortess.be` authenticeren (SPF/DKIM-records bij de domeinbeheerder) en `contact@samenvoortess.be` als afzender toevoegen.
 - [ ] Contactadres invullen bij Instellingen in het Panel.
-- [ ] `'debug' => true` in `site/config/config.php` uitzetten (of `'debug' => false` in het serverconfigbestand zetten), zodat bezoekers geen foutdetails te zien krijgen.
+- [x] `'debug'` staat uit in `site/config/config.php`; alleen het lokale configbestand zet het aan. Zet het op de server nooit aan.
+- [ ] **Panel-accounts:** de eerste admin lokaal aanmaken en `site/accounts` uploaden (Kirby staat installeren op een publieke server niet toe). Inloggen vraagt na het wachtwoord een code (`auth.methods` in `config.php`): via een authenticator-app als die ingesteld is (Account → Tweestapsverificatie), anders per mail. Daarvoor moet de mail via Brevo werken. Lokaal staat de code uit.
+- [ ] `panel.vue.compiler` niet uitzetten: de Donaties-weergave in het Panel (`site/plugins/tess-donations/index.js`) gebruikt een `template`-string.
+- [ ] **Kirby-licentie.** Een publieke site heeft een licentie nodig (lokaal en op een testserver niet). Kirby geeft vzw's een gratis licentie of korting, afhankelijk van hun financiering: mail naar licensing@getkirby.com met als onderwerp "Free/discounted license for a non-profit organization" en beschrijf het project en de financiering. De licentie activeer je in het Panel; ze komt in `site/config/.license` op de server (staat niet in Git).
 - [ ] Het contactformulier op de live site testen en de mail controleren in de inbox en in Brevo (Transactional → Logs).
+
+## Onderhoud na de oplevering
+
+Iemand van de vzw volgt dit op. De meeste taken duren een paar minuten per maand. De punten met (technisch) vragen toegang tot de server en Composer; laat je daarvoor helpen als dat nodig is.
+
+**Wekelijks of zodra er iets binnenkomt**
+- Berichten bij donaties nakijken: Panel → Donaties, filter "Te controleren". Berichten met een link, telefoonnummer of e-mailadres verschijnen pas na goedkeuring.
+- Meldingen van de uptimecontrole opvolgen als de site onbereikbaar is.
+- (technisch) Update-voorstellen van Dependabot op GitHub: lokaal testen, deployen en op de server `composer install --no-dev --optimize-autoloader`. Beveiligingsupdates eerst.
+
+**Maandelijks**
+- (technisch) Kirby-beveiligingsupdates: getkirby.com/security nakijken of de nieuwsbrief volgen. Kritieke fixes binnen enkele dagen installeren (zie [Composer-pakketten](#composer-pakketten-kirby-en-vendor)).
+- Mollie-dashboard: mislukte webhooks. Anders kan een betaalde donatie op "open" blijven staan.
+- Brevo → Transactional → Logs: geweigerde bedankmails. Opnieuw versturen kan in het Panel bij Donaties.
+
+**Jaarlijks of af en toe**
+- (technisch) PHP-versie bij de host: tijdig overstappen voor een versie geen beveiligingsupdates meer krijgt.
+- (technisch) Herstel van een back-up testen op een testkopie.
+- Toegankelijkheidsverklaring: datum bijwerken na een nieuwe controle.
+- Domeinnaam en hosting verlengen; het certificaat (https) één keer nakijken.
+- Panel-accounts: wie geen toegang meer nodig heeft, verwijderen.
+
+## Zoekmachines, delen en talen
+
+- **Beschrijving en deelafbeelding per pagina:** tabblad Menu & zoekmachines. De deelafbeelding is het voorbeeld bij delen via WhatsApp, Facebook of Instagram (liefst 1200 × 630). Zonder eigen afbeelding gebruikt de site een foto van de pagina, en anders de standaard deelafbeelding uit Instellingen.
+- `robots.txt`, `sitemap.xml` en `.well-known/security.txt` maakt de site zelf (`site/plugins/tess-seo`). Alle tags in `<head>` staan in `site/snippets/layout/meta.php`.
+- **Talen:** Nederlands is de hoofdtaal. Een pagina verschijnt pas in het Frans of Engels als ze in het Panel in die taal is ingevuld; tot dan verwijst `/fr/…` of `/en/…` door naar de Nederlandse pagina en toont de taalkeuze die taal niet. Na het vertalen hoeft er niets aan de code te gebeuren. Let op: teksten uit Instellingen (footer, oproepblok) moeten ook vertaald worden, anders blijven die Nederlands.
+- **Toegankelijkheidsverklaring:** onderaan de pagina Disclaimer (`/disclaimer#toegankelijkheid`), met een link in de footer. Werk de datum bij na elke controle.
+- **Favicon:** `favicon.ico` (root), `assets/images/favicon.svg` en `assets/images/apple-touch-icon.png`. Nu een tijdelijk hartje; vervang alle drie als er een definitief icoon is.
 
 ## Typografie
 
