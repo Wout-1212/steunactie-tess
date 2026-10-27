@@ -26,16 +26,58 @@ De opdrachtgever heeft nog geen Mollie-account. We bouwen en testen daarom op ee
 
 ## Fase 0: Voorbereiding
 
-- [ ] Testserver met HTTPS en PHP 8.2 of hoger, publiek bereikbaar (Mollie moet de webhook kunnen aanroepen).
-- [ ] Op de testserver na elke deploy `composer install --no-dev --optimize-autoloader` uitvoeren (of `kirby/` en `vendor/` lokaal installeren en uploaden). Beide mappen staan niet in Git; zonder die mappen werkt de site niet.
+- [x] Testserver met HTTPS en PHP 8.2 of hoger, publiek bereikbaar (Mollie moet de webhook kunnen aanroepen). Zie [Testserver](#testserver).
+- [x] Op de testserver na elke deploy `composer install --no-dev --optimize-autoloader` uitvoeren (of `kirby/` en `vendor/` lokaal installeren en uploaden). Beide mappen staan niet in Git; zonder die mappen werkt de site niet.
 - [x] Combell: SQLite staat standaard aan. Er is geen databaseserver nodig, SQLite is gewoon een bestand.
-- [ ] Testserver: controleren dat de PHP-extensie `pdo_sqlite` aanstaat (tijdelijk `<?php var_dump(extension_loaded('pdo_sqlite'));` uploaden, moet `bool(true)` tonen, daarna verwijderen).
-- [ ] Draait de testserver op nginx in plaats van Apache: `/site` blokkeren (de `.htaccess` regel `RewriteRule ^site/(.*) index.php` werkt daar niet).
-- [ ] Eigen Mollie-account aanmaken, testsleutel (`test_…`) kopiëren uit Developers → API keys.
-- [ ] `config.{testdomein}.php` op de testserver: Brevo-login (zie IMPLEMENTATIE.md) en `'tess.mollie.key' => 'test_…'`.
-- [ ] Brevo: testdomein of afzender toegelaten, zodat de bedankmail niet geweigerd wordt.
+- [x] Testserver: PHP-extensie `pdo_sqlite` staat aan (`php -m` via SSH).
+- [x] Draait de testserver op nginx in plaats van Apache: `/site` blokkeren. Niet nodig: nginx staat vóór Apache en `.htaccess` werkt; `/site`, `/content`, `/kirby`, `/vendor`, `.git` en de `.md`-bestanden geven 403 of 404.
+- [x] Eigen Mollie-account aanmaken, testsleutel (`test_…`) kopiëren uit Developers → API keys.
+- [x] `config.{testdomein}.php` op de testserver: Brevo-login (zie IMPLEMENTATIE.md) en `'tess.mollie.key' => 'test_…'`.
+- [ ] Brevo: testdomein of afzender toegelaten, zodat de bedankmail niet geweigerd wordt. Op de testserver tijdelijk `steunactietess@mctantwerp.be` (de enige geverifieerde afzender); nog testen.
 
 **Klaar als:** het contactformulier op de testserver een mail verstuurt en `pdo_sqlite` beschikbaar is.
+
+### Testserver
+
+**Stand van zaken (27-10-2026):** de site draait op https://samenvoortess.wout.philippo.kdgmt.be (Combell-subsite op de eigen hosting). Getest van buitenaf: geldig Let's Encrypt-certificaat (tot 25-01-2027), http → https met 301, `X-Robots-Tag: noindex, nofollow`, `robots.txt` met `Disallow: /`, alle beveiligingsheaders (CSP nog Report-Only), interne bestanden onbereikbaar, webhook met een verzonnen ID geeft 200 zonder redirect. **Volgende stap: inloggen in het Panel** (zie hieronder).
+
+| Wat | Waarde |
+|---|---|
+| Adres | https://samenvoortess.wout.philippo.kdgmt.be |
+| SSH | `ssh <gebruiker>@<ssh-host>`, wachtwoord van de primaire FTP-gebruiker. `ssh.wout.philippo.kdgmt.be` bestaat (nog) niet in DNS. |
+| Map op de server | `<webroot>/samenvoortess.wout.philippo.kdgmt.be` (de repo is hier rechtstreeks gekloond, de webroot) |
+| GitHub | Clone via de deploykey met alias `samenvoortess` in `~/.ssh/config` op de server: `git@samenvoortess:mctantwerp/theagency2627-steunactie-tess.git` |
+| PHP | 8.4.27, Composer 2.10, `pdo_sqlite`, `gd`, `curl`, `mbstring` |
+| Hostconfig | `site/config/config.samenvoortess.wout.philippo.kdgmt.be.php`: lokaal bewerken, uploaden met `scp` (zie hieronder), op de server `chmod 600`. Staat niet in Git. |
+| Brevo | Account dat later naar de opdrachtgever gaat. SMTP-key `samenvoortess-staging`. Enige geverifieerde afzender: `steunactietess@mctantwerp.be` (DKIM en DMARC niet ingesteld, mails kunnen in spam belanden). |
+| Panel-account | Lokaal aangemaakt (`site/accounts/Xgo5LjyQ`) en geüpload, zonder `.logins`. |
+
+**Deployen** (in de map op de server):
+
+```sh
+git pull
+composer install --no-dev --optimize-autoloader
+```
+
+**Hostconfig uploaden** (lokale PowerShell, vanuit de projectmap):
+
+```powershell
+scp site\config\config.samenvoortess.wout.philippo.kdgmt.be.php <gebruiker>@<ssh-host>:<webroot>/samenvoortess.wout.philippo.kdgmt.be/site/config/
+```
+
+**Nog te doen, in deze volgorde:**
+
+- [ ] Hostconfig opnieuw uploaden (afzender `steunactietess@mctantwerp.be` toegevoegd voor de inlogcode en het contactformulier) en op de server `chmod 600`.
+- [ ] Inloggen op `/panel`. De code komt per mail van `steunactietess@mctantwerp.be`; kijk ook in spam. Komt er niets: Brevo → Transactional → Logs. Zonder de afzender stuurt Kirby de code van `noreply@{host}`, en dat weigert Brevo.
+- [ ] Na het inloggen meteen Account → Tweestapsverificatie → authenticator-app instellen.
+- [ ] De wijziging in `config.php` committen en pushen (inlogcode van `contact@samenvoortess.be` in plaats van `noreply@…`), daarna op de server deployen.
+- [ ] Contactformulier testen (Fase 0, Klaar als).
+- [ ] Testbetaling van begin tot eind; webhook-logs in het Mollie-dashboard (B-14, B-15 in TASKS-CONTROLE.md).
+- [ ] Daarna de [test]-punten van TASKS-CONTROLE.md, stap 4 van de Volgorde.
+
+**Site niet bereikbaar op het KdG-netwerk?** De DNS van KdG had het oude, foute IP (<ip>) in de cache. Gebruik 4G of een hotspot, of zet tijdelijk `<ip> samenvoortess.wout.philippo.kdgmt.be` in `C:\Windows\System32\drivers\etc\hosts` (Kladblok als administrator) en haal die regel later weer weg.
+
+**Bij de overdracht van het Brevo-account:** e-mailadres, wachtwoord, telefoonnummer, 2FA en facturatiegegevens naar de opdrachtgever zetten, en voor de live site een nieuwe SMTP-key maken (de key van de testserver niet live gebruiken).
 
 ## Fase 1: Basis
 

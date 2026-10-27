@@ -7,6 +7,13 @@ return [
     // Panel login: password plus a code (authenticator app, or by email when none is set up).
     'auth' => [
         'methods' => ['password' => ['2fa' => true]],
+        // Kirby sends the code from noreply@{host} by default; Brevo only accepts a verified sender.
+        'challenge' => [
+            'email' => [
+                'from' => 'contact@samenvoortess.be',
+                'fromName' => 'Samen voor Tess',
+            ],
+        ],
     ],
 
     // Brevo SMTP relay. Login and SMTP key live in the host-specific config (see config.host.example.php).
