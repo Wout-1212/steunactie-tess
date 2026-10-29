@@ -122,6 +122,21 @@ Kirby::plugin('tess/fundraisers', [
                 + $this->mollieTotals()['raised'];
         },
 
+        // Milestones under the progress bar, lowest first, and whether the total has reached each one.
+        // Labels in the given language (default: the current one), so the donation mail can use the donor's.
+        'milestoneProgress' => function (string|null $language = null): array {
+            $raised = $this->raisedTotal();
+            $milestones = [];
+            foreach ($this->content($language)->get('milestones')->toStructure()->sortBy('amount', 'asc', SORT_NUMERIC) as $milestone) {
+                $milestones[] = [
+                    'amount' => $milestone->amount()->toFloat(),
+                    'label' => $milestone->label()->value(),
+                    'reached' => $raised >= $milestone->amount()->toFloat(),
+                ];
+            }
+            return $milestones;
+        },
+
         // Number of online donations (external platforms + the site), or null when no source reports it.
         'onlineDonations' => function (): int|null {
             $steunactie = $this->fundraiserStats('steunactie');

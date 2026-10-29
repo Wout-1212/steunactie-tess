@@ -5,9 +5,10 @@
  * Colours and font follow the site tokens in assets/css/tailwind.css.
  *
  * @var string      $slot    Email content
- * @var string      $footer  Plain footer text (escaped here)
+ * @var string|null $footer  Plain footer text (escaped here), or a 'footer' slot with HTML instead
  * @var string|null $preview Plain inbox preview text, hidden in the email itself (escaped here)
  * @var string|null $lang    Language code of the email
+ * @var bool|null   $logo    Show the logo instead of the site name in the header
  */
 ?>
 <!DOCTYPE html>
@@ -25,7 +26,8 @@
 
 <body style="margin:0;padding:0;background-color:#FFFFFF;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;">
     <?php if (!empty($preview)): ?>
-        <div style="display:none;max-height:0;overflow:hidden;mso-hide:all;"><?= esc($preview) ?></div>
+        <?php /* The filler keeps inbox previews from running on into the first lines of the email. */ ?>
+        <div style="display:none;max-height:0;overflow:hidden;mso-hide:all;"><?= esc($preview) ?><?= str_repeat('&#847;&zwnj;&nbsp;', 40) ?></div>
     <?php endif ?>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" style="background-color:#FFFFFF;">
         <tr>
@@ -35,15 +37,25 @@
                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF"
                     style="max-width:600px;background-color:#FFFFFF;font-family:Montserrat,Arial,Helvetica,sans-serif;font-size:15px;line-height:1.5;color:#27222A;">
                     <tr>
-                        <td style="padding:20px 24px;border-bottom:1px solid #F5D7E6;color:#C43B75;font-size:22px;font-weight:bold;line-height:1.2;">
-                            <?= site()->title()->esc() ?></td>
+                        <?php /* With the logo, 8px less padding: the logo image has its own 8px white edge. */ ?>
+                        <td style="padding:<?= ($logo ?? false) ? '12px 16px' : '20px 24px' ?>;border-bottom:1px solid #F5D7E6;color:#C43B75;font-size:22px;font-weight:bold;line-height:1.2;">
+                            <?php if ($logo ?? false): ?>
+                                <?php /* assets/images/logo.png at 320px on a white tile with rounded corners, shown at half size for sharp
+                                    screens. The tile keeps the dark lettering readable when a mail app shows the email on a dark background.
+                                    A fixed file, not a Kirby thumb, so the link in sent mails keeps working. The alt text stands in when
+                                    images are blocked. */ ?>
+                                <img src="<?= url('assets/images/logo-email.png') ?>" width="176" height="79" alt="<?= site()->title()->esc('attr') ?>"
+                                    style="display:block;width:176px;max-width:100%;height:auto;border:0;outline:none;text-decoration:none;color:#C43B75;font-size:22px;font-weight:bold;">
+                            <?php else: ?>
+                                <?= site()->title()->esc() ?>
+                            <?php endif ?></td>
                     </tr>
                     <tr>
                         <td style="padding:24px;"><?= $slot ?></td>
                     </tr>
                     <tr>
                         <td style="padding:16px 24px;border-top:1px solid #F5D7E6;font-size:12px;color:#27222A;">
-                            <?= esc($footer ?? '') ?></td>
+                            <?= $slots->footer() ?? esc($footer ?? '') ?></td>
                     </tr>
                 </table>
                 <!--[if mso]></td></tr></table><![endif]-->

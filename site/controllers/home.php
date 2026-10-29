@@ -12,14 +12,10 @@ return function ($site, $kirby) {
     $euro->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, 0);
     $format = fn(float $amount) => $euro->formatCurrency($amount, 'EUR');
 
-    $milestones = [];
-    foreach ($site->milestones()->toStructure()->sortBy('amount', 'asc', SORT_NUMERIC) as $milestone) {
-        $milestones[] = [
-            'amount' => $format($milestone->amount()->toFloat()),
-            'label' => $milestone->label()->value(),
-            'reached' => $raised >= $milestone->amount()->toFloat(),
-        ];
-    }
+    $milestones = array_map(
+        fn (array $milestone) => array_replace($milestone, ['amount' => $format($milestone['amount'])]),
+        $site->milestoneProgress()
+    );
 
     return [
         'progress' => [

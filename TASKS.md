@@ -147,7 +147,7 @@ Twee stappen: in het donatieblok op de homepage kies je een bedrag, op de donati
 - [x] `tessDonationSync($reference, $payment)`, idempotent. In plaats van een `flock` gebruikt het een SQLite-transactie `BEGIN IMMEDIATE`, die maar één proces tegelijk toelaat (webhook en bedankpagina kunnen tegelijk lopen):
   - `payment_status` bijwerken; volledig terugbetaald → `refunded`
   - `paid_at` en `method` invullen bij betaald
-  - bij betaald en `mailed_at` leeg: bedankmail versturen (fase 6)
+  - bij betaald en `mailed_at` leeg: bedankmail versturen (fase 6). Alleen vanuit de webhook; de bedankpagina verstuurt hem enkel als er geen webhook is (lokaal)
   - cache van het totaal wissen (fase 7)
 - [x] Antwoord 200, ook bij een onbekend ID. Bij een fout van de Mollie API antwoord 500, zodat Mollie het later opnieuw probeert.
 
@@ -164,7 +164,8 @@ Twee stappen: in het donatieblok op de homepage kies je een bedrag, op de donati
 ## Fase 6: Bedankmail
 
 - [x] `site/templates/emails/donation.html.php` en `donation.text.php`, met de bestaande opmaak `site/snippets/emails/layout.php`.
-- [x] Inhoud: bedankje met het bedrag ("Bedankt voor je donatie van € 50." en dat de steun Tess dichter bij haar behandeling brengt), het bericht, "Met vriendelijke groeten, Team Tess" (datum en Mollie-referentie weggelaten: een eenvoudige bedankmail). Bij `held`: "je bericht verschijnt na controle".
+- [x] Inhoud: logo, "Dag {voornaam}," (eerste woord van de naam, anders "Dag,"), bedankje met het bedrag, overzicht (bedrag, datum, betaalmethode, Mollie-ID), het bericht (bij `held`: "verschijnt na controle"), de volgende niet-bereikte mijlpaal met link naar de voortgang, deelknop (WhatsApp) met Facebook en e-mail eronder, Instagram, "Met heel veel dankbaarheid, Tess en Team Tess", voettekst met contactadres, privacy- en donatieverklaring (ankers op de disclaimerpagina) en het domein. Alle teksten staan in `site/languages`.
+- [x] Voorbeeld in de browser, alleen met `debug` aan (lokaal): `/dev/mail` toont de varianten per taal (zonder naam, zonder mijlpalen, tekstversie, …).
 - [x] In de taal van de donateur (`t($key, null, $language)`, valt terug op Nederlands).
 - [x] Afzender `tess.contact.from` / `fromName`, Reply-To het contactadres uit Instellingen.
 - [x] Gelukt: `mailed_at` invullen. Mislukt: `mail_error` invullen en loggen; de betaling blijft gewoon betaald.

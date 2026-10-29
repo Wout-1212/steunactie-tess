@@ -15,6 +15,7 @@ require_once __DIR__ . '/lib/payment.php';
 require_once __DIR__ . '/lib/sync.php';
 require_once __DIR__ . '/lib/mail.php';
 require_once __DIR__ . '/lib/panel.php';
+require_once __DIR__ . '/lib/preview.php';
 
 function tessMollie(): MollieApiClient
 {
@@ -64,6 +65,11 @@ Kirby::plugin('tess/donations', [
             'pattern' => 'mollie/webhook',
             'method' => 'POST',
             'action' => fn () => tessDonationWebhook(),
+        ],
+        [
+            // Local preview of the thank-you mail; 404 unless 'debug' is on (see lib/preview.php).
+            'pattern' => ['dev/mail', 'dev/mail/(donation)'],
+            'action' => fn (string|null $type = null) => tessDonationMailPreview($type),
         ],
     ],
     // Panel: own menu item with the donations table (see lib/panel.php and index.js).

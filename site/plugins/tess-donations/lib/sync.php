@@ -41,11 +41,12 @@ function tessDonationWebhook(): Response
 }
 
 // Fetches the payment and syncs it; used by the thank-you page. Returns the up-to-date row.
+// The thank-you mail is the webhook's job; only without a webhook (local hosts) does this page send it.
 function tessDonationRefresh(object $donation): object
 {
     if ($donation->payment_id && in_array($donation->payment_status, ['open', 'paid'], true)) {
         try {
-            tessDonationSync($donation->reference, tessMollie()->payments->get($donation->payment_id));
+            tessDonationSync($donation->reference, tessMollie()->payments->get($donation->payment_id), mail: tessDonationWebhookUrl() === null);
         } catch (Throwable $exception) {
             error_log('Donatie: status ophalen voor ' . $donation->reference . ' mislukt: ' . $exception->getMessage());
         }
@@ -53,23 +54,24 @@ function tessDonationRefresh(object $donation): object
     return tessDonationFind($donation->reference);
 }
 
-function tessDonationSync(string $reference, Payment $payment): void
+function tessDonationSync(string $reference, Payment $payment, bool $mail = true): void
 {
     $db = tessDonationsDb();
     $pdo = $db->connection();
 
-    // IMMEDIATE takes the write lock at once, so a webhook and the thank-you page never both decide
-    // to send the mail: whoever comes second sees mailed_at already filled in.
+    // IMMEDIATE takes the write lock at once, so two syncs of the same payment (Mollie retrying the
+    // webhook) never both decide to send the mail: whoever comes second sees mailed_at already filled in.
     $pdo->exec('BEGIN IMMEDIATE');
     try {
         $donation = tessDonationFind($reference);
         $status = tessDonationStatus($payment);
         // A failed mail resets mailed_at (see tessDonationMail), so the next sync simply tries again.
-        $sendMail = $status === 'paid' && $donation->mailed_at === null;
+        $sendMail = $mail && $status === 'paid' && $donation->mailed_at === null;
 
         $changes = array_filter([
             'payment_status' => $status,
-            'method' => $payment->method,
+            // Apple Pay comes in as a credit card payment with the wallet in the details.
+            'method' => ($payment->details->wallet ?? null) === 'applepay' ? 'applepay' : $payment->method,
             'paid_at' => $payment->paidAt ? gmdate('Y-m-d H:i:s', strtotime($payment->paidAt)) : null,
             'mailed_at' => $sendMail ? tessDonationsNow() : null,
         ], fn ($value) => $value !== null);

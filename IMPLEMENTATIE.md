@@ -65,7 +65,7 @@ De SMTP-instellingen staan in `site/config/config.php`. Login en SMTP-key horen 
 
 Op de testserver zet `'tess.contact.to'` in het hostconfigbestand de ontvanger op een eigen adres, zodat testberichten niet bij de opdrachtgever terechtkomen. Op de live site staat die optie er niet in.
 
-Lokaal gaat de mail naar Mailpit in plaats van Brevo, via `site/config/config.theagency2627-steunactie-tess.test.php` (host `127.0.0.1`, poort `1025`, zonder login of versleuteling). Verstuurde berichten bekijk je op http://localhost:8025.
+Lokaal gaat de mail naar Mailpit in plaats van Brevo, via `site/config/config.theagency2627-steunactie-tess.test.php` (host `127.0.0.1`, poort `1025`, zonder login of versleuteling). Verstuurde berichten bekijk je op http://localhost:8025. De bedankmail voor donateurs bekijk je zonder te versturen op `/dev/mail` (alle talen en varianten, met voorbeeldgegevens); die route bestaat alleen met `debug` aan, op de testserver en live geeft ze 404.
 
 In Brevo moet het domein `samenvoortess.be` geauthenticeerd zijn (SPF/DKIM) en `contact@samenvoortess.be` als afzender toegevoegd zijn, anders wordt de mail geweigerd of als spam gemarkeerd.
 
