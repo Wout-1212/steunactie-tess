@@ -4,11 +4,12 @@ use Kirby\Toolkit\Str;
 // Everything in <head> for search engines and sharing: title, description, canonical, language
 // versions, Open Graph (WhatsApp, Facebook, …), icons and structured data.
 // $noindex: true on pages that must stay out of search results (donation, thank-you).
+// $title: replaces the page title in the browser tab (thank-you page when the payment failed).
 $isHome = $page->isHomePage();
 $isUpdate = $page->intendedTemplate()->name() === 'update';
 $indexable = !($noindex ?? false) && !$page->isErrorPage();
 $siteTitle = $site->title()->value();
-$title = $isHome ? $siteTitle : $page->title()->value() . ' | ' . $siteTitle;
+$title = $isHome ? $siteTitle : ($title ?? $page->title()->value()) . ' | ' . $siteTitle;
 $description = $page->description()->value()
     ?: ($isUpdate ? Str::excerpt((string) $page->text()->toBlocks(), 160) : '')
     ?: $site->description()->value();

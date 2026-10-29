@@ -10,7 +10,7 @@ $logoClass = 'h-auto w-auto max-h-[44px] max-w-[112px] md:max-h-[54px] md:max-w-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<?php snippet('layout/meta', ['noindex' => $noindex ?? false]) ?>
+<?php snippet('layout/meta', ['noindex' => $noindex ?? false, 'title' => $title ?? null]) ?>
     <?php /* Version the assets by modification time so browsers never keep a stale copy after a rebuild. */ ?>
     <?= css(url('assets/css/site.css') . '?v=' . filemtime($kirby->root('index') . '/assets/css/site.css')) ?><?= js(url('assets/js/site.js') . '?v=' . filemtime($kirby->root('index') . '/assets/js/site.js'), ['defer' => true]) ?>
 </head>
