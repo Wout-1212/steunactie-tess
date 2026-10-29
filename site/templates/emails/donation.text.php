@@ -1,14 +1,7 @@
 <?= tt('donation.mail-greeting', null, ['name' => $name], $language) ?>
 
 
-<?= t('donation.mail-thanks', null, $language) ?>
-
-
-<?= t('donation.amount', null, $language) ?>: <?= $amount ?>
-
-<?= t('donation.mail-date', null, $language) ?>: <?= $date ?>
-
-<?= t('donation.mail-reference', null, $language) ?>: <?= $reference ?>
+<?= tt('donation.mail-thanks', null, ['amount' => $amount], $language) ?>
 
 <?php if ($message !== ''): ?>
 
@@ -19,6 +12,8 @@
 <?php endif ?>
 
 <?= t('donation.mail-closing', null, $language) ?>
+
+<?= t('donation.mail-signature', null, $language) ?>
 
 
 --

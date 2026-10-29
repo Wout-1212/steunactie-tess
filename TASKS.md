@@ -49,7 +49,7 @@ De opdrachtgever heeft nog geen Mollie-account. We bouwen en testen daarom op ee
 | GitHub | Clone via de deploykey met alias `samenvoortess` in `~/.ssh/config` op de server: `git@samenvoortess:mctantwerp/theagency2627-steunactie-tess.git` |
 | PHP | 8.4.27, Composer 2.10, `pdo_sqlite`, `gd`, `curl`, `mbstring` |
 | Hostconfig | `site/config/config.samenvoortess.wout.philippo.kdgmt.be.php`: lokaal bewerken, uploaden met `scp` (zie hieronder), op de server `chmod 600`. Staat niet in Git. |
-| Brevo | Account dat later naar de opdrachtgever gaat. SMTP-key `samenvoortess-staging`. Enige geverifieerde afzender: `steunactietess@mctantwerp.be` (DKIM en DMARC niet ingesteld, mails kunnen in spam belanden). |
+| Brevo | Account dat later naar de opdrachtgever gaat (login nu `steunactietess@mctantwerp.be`). SMTP-key `samenvoortess-staging`. Domein `samenvoortess.be` geauthenticeerd (DKIM via `brevo1`/`brevo2._domainkey`, DMARC `p=quarantine`); afzender `contact@samenvoortess.be`, de standaard uit `config.php`. |
 | Panel-account | Lokaal aangemaakt (`site/accounts/Xgo5LjyQ`) en geüpload, zonder `.logins`. |
 
 **Deployen** (in de map op de server):
@@ -164,7 +164,7 @@ Twee stappen: in het donatieblok op de homepage kies je een bedrag, op de donati
 ## Fase 6: Bedankmail
 
 - [x] `site/templates/emails/donation.html.php` en `donation.text.php`, met de bestaande opmaak `site/snippets/emails/layout.php`.
-- [x] Inhoud: bedankje, bedrag, datum, Mollie-referentie, het bericht. Bij `held`: "je bericht verschijnt na controle".
+- [x] Inhoud: bedankje met het bedrag ("Bedankt voor je donatie van € 50." en dat de steun Tess dichter bij haar behandeling brengt), het bericht, "Met vriendelijke groeten, Team Tess" (datum en Mollie-referentie weggelaten: een eenvoudige bedankmail). Bij `held`: "je bericht verschijnt na controle".
 - [x] In de taal van de donateur (`t($key, null, $language)`, valt terug op Nederlands).
 - [x] Afzender `tess.contact.from` / `fromName`, Reply-To het contactadres uit Instellingen.
 - [x] Gelukt: `mailed_at` invullen. Mislukt: `mail_error` invullen en loggen; de betaling blijft gewoon betaald.

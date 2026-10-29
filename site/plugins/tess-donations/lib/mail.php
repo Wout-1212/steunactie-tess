@@ -13,7 +13,6 @@ function tessDonationMail(object $donation): bool
 
     $euro = new NumberFormatter($locale, NumberFormatter::CURRENCY);
     $euro->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, 0);
-    $date = new IntlDateFormatter($locale, IntlDateFormatter::LONG, IntlDateFormatter::SHORT, 'Europe/Brussels');
 
     try {
         kirby()->email([
@@ -27,8 +26,6 @@ function tessDonationMail(object $donation): bool
                 'language' => $code,
                 'name' => $donation->name,
                 'amount' => $euro->formatCurrency($donation->amount_cents / 100, 'EUR'),
-                'date' => $date->format(new DateTime($donation->paid_at ?? 'now', new DateTimeZone('UTC'))),
-                'reference' => $donation->payment_id,
                 'message' => $donation->message,
                 'held' => $donation->message_status === 'held',
                 'url' => $language->url(),

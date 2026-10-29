@@ -63,6 +63,8 @@ Het contactformulier verstuurt berichten via de SMTP-relay van Brevo naar het Co
 
 De SMTP-instellingen staan in `site/config/config.php`. Login en SMTP-key horen niet in Git: kopieer `site/config/config.host.example.php` naar `config.samenvoortess.be.php` (en `config.www.samenvoortess.be.php` als www gebruikt wordt) op de server en vul daarin de gegevens uit Brevo in (Settings → SMTP & API → SMTP). Zie ook [Live zetten](#live-zetten).
 
+Op de testserver zet `'tess.contact.to'` in het hostconfigbestand de ontvanger op een eigen adres, zodat testberichten niet bij de opdrachtgever terechtkomen. Op de live site staat die optie er niet in.
+
 Lokaal gaat de mail naar Mailpit in plaats van Brevo, via `site/config/config.theagency2627-steunactie-tess.test.php` (host `127.0.0.1`, poort `1025`, zonder login of versleuteling). Verstuurde berichten bekijk je op http://localhost:8025.
 
 In Brevo moet het domein `samenvoortess.be` geauthenticeerd zijn (SPF/DKIM) en `contact@samenvoortess.be` als afzender toegevoegd zijn, anders wordt de mail geweigerd of als spam gemarkeerd.
@@ -79,10 +81,36 @@ Deze stappen gebeuren niet automatisch bij een deploy en moeten op de server zel
 - [ ] In Brevo het domein `samenvoortess.be` authenticeren (SPF/DKIM-records bij de domeinbeheerder) en `contact@samenvoortess.be` als afzender toevoegen. Ook de inlogcode van het Panel komt van dat adres (`auth.challenge.email.from` in `config.php`); zonder geverifieerde afzender kan niemand inloggen zolang er geen authenticator-app ingesteld is.
 - [ ] Contactadres invullen bij Instellingen in het Panel.
 - [x] `'debug'` staat uit in `site/config/config.php`; alleen het lokale configbestand zet het aan. Zet het op de server nooit aan.
-- [ ] **Panel-accounts:** de eerste admin lokaal aanmaken en `site/accounts` uploaden (Kirby staat installeren op een publieke server niet toe). Inloggen vraagt na het wachtwoord een code (`auth.methods` in `config.php`): via een authenticator-app als die ingesteld is (Account → Tweestapsverificatie), anders per mail. Daarvoor moet de mail via Brevo werken. Lokaal staat de code uit.
+- [ ] **Panel-accounts:** de eerste admin lokaal aanmaken en `site/accounts` uploaden (Kirby staat installeren op een publieke server niet toe). Inloggen vraagt na het wachtwoord een code (`auth.methods` in `config.php`): via een authenticator-app als die ingesteld is (Account → Tweestapsverificatie), anders per mail. Daarvoor moet de mail via Brevo werken. Lokaal staat de code uit. Daarna de accounts voor de vzw aanmaken en overdragen, zie [Panel-accounts en overdracht](#panel-accounts-en-overdracht).
+- [ ] `'tess.contact.to'` **niet** in het live configbestand zetten. Dat stuurt contactberichten naar een ander adres dan het Contactadres uit Instellingen en is alleen voor de testserver bedoeld.
 - [ ] `panel.vue.compiler` niet uitzetten: de Donaties-weergave in het Panel (`site/plugins/tess-donations/index.js`) gebruikt een `template`-string.
 - [ ] **Kirby-licentie.** Een publieke site heeft een licentie nodig (lokaal en op een testserver niet). Kirby geeft vzw's een gratis licentie of korting, afhankelijk van hun financiering: mail naar licensing@getkirby.com met als onderwerp "Free/discounted license for a non-profit organization" en beschrijf het project en de financiering. De licentie activeer je in het Panel; ze komt in `site/config/.license` op de server (staat niet in Git).
 - [ ] Het contactformulier op de live site testen en de mail controleren in de inbox en in Brevo (Transactional → Logs).
+
+## Panel-accounts en overdracht
+
+Er zijn twee rollen:
+
+| Rol | Wie | Wat |
+|---|---|---|
+| Admin | Eén vertrouwenspersoon van de vzw (en het team tot de overdracht) | Alles, ook gebruikers aanmaken en verwijderen |
+| Editor | Iedereen die inhoud bijhoudt | Inhoud, updates, bestanden en Donaties. Geen gebruikers, talen of systeeminstellingen. Eigen naam, e-mailadres, wachtwoord en tweestapsverificatie wel. Rechten in `site/blueprints/users/editor.yml`. |
+
+**Accounts aanmaken.** Kirby heeft geen registratie of uitnodigingsmail: alleen een admin maakt accounts aan (Panel → Gebruikers → Toevoegen). "Wachtwoord vergeten" werkt ook niet, omdat Kirby dat uitschakelt zodra tweestapsverificatie aanstaat. Per nieuw account:
+
+1. Een tijdelijk wachtwoord kiezen en apart van het e-mailadres bezorgen (bijvoorbeeld via Teams of persoonlijk, niet in dezelfde mail).
+2. De eerste inlogcode komt per mail. Kijk ook in spam of quarantaine.
+3. Na het inloggen: Account → wachtwoord wijzigen en Tweestapsverificatie → authenticator-app instellen. Daarna is er geen mailcode meer nodig.
+
+Wachtwoord vergeten: een admin zet een nieuw tijdelijk wachtwoord via Gebruikers → de persoon → Wachtwoord wijzigen.
+
+**Overdracht aan de vzw:**
+
+- [ ] Voor één vertrouwenspersoon van de vzw een Admin-account aanmaken. Die maakt en verwijdert daarna zelf de accounts van de vzw.
+- [ ] Voor de andere mensen van de vzw een Editor-account aanmaken (of dat aan hun admin overlaten).
+- [ ] Controleren dat de admin van de vzw kan inloggen en een gebruiker kan aanmaken.
+- [ ] Daarna de accounts van het team verwijderen, behalve als het team de site nog onderhoudt.
+- [ ] Ook de andere accounts overdragen: Brevo (zie TASKS.md), Mollie, de host en GitHub.
 
 ## Onderhoud na de oplevering
 
@@ -101,6 +129,7 @@ Iemand van de vzw volgt dit op. De meeste taken duren een paar minuten per maand
 **Jaarlijks of af en toe**
 - (technisch) PHP-versie bij de host: tijdig overstappen voor een versie geen beveiligingsupdates meer krijgt.
 - (technisch) Herstel van een back-up testen op een testkopie.
+- Panel → Gebruikers: accounts van mensen die niet meer meewerken verwijderen. Iedereen die geen gebruikers moet beheren is Editor, niet Admin.
 - Toegankelijkheidsverklaring: datum bijwerken na een nieuwe controle.
 - Domeinnaam en hosting verlengen; het certificaat (https) één keer nakijken.
 - Panel-accounts: wie geen toegang meer nodig heeft, verwijderen.
