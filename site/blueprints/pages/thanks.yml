@@ -19,7 +19,7 @@ fields:
     type: textarea
     buttons: false
   pending_headline:
-    label: Betaling nog niet afgerond (in verwerking of afgebroken)
+    label: Betaling nog in verwerking
     type: headline
   pending_title:
     label: Titel
@@ -28,7 +28,7 @@ fields:
     label: Tekst
     type: textarea
     buttons: false
-    help: Ook voor wie de Mollie-betaling verlaat met het pijltje terug, en voor wie de pagina zonder geldige link opent.
+    help: Wie bij Mollie op het pijltje terug klikt of de pagina zonder geldige link opent, krijgt de tekst bij Betaling mislukt.
   failed_headline:
     label: Betaling mislukt of geannuleerd
     type: headline

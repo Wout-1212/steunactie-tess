@@ -10,11 +10,11 @@ Paid-text: Je donatie van {amount} is goed ontvangen. Je krijgt zo meteen een be
 
 ----
 
-Pending-title: Je betaling is nog niet afgerond
+Pending-title: Je betaling wordt verwerkt
 
 ----
 
-Pending-text: We hebben nog geen bevestiging van je betaling ontvangen. Heb je de betaling afgebroken? Dan is er niets afgeschreven en kun je het gerust opnieuw proberen. Heb je wel betaald, dan krijg je binnen enkele minuten een bevestiging per mail.
+Pending-text: We hebben nog geen bevestiging van je betaling ontvangen. Dat kan enkele minuten duren. Zodra ze binnen is, krijg je een bevestiging per mail.
 
 ----
 

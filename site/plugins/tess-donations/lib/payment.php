@@ -71,6 +71,9 @@ function tessDonationStart(Language $language): Response
             'amount' => ['currency' => 'EUR', 'value' => number_format((int) $amount, 2, '.', '')],
             'description' => 'Donatie ' . site()->title()->value(),
             'redirectUrl' => tessDonationThanksUrl($language, $reference),
+            // Leaving the checkout (back arrow on Mollie's method list). The payment itself stays open
+            // until it expires, so the thank-you page needs this flag to show the failed state right away.
+            'cancelUrl' => tessDonationThanksUrl($language, $reference) . '&canceled=1',
             'webhookUrl' => tessDonationWebhookUrl(),
             'locale' => ['nl' => 'nl_BE', 'fr' => 'fr_BE', 'en' => 'en_GB'][$language->code()] ?? 'nl_BE',
             'metadata' => ['reference' => $reference],
