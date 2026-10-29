@@ -31,6 +31,9 @@ $tabTitle = $state === 'paid' ? null : Str::template($page->content()->get($stat
     'name' => $donation?->name ?? '',
     'amount' => $amount,
 ]);
+// Leaving Mollie's checkout with the back arrow returns here while the payment is still open (it only
+// expires about 15 minutes later), so an open donation also gets the retry button.
+$retry = $state === 'failed' || ($state === 'pending' && $donation);
 ?>
 <?php snippet('layout/header', ['noindex' => true, 'title' => $tabTitle]) ?>
 <section class="min-h-[45vh] py-[42px] md:py-[72px]">
@@ -39,10 +42,10 @@ $tabTitle = $state === 'paid' ? null : Str::template($page->content()->get($stat
         <h1 class="text-[clamp(30px,4vw,48px)]"><?= $fill($page->content()->get($state . '_title')->value()) ?></h1>
         <p class="mx-auto max-w-[56ch] text-[16px] leading-[1.7] md:text-[17px]"><?= $fill($page->content()->get($state . '_text')->value()) ?></p>
         <div class="mt-8 flex flex-wrap justify-center gap-3">
-            <?php if ($state === 'failed'): ?>
+            <?php if ($retry): ?>
                 <?php snippet('components/button', ['donation' => true, 'href' => page('doneren')?->url() . ($donation ? '?amount=' . (int) ($donation->amount_cents / 100) : ''), 'text' => t('donation.try-again')]) ?>
             <?php endif ?>
-            <?php snippet('components/button', ['href' => page('home')->url(), 'text' => t('donation.back-home'), 'variant' => $state === 'failed' ? 'outline' : 'solid']) ?>
+            <?php snippet('components/button', ['href' => page('home')->url(), 'text' => t('donation.back-home'), 'variant' => $retry ? 'outline' : 'solid']) ?>
         </div>
     </div>
 </section>

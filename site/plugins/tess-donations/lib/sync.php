@@ -25,7 +25,9 @@ function tessDonationWebhook(): Response
 
     try {
         $payment = tessMollie()->payments->get($id);
-        $donation = tessDonationFind((string) ($payment->metadata->reference ?? ''));
+        // mollie-api-php v3 returns metadata as the raw JSON string; older versions decoded it.
+        $metadata = is_string($payment->metadata) ? json_decode($payment->metadata) : $payment->metadata;
+        $donation = tessDonationFind((string) ($metadata->reference ?? ''));
         if ($donation && $donation->payment_id === $payment->id) {
             tessDonationSync($donation->reference, $payment);
         }
