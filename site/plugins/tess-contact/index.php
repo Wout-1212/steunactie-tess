@@ -62,6 +62,8 @@ Kirby::plugin('tess/contact', [
         'cache' => true,
         'from' => null,
         'fromName' => null,
+        // Overrides the recipient from the site settings, e.g. on the test server.
+        'to' => null,
         // Messages per IP address per window (minutes).
         'limit' => 5,
         'window' => 60,
@@ -90,7 +92,7 @@ Kirby::plugin('tess/contact', [
                 $email = Str::trim(tessField('email'));
                 // Keep line breaks and tabs, drop other control characters.
                 $message = Str::trim(preg_replace('/[^\P{Cc}\n\t]/u', '', str_replace("\r\n", "\n", tessField('message'))));
-                $to = (string) $kirby->site()->contactemail()->value();
+                $to = (string) (option('tess.contact.to') ?? $kirby->site()->contactemail()->value());
 
                 if ($name === '' || Str::length($name) > 120
                     || !V::email($email) || Str::length($email) > 254
