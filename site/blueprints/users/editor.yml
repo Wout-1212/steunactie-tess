@@ -1,0 +1,16 @@
+title: Editor
+description: Beheert de inhoud, updates en donaties. Geen gebruikers, talen of systeeminstellingen.
+# Everything not listed stays allowed, including the Donaties area from the tess-donations plugin.
+permissions:
+  access:
+    system: false
+    users: false
+    languages: false
+  languages: false
+  users: false
+  # Own account: name, email, password and 2FA stay editable.
+  user:
+    changeRole: false
+    delete: false
+  pages:
+    changeTemplate: false
