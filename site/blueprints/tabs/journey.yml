@@ -1,11 +1,18 @@
-# Treatment progress, kept in one place: the homepage and the treatment plan page both read from here.
+# Treatment progress, kept in one place: the timeline (homepage and treatment plan page) and the scale (homepage).
 label: Traject
 icon: flag
 fields:
+  journey_headline:
+    label: Tijdlijn
+    type: headline
+  journey_info:
+    label: Over de tijdlijn
+    type: info
+    text: De grote stappen van het traject. Ze verschijnen als tijdlijn op de homepage en op de pagina Ziekte & behandeling. Titel en inleiding van de tijdlijn staan bij [Home → Traject](/panel/pages/home?tab=journey).
   journey_steps:
     label: Stappen van het behandeltraject
     type: structure
-    help: Verschijnen als tijdlijn op de homepage en op de pagina Ziekte & behandeling. Zet de stap waar Tess nu staat op Nu bezig; de tijdlijn opent bij die stap.
+    help: Zet de stap waar Tess nu staat op Nu bezig; de tijdlijn opent bij die stap.
     columns:
       heading: true
       status: true
@@ -24,21 +31,51 @@ fields:
       text:
         label: Toelichting (op de pagina Ziekte & behandeling)
         type: textarea
-  medical_line:
-    type: line
+  medical_headline:
+    label: Weegschaal
+    type: headline
+  medical_info:
+    label: Over de weegschaal
+    type: info
+    text: Alleen op de homepage, onder de tijdlijn. Elk bevestigd onderzoek of elke behandeling is één bolletje op de weegschaal, links bij Al gedaan en rechts bij Nog te doen. De weegschaal gaat over de behandeling, nooit over geld. Bedragen en mijlpalen staan bij [Donaties](/panel/site?tab=donations).
+  medical_title:
+    label: Titel weegschaal
+    type: text
+    placeholder: Hoe ver staat Tess?
+  medical_intro:
+    label: Uitleg weegschaal (optioneel)
+    type: textarea
+    buttons: false
+    help: Leeg = de standaarduitleg over links en rechts.
   medical_steps:
-    label: Medische weegschaal
+    label: Onderzoeken en behandelingen
     type: structure
-    help: Alleen bevestigde onderzoeken en behandelingen invoeren. Ze bepalen hoe ver de weegschaal op de homepage naar Al gedaan overhelt; dit staat los van de opgehaalde donaties.
+    help: "{{ site.medicalStatus }}"
     columns:
       heading: true
+      kind: true
       status: true
-      weight: true
     fields:
       heading:
         label: Onderzoek of behandeling
         type: text
         required: true
+        help: Alleen bevestigde stappen. Deze naam staat in het lijstje onder de weegschaal.
+      kind:
+        label: Soort
+        type: select
+        translate: false
+        help: Bepaalt het icoontje in het bolletje. Zonder soort krijgt een gedane stap een vinkje.
+        options:
+          onderzoek: Onderzoek
+          consult: Consult
+          scan: Scan (MRI, CT, echo, röntgen)
+          bloed: Bloedafname
+          behandeling: Behandeling (infuus, kuur, therapie)
+          medicatie: Medicatie
+          operatie: Operatie
+          opname: Opname in het ziekenhuis
+          nazorg: Nazorg en revalidatie
       status:
         label: Status
         type: select
@@ -46,19 +83,3 @@ fields:
         options:
           done: Al gedaan
           planned: Nog te doen
-      weight:
-        label: Gewicht op de weegschaal
-        type: number
-        default: 1
-        min: 1
-        step: 1
-        help: Gelijke gewichten tellen stappen gelijk mee; dit is geen geldbedrag en geen genezingspercentage.
-        translate: false
-  medical_done_amount:
-    extends: fields/euro
-    label: Bevestigd bedrag bij Al gedaan (optioneel)
-    width: 1/2
-  medical_planned_amount:
-    extends: fields/euro
-    label: Bevestigd bedrag bij Nog te doen (optioneel)
-    width: 1/2

@@ -1,6 +1,10 @@
 label: Donaties
 icon: heart
 fields:
+  progress_title:
+    label: Titel boven de voortgangsbalk
+    type: text
+    placeholder: Samen opgehaald
   goal:
     extends: fields/euro
     label: Doelbedrag

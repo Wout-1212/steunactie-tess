@@ -37,10 +37,10 @@ Kirby bijwerken gaat ook via Composer, bijvoorbeeld `composer update getkirby/cm
 
 Het Panel opent op de site met deze tabbladen, de vaakst gebruikte eerst:
 
-- **Overzicht:** opgehaald bedrag (inclusief wat automatisch van Steunactie en GoFundMe gelezen wordt), percentage van het doel, aantal online donaties, aantal updates en de trajectstap die op Nu bezig staat. Elk cijfer linkt naar het tabblad waar je het aanpast. Daaronder staan de pagina's en de juridische pagina's.
+- **Overzicht:** opgehaald bedrag (inclusief wat automatisch van Steunactie en GoFundMe gelezen wordt), percentage van het doel, aantal online donaties, aantal updates, de trajectstap die op Nu bezig staat en de stand van de weegschaal. Elk cijfer linkt naar het tabblad waar je het aanpast. Daaronder staan de pagina's en de juridische pagina's.
 - **Updates:** voeg een update toe, vul datum en tekst in en zet de update op Gepubliceerd. Alleen listed updates verschijnen in het overzicht en op de homepage.
-- **Donaties:** doelbedrag, opgehaalde bedragen per bron en mijlpalen.
-- **Traject:** de stappen van het behandeltraject met hun status, en de items van de medische weegschaal. Homepage en de pagina Ziekte & behandeling lezen allebei hieruit.
+- **Donaties:** titel van de voortgangsbalk, doelbedrag, opgehaalde bedragen per bron en mijlpalen.
+- **Traject:** de stappen van de tijdlijn met hun status (homepage en de pagina Ziekte & behandeling), en daaronder alles van de weegschaal: titel, uitleg en de onderzoeken en behandelingen (alleen homepage).
 - **Instellingen:** logo, organisatiegegevens, contact, Instagram, de links naar Steunactie en GoFundMe, en het oproepblok onderaan de pagina's.
 
 Elke pagina heeft een eigen blueprint met alleen de velden die ze echt toont (`site/blueprints/pages`). Wat op meerdere plaatsen terugkomt staat in `site/blueprints/fields` (bijvoorbeeld `euro`, `photo`, `text-sections`, `questions`), `sections` (de updatelijst) en `tabs` (de tabbladen van de site en het tabblad Menu & zoekmachines). De cijfers op Overzicht komen uit `site/plugins/tess-panel`.
@@ -193,9 +193,9 @@ De frontend volgt samen-voor-tess-preview-1.pdf. De exacte kleuren uit Kleurenpa
 
 ### Medische weegschaal beheren
 
-Ga in het Panel naar het tabblad Traject. Vul onder Medische weegschaal alleen bevestigde onderzoeken/behandelingen in en kies per item Al gedaan of Nog te doen. Titel en uitleg boven de weegschaal staan bij Home → Traject. Gewicht staat standaard op 1. Een hoger gewicht telt een stap zwaarder mee op de schaal: dit is geen bedrag en geen percentage genezing. De schaal reageert uitsluitend op deze behandelstappen; opgehaalde donaties blijven afzonderlijk in de bestaande progressbar.
+Ga in het Panel naar het tabblad Traject, onder Weegschaal. Titel en uitleg staan daar ook. Vul alleen bevestigde onderzoeken en behandelingen in en kies per stap Al gedaan of Nog te doen, en optioneel een Soort (onderzoek, consult, scan, bloedafname, behandeling, medicatie, operatie, opname of nazorg). Elke stap is één bolletje in de schaal met het icoon van zijn soort; zonder soort krijgt een gedane stap een vinkje. Onder de stappenlijst toont het Panel wat er nu op de homepage staat ("3 van 7 stappen gedaan").
 
-De optionele bevestigde bedragen staan uitsluitend in de informatiekaarten Al gedaan en Nog te doen. Onder de schaal staan geen geldlabels. Zonder medische invoer staat de schaal neutraal en tonen de kaarten dat voortgang nog niet bevestigd is.
+De weegschaal helt maximaal 16° over naar de kant met de meeste stappen en kantelt bij het scrollen vanuit evenwicht naar die stand (niet bij verminderde beweging). Onder de schaal staan de zin "3 van 7 behandelstappen gedaan" en de twee lijstjes Al gedaan en Nog te doen. De weegschaal toont nooit bedragen: het geld staat alleen in de voortgangsbalk eronder. Zonder stappen verschijnt alleen de titel met de zin dat de stappen volgen zodra ze bevestigd zijn.
 De homepage behoudt de drie meest recente gepubliceerde updates (de PDF toont er twee). Het gedeelde overzicht blijft alle gepubliceerde updates tonen. Dit behoudt de bestaande inhoudsselectie.
 
 ### Bestaande werking

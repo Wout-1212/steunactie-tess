@@ -518,6 +518,35 @@ if (motionAllowed) {
     fillBar.observe(donationBar);
   }
 
+  // The medical scale starts level and tilts to its position once in view. The pans hang from the beam
+  // ends, so they move with them; treatment.php renders the end position with the same numbers.
+  const scale = document.querySelector("[data-scale]");
+  if (scale && Number(scale.dataset.scale)) {
+    const tilt = Number(scale.dataset.scale);
+    const length = Number(scale.dataset.scaleBeam);
+    const [beam, done, planned] = ["beam", "done", "planned"].map((part) =>
+      scale.querySelector(`[data-scale-part="${part}"]`),
+    );
+    const position = (angle) => {
+      const radians = (angle * Math.PI) / 180;
+      const x = length * (1 - Math.cos(radians));
+      const y = length * Math.sin(radians);
+      beam.setAttribute("transform", `rotate(${angle} ${scale.dataset.scalePivot})`);
+      done.setAttribute("transform", `translate(${x} ${-y})`);
+      planned.setAttribute("transform", `translate(${-x} ${y})`);
+    };
+    position(0);
+    const tiltScale = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        tiltScale.disconnect();
+        animate((eased) => position(tilt * eased));
+      },
+      { threshold: 0.6 },
+    );
+    tiltScale.observe(scale);
+  }
+
   // Donation buttons get a star that laps their rounded border, trailing light behind it.
   // SMIL runs each lap natively. JavaScript decides when laps start (once by itself when the button
   // is first in view, then only on hover/focus) and rebuilds the SVG for each new lap or resize,

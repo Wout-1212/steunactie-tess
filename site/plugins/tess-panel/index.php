@@ -59,7 +59,32 @@ Kirby::plugin('tess/panel', [
                 'link' => $panel . '/site?tab=journey',
             ];
 
+            ['done' => $done, 'total' => $total] = $this->medicalProgress();
+            $reports[] = [
+                'label' => 'Weegschaal',
+                'value' => $total ? "$done van $total stappen" : 'Nog geen stappen',
+                'info' => $total ? 'Behandelstappen gedaan, los van de donaties' : 'Voeg ze toe bij Traject',
+                'theme' => $total ? null : 'notice',
+                'link' => $panel . '/site?tab=journey',
+            ];
+
             return $reports;
+        },
+
+        // Steps on the medical scale (Traject tab): done, and done plus planned. The homepage scale counts with this too,
+        // so the Panel and the site always show the same numbers.
+        'medicalProgress' => function (): array {
+            $steps = $this->medical_steps()->toStructure();
+            $done = $steps->filterBy('status', 'done')->count();
+            return ['done' => $done, 'total' => $done + $steps->filterBy('status', 'planned')->count()];
+        },
+
+        // One-line status under the scale steps in the Panel, so editors see what the homepage shows.
+        'medicalStatus' => function (): string {
+            ['done' => $done, 'total' => $total] = $this->medicalProgress();
+            return $total
+                ? "Nu op de homepage: $done van $total stappen gedaan."
+                : 'Nog geen stappen. Op de homepage staat dat ze volgen zodra ze bevestigd zijn.';
         },
     ],
 ]);

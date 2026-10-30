@@ -1,7 +1,7 @@
+<?php // Fundraising only: euros raised from all sources. The medical scale above never uses these numbers. ?>
 <section class="py-9 text-ink md:py-16" id="donatievoortgang">
     <div class="mx-auto w-[calc(100%-40px)] max-w-[1120px] lg:w-[calc(100%-64px)]">
-        <h2 class="mb-[18px] text-[13px] leading-[1.3] tracking-[.1em] uppercase max-md:text-ink">
-            <?= $page->progress_title()->esc() ?></h2>
+        <?php snippet('components/heading', ['text' => $site->progress_title()->or(t('progress.title'))]) ?>
         <div class="mb-3 flex flex-wrap items-baseline justify-between gap-3 md:gap-5 max-xs:items-start">
             <?php if ($progress['hasGoal']): ?>
                 <strong data-count-up class="text-[32px] leading-[1.2] tracking-[-.02em] text-pink tabular-nums md:text-[40px]"><?= $progress['raised'] ?></strong><span class="max-w-none text-right text-[11px] leading-normal text-ink md:text-[13px]"><?= t('progress.of-goal') ?> <?= $progress['goal'] ?>

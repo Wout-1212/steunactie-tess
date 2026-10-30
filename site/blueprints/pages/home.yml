@@ -58,7 +58,7 @@ tabs:
           journey_info:
             label: Stappen en weegschaal
             type: info
-            text: De stappen van het traject en de items van de medische weegschaal pas je aan bij [Traject](/panel/site?tab=journey). Hier staan alleen de titels en teksten.
+            text: De stappen van de tijdlijn en alles van de weegschaal (titel, uitleg en stappen) pas je aan bij [Traject](/panel/site?tab=journey). Hier staan alleen de titel, inleiding en foto van de tijdlijn.
           treatment_title:
             label: Titel tijdlijn
             type: text
@@ -66,15 +66,6 @@ tabs:
             label: Inleiding tijdlijn (optioneel)
             type: textarea
             buttons: false
-          medical_title:
-            label: Titel medische weegschaal
-            type: text
-            placeholder: Waar gaat jouw steun naartoe?
-          medical_intro:
-            label: Uitleg medische weegschaal (optioneel)
-            type: textarea
-            buttons: false
-            help: Leeg = de standaarduitleg over Al gedaan en Nog te doen.
       sidebar:
         width: 1/3
         fields:
@@ -85,10 +76,10 @@ tabs:
     label: Doneren
     icon: heart
     fields:
-      progress_title:
-        label: Titel boven de voortgangsbalk
-        type: text
-        help: Bedragen en mijlpalen staan bij [Donaties](/panel/site?tab=donations).
+      progress_info:
+        label: Voortgangsbalk
+        type: info
+        text: Titel, bedragen en mijlpalen van de voortgangsbalk staan bij [Donaties](/panel/site?tab=donations).
       contribute_title:
         label: Titel manieren om bij te dragen
         type: text

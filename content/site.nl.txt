@@ -2,6 +2,10 @@ Title: Samen voor Tess
 
 ----
 
+Progress-title: 
+
+----
+
 Goal: 250000
 
 ----
@@ -37,41 +41,51 @@ Milestones:
 
 Journey-steps:
 
--
-  heading: Diagnose & doorverwijzing
+- 
+  heading: 'Diagnose & doorverwijzing'
+  status: ""
   text: De toelichting volgt.
--
+- 
   heading: Gespecialiseerde therapie
+  status: ""
   text: De toelichting volgt.
--
+- 
   heading: Intensieve behandelfase
+  status: ""
   text: De toelichting volgt.
--
-  heading: Herstel & nazorg
+- 
+  heading: 'Herstel & nazorg'
+  status: ""
   text: De toelichting volgt.
--
+- 
   heading: Operatie
+  status: ""
   text: test
+
+----
+
+Medical-title: 
+
+----
+
+Medical-intro: 
 
 ----
 
 Medical-steps:
 
-----
-
-Medical-done-amount:
-
-----
-
-Medical-planned-amount:
-
-----
-
-Cta-title: Wil je Tess helpen?
-
-----
-
-Cta-text: Elke bijdrage, groot of klein, maakt een verschil.
+- 
+  heading: onderzoek 1
+  kind: onderzoek
+  status: done
+- 
+  heading: operatie 1
+  kind: operatie
+  status: planned
+- 
+  heading: scan 1
+  kind: scan
+  status: planned
 
 ----
 
@@ -83,7 +97,15 @@ Logo:
 
 ----
 
+Shareimage: 
+
+----
+
 Organisation: Samen voor Tess
+
+----
+
+Organisationnumber: 1041.458.910
 
 ----
 
@@ -91,7 +113,7 @@ Organisationaddress: Abdis Agnesstraat 32, 8510 MARKE
 
 ----
 
-Organisationnumber: 1041.458.910
+Bankaccount: BE97 7340 5272 3549
 
 ----
 
@@ -107,12 +129,16 @@ Instagramtess: https://www.instagram.com/tess_on_a_mission/
 
 ----
 
-Bankaccount: BE97 7340 5272 3549
-
-----
-
 Fundraiser: https://steunactie.be/actie/de-medische-loterij-met-duidelijk-behandelplan-en-uitzicht-op-genezing
 
 ----
 
 Gofundme: https://www.gofundme.com/f/me8jby-support-and-hope-for-tess-recovery-and-life
+
+----
+
+Cta-title: Wil je Tess helpen?
+
+----
+
+Cta-text: Elke bijdrage, groot of klein, maakt een verschil.

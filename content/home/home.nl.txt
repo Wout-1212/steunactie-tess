@@ -30,10 +30,6 @@ Story-image:
 
 ----
 
-Progress-title: Donatievoortgang
-
-----
-
 Donation-title: Help Tess vandaag nog
 
 ----
@@ -92,14 +88,6 @@ Treatment-title: Het traject van Tess
 ----
 
 Treatment-intro: 
-
-----
-
-Medical-title: 
-
-----
-
-Medical-intro: 
 
 ----
 
