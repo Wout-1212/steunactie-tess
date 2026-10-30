@@ -87,6 +87,19 @@ Deze stappen gebeuren niet automatisch bij een deploy en moeten op de server zel
 - [ ] **Kirby-licentie.** Een publieke site heeft een licentie nodig (lokaal en op een testserver niet). Kirby geeft vzw's een gratis licentie of korting, afhankelijk van hun financiering: mail naar licensing@getkirby.com met als onderwerp "Free/discounted license for a non-profit organization" en beschrijf het project en de financiering. De licentie activeer je in het Panel; ze komt in `site/config/.license` op de server (staat niet in Git).
 - [ ] Het contactformulier op de live site testen en de mail controleren in de inbox en in Brevo (Transactional → Logs).
 
+**Vindbaar in Google** (pas na de bovenstaande stappen):
+
+- [ ] Controleren dat de live site niet geblokkeerd is: `https://samenvoortess.be/robots.txt` toont `Allow: /` en een `Sitemap:`-regel (niet `Disallow: /`), en de pagina's sturen geen `X-Robots-Tag: noindex` mee (`curl -I https://samenvoortess.be`). Anders staat `tess.noindex` nog in het live configbestand.
+- [ ] De echte teksten staan erin: geen "De definitieve tekst volgt." of "binnenkort toegevoegd" meer op Haar verhaal, Ziekte & behandeling en de FAQ, en de voorbeeldupdates zijn verwijderd. Google toont wat er bij de eerste bezoeken staat.
+- [ ] **Beschrijving voor zoekmachines** invullen op Home, Haar verhaal, Ziekte & behandeling en FAQ (tabblad Menu & zoekmachines, 120 à 160 tekens). Dat is het grijze tekstje in Google, ook onder de sitelinks. Leeg = het begin van de introductie.
+- [ ] De **websitebeschrijving** in Instellingen nakijken: op de homepage staat die ook in de titel ("Samen voor Tess – …"). Een eigen titel kan via "Titel in Google" op het tabblad Menu & zoekmachines.
+- [ ] **Definitieve favicon:** `favicon.ico`, `assets/images/favicon.svg` en `assets/images/apple-touch-icon.png` vervangen (nu een tijdelijk hartje). Google toont dit icoon naast de naam in de zoekresultaten.
+- [ ] **Standaard deelafbeelding** uploaden in Instellingen (1200 × 630), voor het voorbeeld bij delen via WhatsApp en Facebook.
+- [ ] **Google Search Console** (search.google.com/search-console): eigendom `samenvoortess.be` toevoegen als domein en bevestigen met het TXT-record bij Combell (DNS). Het account op naam van de vzw zetten of de vzw als eigenaar toevoegen.
+- [ ] In Search Console bij Sitemaps `https://samenvoortess.be/sitemap.xml` indienen, en bij URL-inspectie de homepage invoeren en "Indexering aanvragen" kiezen.
+- [ ] Links naar de site plaatsen: Instagram-bio's (@samen_voor_tess en @tess_on_a_mission), de GoFundMe en de steunactie. Links van andere sites helpen Google de site sneller te vinden.
+- [ ] Na één à twee weken in Search Console (Pagina's) nakijken of de pagina's geïndexeerd zijn en zoeken op "Samen voor Tess". De sitelinks onder het resultaat (Haar verhaal, FAQ, …) kiest Google zelf; die verschijnen meestal pas na enkele weken tot maanden, als er op de naam gezocht wordt.
+
 ## Panel-accounts en overdracht
 
 Er zijn twee rollen:
@@ -136,7 +149,7 @@ Iemand van de vzw volgt dit op. De meeste taken duren een paar minuten per maand
 
 ## Zoekmachines, delen en talen
 
-- **Beschrijving en deelafbeelding per pagina:** tabblad Menu & zoekmachines. De deelafbeelding is het voorbeeld bij delen via WhatsApp, Facebook of Instagram (liefst 1200 × 630). Zonder eigen afbeelding gebruikt de site een foto van de pagina, en anders de standaard deelafbeelding uit Instellingen.
+- **Titel, beschrijving en deelafbeelding per pagina:** tabblad Menu & zoekmachines. Zonder eigen titel is die "Paginatitel | Samen voor Tess", op de homepage "Samen voor Tess – " met de websitebeschrijving. Zonder eigen beschrijving gebruikt de site het begin van de introductie, en anders de websitebeschrijving uit Instellingen. De deelafbeelding is het voorbeeld bij delen via WhatsApp, Facebook of Instagram (liefst 1200 × 630). Zonder eigen afbeelding gebruikt de site een foto van de pagina, en anders de standaard deelafbeelding uit Instellingen.
 - `robots.txt`, `sitemap.xml` en `.well-known/security.txt` maakt de site zelf (`site/plugins/tess-seo`). Alle tags in `<head>` staan in `site/snippets/layout/meta.php`.
 - **Talen:** Nederlands is de hoofdtaal. Een pagina verschijnt pas in het Frans of Engels als ze in het Panel in die taal is ingevuld; tot dan verwijst `/fr/…` of `/en/…` door naar de Nederlandse pagina en toont de taalkeuze die taal niet. Na het vertalen hoeft er niets aan de code te gebeuren. Let op: teksten uit Instellingen (footer, oproepblok) moeten ook vertaald worden, anders blijven die Nederlands.
 - **Toegankelijkheidsverklaring:** onderaan de pagina Disclaimer (`/disclaimer#toegankelijkheid`), met een link in de footer. Werk de datum bij na elke controle.

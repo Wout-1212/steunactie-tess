@@ -11,10 +11,16 @@ fields:
     type: text
     width: 1/2
     help: Leeg = zelfde als in het menu.
+  seotitle:
+    label: Titel in Google (optioneel)
+    type: text
+    counter: true
+    maxlength: 70
+    help: De blauwe titel in de zoekresultaten. Leeg = de paginatitel met "| Samen voor Tess" erachter (op de homepage "Samen voor Tess – " met de websitebeschrijving).
   description:
     label: Beschrijving voor zoekmachines
     type: textarea
-    help: Leeg = de websitebeschrijving uit Instellingen.
+    help: Het grijze tekstje onder de titel in Google, liefst 120 à 160 tekens. Leeg = het begin van de introductie, en anders de websitebeschrijving uit Instellingen.
   shareimage:
     label: Deelafbeelding (optioneel)
     type: files

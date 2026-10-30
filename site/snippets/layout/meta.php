@@ -9,9 +9,16 @@ $isHome = $page->isHomePage();
 $isUpdate = $page->intendedTemplate()->name() === 'update';
 $indexable = !($noindex ?? false) && !$page->isErrorPage();
 $siteTitle = $site->title()->value();
-$title = $isHome ? $siteTitle : ($title ?? $page->title()->value()) . ' | ' . $siteTitle;
+// Home: "Samen voor Tess – {site description}", the site name plus what it is about, as Google shows it.
+$title = match (true) {
+    isset($title) => $title . ' | ' . $siteTitle,
+    $page->seotitle()->isNotEmpty() => $page->seotitle()->value(),
+    $isHome => $site->description()->isNotEmpty() ? $siteTitle . ' – ' . $site->description()->value() : $siteTitle,
+    default => $page->title()->value() . ' | ' . $siteTitle,
+};
+// Without a description of its own a page uses its introduction, so every page gets its own text in Google.
 $description = $page->description()->value()
-    ?: ($isUpdate ? Str::excerpt((string) $page->text()->toBlocks(), 160) : '')
+    ?: Str::excerpt($isUpdate ? (string) $page->text()->toBlocks() : $page->text()->kirbytext()->value(), 160)
     ?: $site->description()->value();
 $languages = $page->translatedLanguages();
 $ogLocale = fn ($language) => strtok($language->locale(LC_ALL) ?? '', '.');
