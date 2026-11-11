@@ -37,8 +37,9 @@ RewriteRule ^kirby/(.*) index.php [L]
 
 # block Composer packages and development files, in case they are deployed anyway
 # (only the folders in the deploy list of IMPLEMENTATIE.md belong on the server)
-RewriteRule ^(vendor|node_modules|state)/(.*) index.php [L]
+RewriteRule ^(vendor|node_modules|state|tests|src)/(.*) index.php [L]
 RewriteRule ^[^/]+\.(md|json|lock)$ index.php [L]
+RewriteRule ^phpunit\.xml$ index.php [L]
 
 # make site links work
 RewriteCond %{REQUEST_FILENAME} !-f

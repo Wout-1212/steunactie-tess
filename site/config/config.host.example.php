@@ -28,6 +28,6 @@ return [
             'password' => 'xsmtpsib-...',
         ],
     ],
-    'tess.mollie.key' => 'test_...',
+    'tess.mollie.key' => 'test...',
     // 'tess.noindex' => true,
 ];

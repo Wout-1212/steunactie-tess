@@ -35,6 +35,10 @@
     "start": [
       "Composer\\Config::disableProcessTimeout",
       "@php -S localhost:8000 kirby/router.php"
-    ]
+    ],
+    "test": "phpunit"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~13.4"
   }
 }

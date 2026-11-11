@@ -73,12 +73,20 @@ function tessDonationsMigrate(Database $db): void
         if ($target <= $version) {
             continue;
         }
-        $db->connection()->beginTransaction();
-        foreach ($statements as $statement) {
-            $db->execute($statement);
+        // All of a migration or nothing: SQLite can roll back CREATE and ALTER too, so a failed
+        // migration leaves the old schema and the old version, and simply runs again next time.
+        $pdo = $db->connection();
+        $pdo->beginTransaction();
+        try {
+            foreach ($statements as $statement) {
+                $db->execute($statement);
+            }
+            $db->execute('PRAGMA user_version = ' . $target);
+            $pdo->commit();
+        } catch (Throwable $exception) {
+            $pdo->rollBack();
+            throw $exception;
         }
-        $db->execute('PRAGMA user_version = ' . $target);
-        $db->connection()->commit();
     }
 }
 

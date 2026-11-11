@@ -1,6 +1,6 @@
 # Samen voor Tess - Kirby en Tailwind
 
-De site gebruikt Kirby/PHP met Tailwind CSS. Installeer de frontend-afhankelijkheden met `npm install` en start de CSS-watcher met `npm run dev`. Voor de productie-CSS gebruik je `npm run build`. Start de lokale Kirby-server apart met `composer start` of open de bestaande Herd-site.
+De site gebruikt Kirby/PHP met Tailwind CSS. Installeer de frontend-afhankelijkheden met `npm install` en start de CSS- en JavaScript-watcher met `npm run dev`. Voor de productiebestanden gebruik je `npm run build`. De JavaScript staat per onderdeel in `src/js` en wordt gebundeld tot `assets/js/site.js`. Start de lokale Kirby-server apart met `composer start` of open de bestaande Herd-site.
 
 De templates staan in `site/templates` en `site/snippets`. Pas kleuren en lettertypes aan in `assets/css/tailwind.css`; `assets/css/site.css` wordt automatisch gegenereerd. Zie `IMPLEMENTATIE.md` voor het beheren van teksten, foto's, donatievoortgang en rekeningnummer, en voor de checklist bij het live zetten (onder meer een apart configbestand met de Brevo-gegevens op de server).
 

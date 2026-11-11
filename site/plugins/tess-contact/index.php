@@ -22,25 +22,45 @@ function tessContactRespond(Language $language, string $status, int|null $code =
 // Shared by the contact and donation forms. $plugin is the plugin name ('contact', 'donations'):
 // its cache and its limit, window and minSeconds options are used.
 
+// An IP address is personal data, so the rate limit only stores a keyed hash of it. A plain sha256 can be
+// reversed by hashing all 4 billion IPv4 addresses; without the secret salt from the host config it can't.
+function tessVisitorHash(): string
+{
+    return hash_hmac('sha256', 'rate-limit:' . kirby()->visitor()->ip(), (string) option('content.salt', kirby()->root('content')));
+}
+
 // Counts accepted submissions per IP within a fixed window; returns false once the limit is reached.
 function tessAllow(string $plugin): bool
 {
     $cache = kirby()->cache('tess.' . $plugin);
-    $key = hash('sha256', __DIR__ . kirby()->visitor()->ip());
-    $entry = $cache->get($key) ?? ['count' => 0, 'until' => time() + option('tess.' . $plugin . '.window') * 60];
+    $key = tessVisitorHash();
+    $now = time();
+    $entry = $cache->get($key);
 
+    // The cache rounds up to whole minutes, so an entry can outlive its window by a few seconds: start a new one.
+    if ($entry === null || $entry['until'] <= $now) {
+        $entry = ['count' => 0, 'until' => $now + option('tess.' . $plugin . '.window') * 60];
+    }
     if ($entry['count'] >= option('tess.' . $plugin . '.limit')) {
         return false;
     }
     $entry['count']++;
-    $cache->set($key, $entry, (int) ceil(($entry['until'] - time()) / 60));
+    // Expiry is in minutes and 0 means "never", so keep at least one minute.
+    $cache->set($key, $entry, max(1, (int) ceil(($entry['until'] - $now) / 60)));
     return true;
 }
 
-// A form posted from another site (a browser always sends Origin with a cross-site POST).
+// A form posted from another site (CSRF). Browsers say where a request comes from in Sec-Fetch-Site
+// (Fetch Metadata); older browsers without it still send Origin with every cross-site POST. A request
+// with neither doesn't come from a browser form, so it is left to the other checks.
 function tessForeignOrigin(): bool
 {
-    $origin = kirby()->request()->header('Origin');
+    $request = kirby()->request();
+    if ($fetchSite = $request->header('Sec-Fetch-Site')) {
+        // 'none': the visitor started the request themselves (address bar, bookmark).
+        return !in_array($fetchSite, ['same-origin', 'none'], true);
+    }
+    $origin = $request->header('Origin');
     return $origin !== null && parse_url($origin, PHP_URL_HOST) !== parse_url(kirby()->url(), PHP_URL_HOST);
 }
 
@@ -88,10 +108,10 @@ Kirby::plugin('tess/contact', [
                 }
 
                 // One line without control characters, since the name also ends up in the subject and Reply-To.
-                $name = Str::trim(preg_replace('/[\s\p{Cc}]+/u', ' ', tessField('name')));
-                $email = Str::trim(tessField('email'));
+                $name = trim(preg_replace('/[\s\p{Cc}]+/u', ' ', tessField('name')));
+                $email = trim(tessField('email'));
                 // Keep line breaks and tabs, drop other control characters.
-                $message = Str::trim(preg_replace('/[^\P{Cc}\n\t]/u', '', str_replace("\r\n", "\n", tessField('message'))));
+                $message = trim(preg_replace('/[^\P{Cc}\n\t]/u', '', str_replace("\r\n", "\n", tessField('message'))));
                 $to = (string) (option('tess.contact.to') ?? $kirby->site()->contactemail()->value());
 
                 if ($name === '' || Str::length($name) > 120

@@ -36,7 +36,7 @@ function tessDonationPanelView(): array
 {
     $filters = tessDonationFilters();
     $filter = array_key_exists(get('filter'), $filters) ? get('filter') : 'paid';
-    $search = Str::trim((string) get('q'));
+    $search = trim((string) get('q'));
     $page = max(1, (int) get('page', 1));
     $limit = 25;
 

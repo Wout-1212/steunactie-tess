@@ -6,6 +6,8 @@ De PDF-wireframes zijn vertaald naar PHP-templates met responsive Tailwind CSS e
 
 Gebruik je bestaande Herd-site, of start vanuit de projectmap `composer start` (PHP en Composer moeten beschikbaar zijn). Open daarna de lokale site en `/panel`. Na een verse `git clone` eerst `composer install` uitvoeren (zie [Composer-pakketten](#composer-pakketten-kirby-en-vendor)).
 
+De unittests voor de plugins (donatieberichten, Mollie-status, het uitlezen van Steunactie en GoFundMe, de databasemigraties en de formulierbeveiliging) staan in `tests/`. Voer ze uit met `composer test`. Ze gebruiken een database en caches in het geheugen en roepen Mollie niet aan. PHPUnit is een ontwikkelpakket (PHP 8.4 of hoger) en komt met `--no-dev` niet op de server.
+
 ## Composer-pakketten (kirby en vendor)
 
 De mappen `kirby/` en `vendor/` staan **niet** in Git (zie `.gitignore`). Composer installeert ze:
@@ -75,7 +77,7 @@ Deze stappen gebeuren niet automatisch bij een deploy en moeten op de server zel
 
 - [ ] **Composer-pakketten installeren.** `kirby/` en `vendor/` staan niet in Git: voer op de server bij elke deploy `composer install --no-dev --optimize-autoloader` uit, of upload de lokaal geïnstalleerde mappen `kirby/` en `vendor/` mee (zie [Composer-pakketten](#composer-pakketten-kirby-en-vendor)). Zonder deze mappen werkt de site niet.
 - [ ] **Nieuw configbestand voor de server aanmaken.** Kopieer `site/config/config.host.example.php` naar `site/config/config.samenvoortess.be.php` op de server en vul de Brevo SMTP-login en SMTP-key in. Wordt de site ook via www bereikt, maak dan dezelfde kopie als `config.www.samenvoortess.be.php`. Dit bestand staat bewust niet in Git en moet dus met de hand geüpload worden. Zonder dit bestand verstuurt het contactformulier geen mail.
-- [ ] **Alleen deze bestanden en mappen deployen:** `index.php`, `.htaccess`, `favicon.ico`, `assets/`, `content/`, `kirby/`, `media/` (alleen `media/index.html`), `site/` en `vendor/`. **Niet** naar de server: `.git/`, `.claude/`, `.vscode/`, `node_modules/`, `state/`, de `.md`-bestanden, `composer.json/lock`, `package*.json` en `.editorconfig`. `.htaccess` blokkeert ze ook, maar alleen als extra laag. `site/accounts`, `site/sessions`, `site/cache` en `site/storage` van de server nooit overschrijven met een lokale versie.
+- [ ] **Alleen deze bestanden en mappen deployen:** `index.php`, `.htaccess`, `favicon.ico`, `assets/`, `content/`, `kirby/`, `media/` (alleen `media/index.html`), `site/` en `vendor/`. **Niet** naar de server: `.git/`, `.claude/`, `.vscode/`, `node_modules/`, `state/`, `src/`, `tests/`, `phpunit.xml`, de `.md`-bestanden, `composer.json/lock`, `package*.json` en `.editorconfig`. `.htaccess` blokkeert ze ook, maar alleen als extra laag. `site/accounts`, `site/sessions`, `site/cache` en `site/storage` van de server nooit overschrijven met een lokale versie.
 - [ ] In het serverconfigbestand ook `url` (het ene adres van de site, met https), `content.salt` en `cookie.key` invullen (zie `config.host.example.php`). Op de testserver daarnaast `'tess.noindex' => true`; op de live site **nooit**.
 - [ ] Het lokale bestand `config.theagency2627-steunactie-tess.test.php` (Mailpit) **niet** naar de server kopiëren.
 - [ ] In Brevo het domein `samenvoortess.be` authenticeren (SPF/DKIM-records bij de domeinbeheerder) en `contact@samenvoortess.be` als afzender toevoegen. Ook de inlogcode van het Panel komt van dat adres (`auth.challenge.email.from` in `config.php`); zonder geverifieerde afzender kan niemand inloggen zolang er geen authenticator-app ingesteld is.
@@ -187,13 +189,15 @@ npm install
 npm run dev
 ```
 
-`npm run dev` houdt de Tailwind-build actief tijdens het ontwikkelen. Start Kirby daarnaast in een andere terminal met `composer start`, of gebruik je bestaande Herd-site.
+`npm run dev` houdt tijdens het ontwikkelen zowel de Tailwind-build als de JavaScript-build actief (stoppen met Ctrl+C). Start Kirby daarnaast in een andere terminal met `composer start`, of gebruik je bestaande Herd-site.
 
 ```sh
 npm run build
 ```
 
-De productiebuild schrijft de gecomprimeerde CSS naar `assets/css/site.css`. Bewerk dit gegenereerde bestand niet rechtstreeks. Het bestand blijft in Git zodat de website zonder Node.js op de PHP-host kan draaien. Node.js en de npm-pakketten zijn alleen nodig om de styling opnieuw te bouwen. Er wordt geen Tailwind-CDN gebruikt. Fonts worden lokaal in dezelfde CSS-bundel geladen.
+De productiebuild schrijft de gecomprimeerde CSS naar `assets/css/site.css` en de gecomprimeerde JavaScript naar `assets/js/site.js`. Voer hem uit voor je commit of deployt: `npm run dev` schrijft niet-gecomprimeerde bestanden. Bewerk deze gegenereerde bestanden niet rechtstreeks. Ze blijven in Git zodat de website zonder Node.js op de PHP-host kan draaien. Node.js en de npm-pakketten zijn alleen nodig om de styling en scripts opnieuw te bouwen. Er wordt geen Tailwind-CDN gebruikt. Fonts worden lokaal in dezelfde CSS-bundel geladen.
+
+**JavaScript** staat in `src/js`, één bestand (ES-module) per onderdeel: menu, donatieformulier, lightbox, de ster op de donatieknoppen enzovoort. `src/js/main.js` importeert ze allemaal; esbuild bundelt dat tot één `assets/js/site.js`, ingepakt in een functie zodat niets in de globale scope belandt. Een bundel in plaats van losse modules in de browser, omdat `.htaccess` alles in `assets/js` een jaar laat cachen: alleen `site.js` krijgt `?v=` met de bestandsdatum, losse geïmporteerde bestanden zouden na een update oud blijven. Elk onderdeel zoekt zijn eigen HTML (via `data-`-attributen) en doet niets op pagina's zonder die HTML; de site werkt ook zonder JavaScript. De browserdoelen van esbuild (`--target` in `package.json`) zijn dezelfde als die van Tailwind 4.
 
 ## Teksten beheren in Kirby
 

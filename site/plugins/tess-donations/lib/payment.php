@@ -24,10 +24,10 @@ function tessDonationStart(Language $language): Response
         return $back('invalid');
     }
 
-    $amount = Str::trim(tessField('amount'));
+    $amount = trim(tessField('amount'));
     // One line, since the name also ends up in the mail.
-    $name = Str::trim(preg_replace('/[\s\p{Cc}]+/u', ' ', tessField('name')));
-    $email = Str::trim(tessField('email'));
+    $name = trim(preg_replace('/[\s\p{Cc}]+/u', ' ', tessField('name')));
+    $email = trim(tessField('email'));
     $message = tessDonationCleanMessage(tessField('message'));
 
     $errors = array_keys(array_filter([
@@ -91,7 +91,7 @@ function tessDonationStart(Language $language): Response
 // Keeps single line breaks, drops other control characters and runs of empty lines. Also used in the Panel.
 function tessDonationCleanMessage(string $message): string
 {
-    return Str::trim(preg_replace(['/[^\P{Cc}\n]/u', "/\n{3,}/"], ['', "\n\n"], str_replace(["\r\n", "\t"], ["\n", ' '], $message)));
+    return trim(preg_replace(['/[^\P{Cc}\n]/u', "/\n{3,}/"], ['', "\n\n"], str_replace(["\r\n", "\t"], ["\n", ' '], $message)));
 }
 
 // Links, email addresses and phone numbers wait for approval in the Panel; everything else is shown at once.
