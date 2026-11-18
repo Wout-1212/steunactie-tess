@@ -42,9 +42,10 @@ $logoClass = 'h-auto w-auto max-h-[44px] max-w-[112px] md:max-h-[54px] md:max-w-
                 <?php foreach (['home', 'haar-verhaal', 'behandelingsplan', 'updates', 'faq'] as $slug): ?>
                     <?php if ($item = page($slug)): ?><a class="<?= $navLink ?>" href="<?= $item->url() ?>" <?= $page->is($item) ? 'aria-current="page"' : ($page->isDescendantOf($item) ? 'aria-current="true"' : '') ?>><?= $item->navtitle()->or($item->title())->esc() ?></a><?php endif ?>
                 <?php endforeach ?><a class="<?= $navLink ?>" href="<?= page('home')->url() ?>#contact"><?= t('nav.contact') ?></a>
-                <?php /* Only languages this page exists in (plugins/tess-seo); hidden while there is just one. */ ?>
+                <?php /* Every site language. One this page isn't translated into yet (plugins/tess-seo would send it back
+                    to Dutch) is shown greyed out and not clickable, with a note in that language. */ ?>
                 <?php $languages = $page->translatedLanguages() ?>
-                <?php if ($languages->count() > 1): ?>
+                <?php if ($kirby->languages()->count() > 1): ?>
                 <details class="group relative shrink-0 max-md:self-start" data-language-picker>
                     <summary class="relative flex min-h-11 list-none items-center gap-1.5 p-0 focus-visible:rounded-[3px] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-pink motion-safe:transition-[color] motion-safe:duration-200" aria-label="<?= t('nav.languages') ?>: <?= strtoupper($kirby->languageCode()) ?>">
                         <?php snippet('components/icon', ['name' => 'globe', 'class' => 'size-[17px]']) ?>
@@ -55,6 +56,8 @@ $logoClass = 'h-auto w-auto max-h-[44px] max-w-[112px] md:max-h-[54px] md:max-w-
                             <?php if ($language = $languages->find($code)): ?>
                                 <?php $isCurrent = $language->code() === $kirby->languageCode() ?>
                                 <a class="flex min-h-11 items-center justify-between gap-4 rounded-[3px] px-3 py-2 hover:bg-blush hover:text-pink focus-visible:bg-blush motion-safe:transition-[color,background-color] motion-safe:duration-200<?= $isCurrent ? ' font-bold text-pink' : '' ?>" href="<?= $page->url($language->code()) ?>" hreflang="<?= $language->code() ?>" lang="<?= $language->code() ?>" <?= $isCurrent ? 'aria-current="true"' : '' ?>><?= strtoupper($language->code()) ?><?php if ($isCurrent): ?><span aria-hidden="true">✓</span><?php endif ?></a>
+                            <?php elseif ($kirby->language($code)): ?>
+                                <a role="link" aria-disabled="true" class="flex min-h-11 cursor-not-allowed items-center justify-between gap-4 whitespace-nowrap rounded-[3px] px-3 py-2 text-ink/55" lang="<?= $code ?>"><?= strtoupper($code) ?><span class="text-[11px]"><?= t('nav.not-translated', null, $code) ?></span></a>
                             <?php endif ?>
                         <?php endforeach ?>
                     </div>

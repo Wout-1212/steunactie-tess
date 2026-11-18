@@ -13,6 +13,8 @@ return [
         'footer.transfer' => 'Virement bancaire',
         'footer.company-number' => "Numéro d'entreprise",
         'footer.accessibility' => 'Accessibilité',
+        'nav.languages' => 'Langue',
+        'nav.not-translated' => 'pas encore traduit',
         'contact.required' => 'Tous les champs sont obligatoires.',
         'donation.donate' => 'Faire un don',
         'donation.alternatives' => 'Vous préférez une autre façon ?',

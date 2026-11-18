@@ -110,20 +110,19 @@ function tessDonationById(int $id): object
 function tessDonationEditDialog(int $id): array
 {
     $donation = tessDonationById($id);
-    $readonly = fn (string $label, string|null $value, string $width = '1/2') => ['type' => 'text', 'label' => $label, 'disabled' => true, 'width' => $width, 'value' => $value];
+    $readonly = fn (string $label) => ['type' => 'text', 'label' => $label, 'disabled' => true, 'width' => '1/2'];
 
     return [
         'component' => 'k-form-dialog',
         'props' => [
             'size' => 'large',
             'fields' => [
-                'name' => $readonly('Naam', $donation->name . ($donation->show_name ? '' : ' (wil anoniem blijven)')),
-                'email' => $readonly('E-mailadres', $donation->email),
-                'amount' => $readonly('Bedrag', '€ ' . number_format($donation->amount_cents / 100, 0, ',', '.') . ($donation->show_amount ? '' : ' (niet tonen)')),
-                'payment' => $readonly('Betaling', (TESS_DONATION_PAYMENT_LABELS[$donation->payment_status] ?? $donation->payment_status)
-                    . ($donation->method ? ' via ' . $donation->method : '') . ' · ' . ($donation->payment_id ?? 'geen Mollie-ID')),
-                'date' => $readonly('Betaald op', tessDonationLocalTime($donation->paid_at) ?: '–'),
-                'mail' => $readonly('Bedankmail', $donation->mail_error ? 'Mislukt: ' . $donation->mail_error : ($donation->mailed_at ? 'Verstuurd' : 'Nog niet verstuurd')),
+                'name' => $readonly('Naam'),
+                'email' => $readonly('E-mailadres'),
+                'amount' => $readonly('Bedrag'),
+                'payment' => $readonly('Betaling'),
+                'date' => $readonly('Betaald op'),
+                'mail' => $readonly('Bedankmail'),
                 'message' => [
                     'type' => 'textarea',
                     'label' => 'Bericht',
@@ -132,7 +131,17 @@ function tessDonationEditDialog(int $id): array
                     'help' => 'Haal hier bijvoorbeeld een telefoonnummer of andere persoonlijke gegevens weg. De rest van het bericht blijft staan.',
                 ],
             ],
-            'value' => ['message' => $donation->message],
+            // The Panel fills each field from this list, by field name; a 'value' inside a field is ignored.
+            'value' => [
+                'name' => $donation->name . ($donation->show_name ? '' : ' (wil anoniem blijven)'),
+                'email' => $donation->email,
+                'amount' => '€ ' . number_format($donation->amount_cents / 100, 0, ',', '.') . ($donation->show_amount ? '' : ' (niet tonen)'),
+                'payment' => (TESS_DONATION_PAYMENT_LABELS[$donation->payment_status] ?? $donation->payment_status)
+                    . ($donation->method ? ' via ' . $donation->method : '') . ' · ' . ($donation->payment_id ?? 'geen Mollie-ID'),
+                'date' => tessDonationLocalTime($donation->paid_at) ?: '–',
+                'mail' => $donation->mail_error ? 'Mislukt: ' . $donation->mail_error : ($donation->mailed_at ? 'Verstuurd' : 'Nog niet verstuurd'),
+                'message' => $donation->message,
+            ],
             'submitButton' => ['text' => 'Bericht opslaan', 'icon' => 'check'],
         ],
     ];

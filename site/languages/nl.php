@@ -45,6 +45,7 @@ return [
         'nav.main' => 'Hoofdnavigatie',
         'nav.contact' => 'Contact',
         'nav.languages' => 'Taal',
+        'nav.not-translated' => 'nog niet vertaald',
 
         'cta.help' => 'Help Tess',
 

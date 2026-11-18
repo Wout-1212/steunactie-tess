@@ -10,7 +10,7 @@
       if (!languagePicker.contains(event.target)) closeLanguagePicker();
     });
     languagePicker.addEventListener("focusout", (event) => {
-      if (!languagePicker.contains(event.relatedTarget)) closeLanguagePicker();
+      if (event.relatedTarget && !languagePicker.contains(event.relatedTarget)) closeLanguagePicker();
     });
     languagePicker.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && languagePicker.open) {
@@ -102,7 +102,7 @@
       () => setMenu(toggle.getAttribute("aria-expanded") !== "true")
     );
     nav.addEventListener("click", (event) => {
-      if (event.target.closest("a")) setMenu(false);
+      if (event.target.closest("a[href]")) setMenu(false);
     });
     desktop.addEventListener("change", () => setMenu(false));
     window.addEventListener("pageshow", () => setMenu(false));
@@ -111,7 +111,7 @@
       if (event.key === "Escape") setMenu(false, true);
       if (event.key === "Tab") {
         const controls = [
-          ...siteHeader.querySelectorAll("a, button, summary")
+          ...siteHeader.querySelectorAll("a[href], button, summary")
         ].filter((element) => element.getClientRects().length);
         const first = controls[0], last = controls[controls.length - 1];
         if (event.shiftKey && document.activeElement === first) {

@@ -485,6 +485,10 @@
     width: 14px;
     height: 14px;
   }
+  .size-\[15px\] {
+    width: 15px;
+    height: 15px;
+  }
   .size-\[17px\] {
     width: 17px;
     height: 17px;
@@ -629,6 +633,9 @@
   .min-w-0 {
     min-width: calc(var(--spacing) * 0);
   }
+  .min-w-11 {
+    min-width: calc(var(--spacing) * 11);
+  }
   .min-w-\[92px\] {
     min-width: 92px;
   }
@@ -656,6 +663,9 @@
   }
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
+  }
+  .cursor-not-allowed {
+    cursor: not-allowed;
   }
   .resize {
     resize: both;
@@ -988,6 +998,9 @@
   .px-1 {
     padding-inline: calc(var(--spacing) * 1);
   }
+  .px-2 {
+    padding-inline: calc(var(--spacing) * 2);
+  }
   .px-3 {
     padding-inline: calc(var(--spacing) * 3);
   }
@@ -1307,6 +1320,9 @@
   .wrap-break-word {
     overflow-wrap: break-word;
   }
+  .whitespace-nowrap {
+    white-space: nowrap;
+  }
   .text-\[\#27222ACC\] {
     color: #27222ACC;
   }
@@ -1315,6 +1331,12 @@
   }
   .text-ink {
     color: var(--color-ink);
+  }
+  .text-ink\/55 {
+    color: color-mix(in srgb, #27222A 55%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      color: color-mix(in oklab, var(--color-ink) 55%, transparent);
+    }
   }
   .text-muted {
     color: var(--color-muted);
@@ -1355,6 +1377,9 @@
   }
   .underline-offset-3 {
     text-underline-offset: 3px;
+  }
+  .underline-offset-\[6px\] {
+    text-underline-offset: 6px;
   }
   .accent-pink {
     accent-color: var(--color-pink);
@@ -1588,6 +1613,11 @@
   .focus-visible\:-outline-offset-3 {
     &:focus-visible {
       outline-offset: calc(3px * -1);
+    }
+  }
+  .focus-visible\:outline-offset-2 {
+    &:focus-visible {
+      outline-offset: 2px;
     }
   }
   .focus-visible\:outline-offset-3 {
@@ -2096,6 +2126,11 @@
   .xs\:text-\[12px\] {
     @media (width >= 22.5625rem) {
       font-size: 12px;
+    }
+  }
+  .md\:order-last {
+    @media (width >= 42.5625rem) {
+      order: 9999;
     }
   }
   .md\:mx-0 {

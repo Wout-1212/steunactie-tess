@@ -37,7 +37,7 @@ export function initMobileMenu() {
     setMenu(toggle.getAttribute("aria-expanded") !== "true"),
   );
   nav.addEventListener("click", (event) => {
-    if (event.target.closest("a")) setMenu(false);
+    if (event.target.closest("a[href]")) setMenu(false);
   });
   desktop.addEventListener("change", () => setMenu(false));
   window.addEventListener("pageshow", () => setMenu(false));
@@ -46,7 +46,7 @@ export function initMobileMenu() {
     if (event.key === "Escape") setMenu(false, true);
     if (event.key === "Tab") {
       const controls = [
-        ...siteHeader.querySelectorAll("a, button, summary"),
+        ...siteHeader.querySelectorAll("a[href], button, summary"),
       ].filter((element) => element.getClientRects().length);
       const first = controls[0],
         last = controls[controls.length - 1];

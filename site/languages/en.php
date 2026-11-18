@@ -13,6 +13,8 @@ return [
         'footer.transfer' => 'Bank transfer',
         'footer.company-number' => 'Company number',
         'footer.accessibility' => 'Accessibility',
+        'nav.languages' => 'Language',
+        'nav.not-translated' => 'not translated yet',
         'contact.required' => 'All fields are required.',
         'donation.donate' => 'Donate now',
         'donation.alternatives' => 'Prefer another way?',

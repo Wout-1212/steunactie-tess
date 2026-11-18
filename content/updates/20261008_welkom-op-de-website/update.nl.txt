@@ -2,11 +2,15 @@ Title: Welkom op de website
 
 ----
 
-Date: 2026-10-08
+Text: [{"content":{"text":"<p>Dit is een voorbeeldupdate. Hier vertellen we binnenkort hoe het met Tess gaat en wat er met de steun gebeurt. Je kunt deze update aanpassen of verwijderen in het Panel.</p>"},"id":"290588c1-0eb1-4581-8d3e-839fb8281333","isHidden":false,"type":"text"},{"content":[],"id":"ce255b94-4dff-4bbc-b53e-d9b8f64eb289","isHidden":false,"type":"line"},{"content":{"level":"h3","text":"Lijst van behandelingen"},"id":"8d4cc59b-cfda-4375-a88a-1efb4d14eaf1","isHidden":false,"type":"heading"},{"content":{"text":"<ul><li>Operatie</li><li>Onderzoek</li><li>Scan</li></ul>"},"id":"4685d273-1edf-4c31-abfb-f4b198d94fd2","isHidden":false,"type":"list"},{"content":[],"id":"eabe9c0e-4135-4944-9950-1d161519486a","isHidden":false,"type":"line"},{"content":{"text":"Super inspirerende quote","citation":"Wout Philippo"},"id":"bc934e86-5743-4cab-bcf8-8274257e5962","isHidden":false,"type":"quote"}]
 
 ----
 
-Text: Dit is een voorbeeldupdate. Hier vertellen we binnenkort hoe het met Tess gaat en wat er met de steun gebeurt. Je kunt deze update aanpassen of verwijderen in het Panel.
+Photos: 
+
+----
+
+Date: 2026-10-08
 
 ----
 

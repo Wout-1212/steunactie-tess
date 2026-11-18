@@ -1,44 +1,42 @@
-# Samen voor Tess - Kirby en Tailwind
+# Samen voor Tess
 
-De site gebruikt Kirby/PHP met Tailwind CSS. Installeer de frontend-afhankelijkheden met `npm install` en start de CSS- en JavaScript-watcher met `npm run dev`. Voor de productiebestanden gebruik je `npm run build`. De JavaScript staat per onderdeel in `src/js` en wordt gebundeld tot `assets/js/site.js`. Start de lokale Kirby-server apart met `composer start` of open de bestaande Herd-site.
+Website van de steunactie Samen voor Tess (samenvoortess.be): het verhaal van Tess, haar behandeltraject, updates, een donatievoortgang en online doneren via Mollie. Redacteurs beheren alles in het Kirby Panel (`/panel`).
 
-De templates staan in `site/templates` en `site/snippets`. Pas kleuren en lettertypes aan in `assets/css/tailwind.css`; `assets/css/site.css` wordt automatisch gegenereerd. Zie `IMPLEMENTATIE.md` voor het beheren van teksten, foto's, donatievoortgang en rekeningnummer, en voor de checklist bij het live zetten (onder meer een apart configbestand met de Brevo-gegevens op de server).
+## Techniek
 
----
+| Onderdeel | Gebruikt |
+|---|---|
+| CMS | Kirby 5.6.1 (PHP 8.2 of hoger), inhoud als tekstbestanden in `content/` |
+| Styling | Tailwind CSS 4, gebouwd naar `assets/css/site.css` |
+| JavaScript | Modules in `src/js`, met esbuild gebundeld naar `assets/js/site.js` |
+| Online doneren | Mollie (`mollie/mollie-api-php` v3), donaties in SQLite (`site/storage/donations.sqlite`) |
+| E-mail | Brevo SMTP-relay (contactformulier, bedankmail, inlogcode van het Panel); lokaal Mailpit |
+| Tests | PHPUnit 13 (PHP 8.4 of hoger) in `tests/` |
 
-<img src="http://getkirby.com/assets/images/github/plainkit.jpg" width="300">
+## Snel starten
 
-**Kirby: the CMS that adapts to any project, loved by developers and editors alike.**
-The Plainkit is a minimal Kirby setup with the basics you need to start a project from scratch. It is the ideal choice if you are already familiar with Kirby and want to start step-by-step.
+```sh
+composer install   # kirby/ en vendor/ staan niet in Git
+npm install
+npm run dev        # Tailwind en esbuild in watch-modus
+composer start     # in een tweede terminal, of gebruik de Herd-site
+composer test      # unittests van de plugins
+npm run build      # voor je commit of deployt: gecomprimeerde CSS en JS
+```
 
-You can learn more about Kirby at [getkirby.com](https://getkirby.com).
+## Mappen
 
-### Try Kirby for free
+| Map | Inhoud |
+|---|---|
+| `site/templates`, `site/snippets` | Opbouw van de pagina's en herbruikbare onderdelen |
+| `site/blueprints` | Velden en tabbladen in het Panel |
+| `site/plugins` | Eigen code: `tess-donations` (Mollie), `tess-contact` (formulier en spambeveiliging), `tess-fundraisers` (Steunactie en GoFundMe uitlezen), `tess-seo`, `tess-panel`, `tess-typography`, `tess-dates` |
+| `site/languages` | Vaste interfaceteksten per taal (nl, fr, en) |
+| `site/config` | `config.php` in Git; de hostconfigbestanden met sleutels niet |
+| `src/js`, `assets/css/tailwind.css` | Bronbestanden van de JavaScript en de styling |
 
-You can try Kirby and the Plainkit on your local machine or on a test server as long as you need to make sure it is the right tool for your next project. … and when you’re convinced, [buy your license](https://getkirby.com/buy).
+## Documentatie
 
-### Get going
-
-Read our guide on [how to get started with Kirby](https://getkirby.com/docs/guide/quickstart).
-
-You can [download the latest version](https://github.com/getkirby/plainkit/archive/main.zip) of the Plainkit.
-If you are familiar with Git, you can clone Kirby's Plainkit repository from Github.
-
-    git clone https://github.com/getkirby/plainkit.git
-
-## What's Kirby?
-
--   **[getkirby.com](https://getkirby.com)** – Get to know the CMS.
--   **[Try it](https://getkirby.com/try)** – Take a test ride with our online demo. Or download one of our kits to get started.
--   **[Documentation](https://getkirby.com/docs/guide)** – Read the official guide, reference and cookbook recipes.
--   **[Issues](https://github.com/getkirby/kirby/issues)** – Report bugs and other problems.
--   **[Feedback](https://feedback.getkirby.com)** – You have an idea for Kirby? Share it.
--   **[Forum](https://forum.getkirby.com)** – Whenever you get stuck, don't hesitate to reach out for questions and support.
--   **[Discord](https://chat.getkirby.com)** – Hang out and meet the community.
--   **[Mastodon](https://mastodon.social/@getkirby)** – Spread the word.
--   **[Bluesky](https://bsky.app/profile/getkirby.com)** – Spread the word.
-
----
-
-© 2009 Bastian Allgeier
-[getkirby.com](https://getkirby.com) · [License agreement](https://getkirby.com/license)
+- [IMPLEMENTATIE.md](IMPLEMENTATIE.md): hoe alles werkt, inhoud beheren, deployen, live zetten en onderhoud.
+- [TASKS.md](TASKS.md): online doneren via Mollie: keuzes en wat nog getest moet worden.
+- [TASKS-CONTROLE.md](TASKS-CONTROLE.md): controle van toegankelijkheid, SEO en beveiliging.

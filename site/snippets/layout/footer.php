@@ -51,6 +51,24 @@ $fade = 'motion-safe:transition-[color,background-color] motion-safe:duration-20
         </div>
         <div class="mt-[30px] flex flex-col items-center justify-between gap-3 border-t border-divider pt-[22px] text-center md:mt-10 md:flex-row md:gap-x-7 md:gap-y-4 md:text-left">
             <p class="m-0 text-[13px]">© <?= date('Y') ?> <?= $site->title()->esc() ?> · <?= t('footer.credit') ?></p>
+            <?php /* Same rule as the header: every language, untranslated ones greyed out and not clickable. */ ?>
+            <?php $languages = $page->translatedLanguages() ?>
+            <?php if ($kirby->languages()->count() > 1): ?>
+            <nav class="flex shrink-0 items-center gap-2 text-[13px] md:order-last" aria-label="<?= t('nav.languages') ?>">
+                <?php snippet('components/icon', ['name' => 'globe', 'class' => 'size-[15px] shrink-0 text-pink']) ?>
+                <ul class="m-0 flex list-none items-center p-0">
+                    <?php foreach (['nl', 'fr', 'en'] as $code): ?>
+                        <?php if ($language = $languages->find($code)): ?>
+                            <?php $isCurrent = $code === $kirby->languageCode() ?>
+                            <li><a class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-[3px] px-2 <?= $isCurrent ? 'font-bold text-pink underline decoration-2 underline-offset-[6px]' : $link ?> <?= $fade ?> focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink" href="<?= $page->url($code) ?>" hreflang="<?= $code ?>" lang="<?= $code ?>" title="<?= esc($language->name(), 'attr') ?>" <?= $isCurrent ? 'aria-current="true"' : '' ?>><?= strtoupper($code) ?></a></li>
+                        <?php elseif ($kirby->language($code)): ?>
+                            <?php $note = t('nav.not-translated', null, $code) ?>
+                            <li><a role="link" aria-disabled="true" class="inline-flex min-h-11 min-w-11 cursor-not-allowed items-center justify-center px-2 text-ink/55" lang="<?= $code ?>" title="<?= esc($note, 'attr') ?>"><?= strtoupper($code) ?><span class="sr-only"> (<?= esc($note) ?>)</span></a></li>
+                        <?php endif ?>
+                    <?php endforeach ?>
+                </ul>
+            </nav>
+            <?php endif ?>
             <?php if ($disclaimer = page('disclaimer')): ?><div class="flex shrink-0 flex-wrap justify-center gap-x-5 gap-y-2"><a class="text-[13px] underline <?= $link ?> <?= $fade ?>" href="<?= $disclaimer->url() ?>"><?= t('footer.disclaimer') ?></a><?php if ($disclaimer->accessibility_text()->isNotEmpty()): ?><a class="text-[13px] underline <?= $link ?> <?= $fade ?>" href="<?= $disclaimer->url() ?>#toegankelijkheid"><?= t('footer.accessibility') ?></a><?php endif ?></div><?php endif ?>
         </div>
     </div>
