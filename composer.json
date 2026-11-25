@@ -23,7 +23,7 @@
   "require": {
     "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
     "getkirby/cms": "^5.2",
-    "mollie/mollie-api-php": "^3.0"
+    "mollie/mollie-api-php": "^4.1"
   },
   "config": {
     "allow-plugins": {
